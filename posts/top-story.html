@@ -20,6 +20,12 @@
   .container-narrow { max-width: 1100px; }
   .prose p { margin: 1em 0; line-height: 1.7; }
   .prose h2 { font-family: var(--font-mast); font-size: 1.5rem; margin-top: 1.5rem; }
+  /* drawer-toggle */
+  #siteMenuToggle { position:absolute; opacity:0; pointer-events:none; }
+  #siteDrawer { transform:translateX(100%); opacity:1; }
+  #siteDrawerBackdrop { opacity:0; }
+  #siteMenuToggle:checked ~ #siteDrawer { transform:translateX(0); }
+  #siteMenuToggle:checked ~ #siteDrawer #siteDrawerBackdrop { opacity:1; }
 </style>
 </head>
 <body>
@@ -29,11 +35,13 @@
     <a href="/index.html" class="inline-block">
       <div class="tpj-masthead text-3xl md:text-5xl leading-none">The Princeton Journal</div>
     </a>
+    <!-- Hamburger icon -->
     <label for="siteMenuToggle" class="absolute right-4 top-6 p-2 border rounded md:hidden" aria-label="Open menu">
       <div class="w-5 h-0.5 bg-black mb-1"></div>
       <div class="w-5 h-0.5 bg-black mb-1"></div>
       <div class="w-5 h-0.5 bg-black"></div>
     </label>
+    <!-- Desktop nav -->
     <nav class="mt-4 hidden md:flex flex-wrap items-center justify-center gap-6 text-sm">
       <a class="hover:underline" href="/index.html">Home</a>
       <a class="hover:underline" href="/community-voices.html">Community Voices</a>
@@ -45,7 +53,7 @@
   </div>
 </header>
 
-<!-- Hero Image (bottom aligned so cars show) -->
+<!-- Hero Image -->
 <div class="w-full">
   <img src="/assets/images/380-traffic.jpg" 
        alt="Traffic on US-380" 
@@ -54,45 +62,35 @@
 
 <main class="mx-auto container-narrow px-4 py-8 max-w-3xl prose">
   <h1 class="tpj-masthead text-3xl mb-4">US-380 Expansion Starts Oct. 6, But the Hardest Miles Are Through Princeton</h1>
-
   <p>On Monday, October 6, 2025, the U.S. 380 project moves from planning to pavement. Night work starts west of Princeton near Airport Road in McKinney and will move east in segments: Airport → New Hope → Bridgefarmer → through Princeton → Boorman Lane. Crews will work six nights a week (Sundays off). Daytime lanes stay open, but traffic will be squeezed through shifts and barrels. The project is expected to take about two and a half years.</p>
-
   <h2>More Than Just Repaving</h2>
   <p>This is part of TxDOT’s larger plan: a new controlled-access freeway north of Princeton and a widening of the existing 380 corridor, including the stretch across Lavon Lake to CR 560. Princeton’s segment will expand to six lanes with frontage roads added over time.</p>
-
   <h2>Near-Term Impacts</h2>
   <p>Residents can expect bright lights at night, heavy equipment noise, narrowed lanes, and cut-through traffic. Contractors must coordinate before closing side streets, though enforcement is often inconsistent once barrels go up.</p>
-
   <h2>Why Now?</h2>
   <p>Traffic long exceeded the road’s design. TxDOT’s 2020 Feasibility Study showed Princeton carrying 49,000 cars per day in 2017, already at freeway levels. By 2045, projections reach 86,000 daily, with peaks over 100,000.</p>
-
   <h2>How We Got Here</h2>
   <ul>
     <li>2017–2020: Feasibility Study recommends freeway.</li>
     <li>Aug. 2, 2022: First Princeton public meeting.</li>
     <li>Sept. 12, 2024: Draft Environmental Assessment hearing.</li>
     <li>Nov. 21, 2024: Final EA posted.</li>
-    <li>Dec. 27, 2024: Jan. 6, 2025: Finding of No Significant Impact signed.</li>
+    <li>Dec. 27, 2024 / Jan. 6, 2025: Finding of No Significant Impact signed.</li>
     <li>June 17, 2025: Spur 399 expansion tied to 380 corridor.</li>
     <li>Fall 2025: Princeton notice sets Oct. 6 start.</li>
   </ul>
-
   <h2>Property Impacts</h2>
   <p>TxDOT’s FONSI shows a 320–536 foot right-of-way, displacing 18 homes, 17 businesses, and one non-commercial property. In McKinney, Jason’s Deli, White Rhino Coffee, and 3Natives closed, citing the project. One Princeton family says they are losing their home to eminent domain.</p>
-
   <h2>Why It Matters</h2>
   <p>Princeton, the fastest-growing city in America, adopted a housing moratorium through Nov. 30, 2025, because infrastructure lagged. The highway project is part of that same story: growth outpacing roads and utilities.</p>
-
   <h2>What Happens Next</h2>
   <p>Night closures begin Oct. 6 near Airport Road, moving east toward Boorman Lane. Expect closures six nights a week for roughly 2.5 years, depending on weather and utilities.</p>
-
   <h2>How Residents Can Help</h2>
   <ul>
     <li>Send in photos of closures and backups.</li>
     <li>Share commute times before and after.</li>
     <li>Report unsafe cut-through hotspots.</li>
   </ul>
-
   <h2>Bottom Line</h2>
   <p>TxDOT promises relief in two and a half years. The Journal will track every closure, every delay, every cost, and every displacement.</p>
 </main>
@@ -120,5 +118,24 @@
   </div>
   <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
 </footer>
+
+<!-- Mobile drawer menu -->
+<div id="siteDrawer" class="fixed inset-0 z-50 md:hidden pointer-events-auto transition">
+  <div id="siteDrawerBackdrop" class="absolute inset-0 bg-black/40 transition-opacity duration-200"></div>
+  <aside class="absolute right-0 top-0 h-full w-80 max-w-[85%] bg-white transition-transform duration-200 shadow-xl">
+    <div class="p-4 border-b-2 border-gray-900 flex items-center justify-between">
+      <div class="font-semibold">Menu</div>
+      <label for="siteMenuToggle" class="p-2 border rounded" aria-label="Close menu">Close</label>
+    </div>
+    <nav class="p-4 grid gap-3 text-base">
+      <a class="hover:underline" href="/index.html">Home</a>
+      <a class="hover:underline" href="/community-voices.html">Community Voices</a>
+      <a class="hover:underline" href="/princeton-governance.html">Princeton Governance</a>
+      <a class="hover:underline" href="/council-tracker.html">City Council Tracker</a>
+      <a class="hover:underline" href="/about.html">About</a>
+      <a class="hover:underline" href="/contact.html">Contact</a>
+    </nav>
+  </aside>
+</div>
 </body>
 </html>
