@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-<style>/* drawer-toggle */
+<style>
 #siteMenuToggle{position:absolute;opacity:0;pointer-events:none;}
 #siteDrawer{transform:translateX(100%);opacity:1;}
 #siteDrawerBackdrop{opacity:0;}
@@ -25,10 +25,7 @@
   body{ font-family: var(--font-body); }
   .tpj-masthead{ font-family: var(--font-mast); letter-spacing:.2px; }
   .container-narrow{ max-width: 1100px; }
-  .prose p{ margin: 1em 0; line-height: 1.7; }
-  .prose h2{ font-family: var(--font-mast); font-size: 1.5rem; margin-top: 1.25rem; }
-  .prose h3{ font-weight: 600; margin-top: 1rem; }
-  .card{ border:1px solid #e5e7eb; border-radius: .75rem; }
+  .card{ border:1px solid #e5e7eb; border-radius:.75rem; }
 </style>
 </head>
 <body>
@@ -51,6 +48,25 @@
       <a class="hover:underline" href="/about.html">About</a>
       <a class="hover:underline" href="/contact.html">Contact</a>
     </nav>
+
+    <!-- Search bar -->
+    <div class="mt-4 mb-4 text-center">
+      <form action="/search.html" method="get" class="flex justify-center">
+        <input type="text" name="q" placeholder="Search articles..." class="border rounded-l px-3 py-2 w-2/3 max-w-md">
+        <button type="submit" class="border rounded-r px-4 py-2 bg-gray-900 text-white">Search</button>
+      </form>
+    </div>
+
+    <!-- Top subscribe form -->
+    <div class="mt-4 mb-6 text-center">
+      <form name="subscribe-top" method="POST" data-netlify="true" netlify-honeypot="b" action="/thank-you.html" class="flex justify-center flex-wrap gap-2">
+        <input type="hidden" name="form-name" value="subscribe-top">
+        <input class="hidden" name="b">
+        <input class="border rounded px-3 py-2 w-2/3 max-w-md" type="email" name="email" placeholder="Your email" required>
+        <div data-netlify-recaptcha="true"></div>
+        <button class="px-3 py-2 border rounded bg-gray-900 text-white">Subscribe</button>
+      </form>
+    </div>
   </div>
 </header>
 
@@ -132,6 +148,13 @@
       <a class="hover:underline" href="/council-tracker.html">City Council Tracker</a>
       <a class="hover:underline" href="/about.html">About</a>
       <a class="hover:underline" href="/contact.html">Contact</a>
+      <!-- Drawer Search -->
+      <div class="mt-3">
+        <form action="/search.html" method="get" class="flex">
+          <input type="text" name="q" placeholder="Search articles..." class="border rounded-l px-3 py-2 w-full">
+          <button type="submit" class="border rounded-r px-4 py-2 bg-gray-900 text-white">Go</button>
+        </form>
+      </div>
     </nav>
   </aside>
 </div>
