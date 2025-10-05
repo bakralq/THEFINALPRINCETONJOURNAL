@@ -73,6 +73,31 @@
     <button class="px-4 py-2 border rounded-r">Search</button>
   </form>
 </div>
+  <!-- Mobile Drawer -->
+<div id="siteDrawer" class="fixed inset-0 z-50 md:hidden pointer-events-auto transition">
+  <div id="siteDrawerBackdrop" class="absolute inset-0 bg-black/40 transition-opacity duration-200"></div>
+  <aside class="absolute right-0 top-0 h-full w-80 max-w-[85%] bg-white transition-transform duration-200 shadow-xl">
+    <div class="p-4 border-b-2 border-gray-900 flex items-center justify-between">
+      <div class="font-semibold">Menu</div>
+      <label for="siteMenuToggle" class="p-2 border rounded" aria-label="Close menu">Close</label>
+    </div>
+    <div class="p-4 border-b">
+      <form action="/search.html" method="get" class="flex">
+        <input type="search" name="q" placeholder="Search articles…" class="flex-1 border rounded-l px-3 py-2" aria-label="Search">
+        <button class="px-4 py-2 border rounded-r">Search</button>
+      </form>
+    </div>
+    <nav class="p-4 grid gap-3 text-base">
+      <a class="hover:underline" href="/index.html">Home</a>
+      <a class="hover:underline" href="/community-voices.html">Community Voices</a>
+      <a class="hover:underline font-semibold" href="/princeton-governance.html">Princeton Governance</a>
+      <a class="hover:underline" href="/council-tracker.html">City Council Tracker</a>
+      <a class="hover:underline" href="/about.html">About</a>
+      <a class="hover:underline" href="/contact.html">Contact</a>
+      <a class="hover:underline" href="/subscribe.html">Subscribe</a>
+    </nav>
+  </aside>
+</div>
 </header>
 
 <main class="mx-auto container-narrow px-4 py-8">
