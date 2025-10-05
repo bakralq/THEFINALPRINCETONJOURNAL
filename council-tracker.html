@@ -5,7 +5,7 @@
 #siteMenuToggle{position:absolute;opacity:0;pointer-events:none;}
 #siteDrawer{transform:translateX(100%);opacity:1;}
 #siteDrawerBackdrop{opacity:0;}
-#siteMenuToggle:checked ~ #siteDrawer{transform:translateX(0);} 
+#siteMenuToggle:checked ~ #siteDrawer{transform:translateX(0);}
 #siteMenuToggle:checked ~ #siteDrawer #siteDrawerBackdrop{opacity:1;}
 </style>
 
@@ -30,7 +30,7 @@
   .prose h2{ font-family: var(--font-mast); font-size: 1.5rem; margin-top: 1.25rem; }
   .prose h3{ font-weight: 600; margin-top: 1rem; }
   .tpj-table{ width:100%; border-collapse: collapse; }
-  .tpj-table th, .tpj-table td{ border:1px solid #e5e7eb; padding:.75rem; }
+  .tpj-table th, .tpj-table td{ border:1px solid #e5e7eb; padding:.75rem; vertical-align: top; }
   .tpj-table thead th{ position:sticky; top:0; background:#fff; }
   .tpj-legend span{ margin-right: 1rem; display:inline-flex; align-items:center; gap:.4rem;}
   .dot{ display:inline-block; width:.8rem; height:.8rem; border-radius:9999px; }
@@ -45,8 +45,6 @@
   function shareFB(){ const url=encodeURIComponent(window.location.href); window.open('https://www.facebook.com/sharer/sharer.php?u='+url,'_blank','noopener'); }
   function shareMail(title){ const url=encodeURIComponent(window.location.href); location.href='mailto:?subject='+encodeURIComponent(title)+'&body='+url; }
 </script>
-
-
 </head>
 <body>
 <input type="checkbox" id="siteMenuToggle" />
@@ -60,22 +58,24 @@
       <div class="w-5 h-0.5 bg-black mb-1"></div>
       <div class="w-5 h-0.5 bg-black"></div>
     </label>
-   <nav class="mt-4 hidden md:flex flex-wrap items-center justify-center gap-6 text-sm">
-  <a class="hover:underline font-medium" href="/index.html">Home</a>
-  <a class="hover:underline font-medium" href="/community-voices.html">Community Voices</a>
-  <a class="hover:underline font-medium" href="/princeton-governance.html">Princeton Governance</a>
-  <a class="hover:underline font-semibold" href="/council-tracker.html">City Council Tracker</a>
-  <a class="hover:underline font-medium" href="/about.html">About</a>
-  <a class="hover:underline font-medium" href="/contact.html">Contact</a>
-  <a class="hover:underline font-medium" href="/subscribe.html">Subscribe</a>
-</nav>
-<div class="mt-4 hidden md:block">
-  <form action="/search.html" method="get" class="max-w-xl mx-auto flex">
-    <input type="search" name="q" placeholder="Search articles…" class="flex-1 border rounded-l px-3 py-2" aria-label="Search">
-    <button class="px-4 py-2 border rounded-r">Search</button>
-  </form>
-</div>
+    <nav class="mt-4 hidden md:flex flex-wrap items-center justify-center gap-6 text-sm">
+      <a class="hover:underline font-medium" href="/index.html">Home</a>
+      <a class="hover:underline font-medium" href="/community-voices.html">Community Voices</a>
+      <a class="hover:underline font-medium" href="/princeton-governance.html">Princeton Governance</a>
+      <a class="hover:underline font-semibold" href="/council-tracker.html">City Council Tracker</a>
+      <a class="hover:underline font-medium" href="/about.html">About</a>
+      <a class="hover:underline font-medium" href="/contact.html">Contact</a>
+      <a class="hover:underline font-medium" href="/subscribe.html">Subscribe</a>
+    </nav>
+    <div class="mt-4 hidden md:block">
+      <form action="/search.html" method="get" class="max-w-xl mx-auto flex">
+        <input type="search" name="q" placeholder="Search articles…" class="flex-1 border rounded-l px-3 py-2" aria-label="Search">
+        <button class="px-4 py-2 border rounded-r">Search</button>
+      </form>
+    </div>
+  </div>
 </header>
+
 <main class="mx-auto container-narrow px-4 py-8">
   <h1 class="tpj-masthead text-3xl mb-1">City Council Tracker</h1>
   <p class="text-gray-700 mb-4">Browse agenda items by date. Click any item for the full breakdown, votes, and impact.</p>
@@ -85,6 +85,7 @@
     <input id="dateFilter" oninput="render()" class="w-full border px-3 py-2 rounded" type="date" aria-label="Filter by date">
   </div>
 
+  <!-- Desktop table -->
   <div id="desktop" class="hidden md:block overflow-x-auto">
     <table class="tpj-table">
       <thead>
@@ -94,25 +95,54 @@
           <th>Summary</th>
         </tr>
       </thead>
-      <tbody id="tbody"><tr><td>2025-10-08</td><td><a class="underline font-semibold" href="/tracker/us-380-night-work.html">Resolution on US-380 night work</a></td><td>Set hours, segments, and mitigations for overnight construction. <a class="underline text-sm ml-2" href="/tracker/us-380-night-work.html">Full breakdown →</a></td></tr><tr><td>2025-10-01</td><td><a class="underline font-semibold" href="/tracker/fy-2026-budget.html">Adopt FY 2026 Budget</a></td><td>General fund appropriations and capital plan adoption. <a class="underline text-sm ml-2" href="/tracker/fy-2026-budget.html">Full breakdown →</a></td></tr></tbody>
+      <tbody id="tbody">
+        <tr>
+          <td>2025-09-22</td>
+          <td>
+            <a class="underline font-semibold" href="/tracker/h14-etj-removal-fee.html">Agenda Item H14: Amendment to City Fee Schedule (ETJ Removal Fee)</a>
+            <div class="text-sm text-gray-500">Council Approves Item H14, Removes Proposed ETJ Removal Fee</div>
+          </td>
+          <td>
+            Proposal to add a $1,000 fee for ETJ removal requests.
+            <a class="underline text-sm ml-2" href="/tracker/h14-etj-removal-fee.html">Full breakdown →</a>
+          </td>
+        </tr>
+      </tbody>
     </table>
-    <div id="emptyDesktop" class="text-sm text-gray-500 mt-3">No items yet.</div>
+    <div id="emptyDesktop" class="text-sm text-gray-500 mt-3" style="display:none;">No items yet.</div>
   </div>
 
-  <div id="mobile" class="md:hidden space-y-3 mt-3"><div class="card p-3"><div class="text-xs text-gray-500">Date</div><div class="mb-2">2025-10-08</div><a class="font-semibold underline" href="/tracker/us-380-night-work.html">Resolution on US-380 night work</a><div class="text-sm text-gray-600 mt-1">Set hours, segments, and mitigations for overnight construction.</div><div class="mt-2"><a class="underline text-sm" href="/tracker/us-380-night-work.html">Open breakdown →</a></div></div><div class="card p-3"><div class="text-xs text-gray-500">Date</div><div class="mb-2">2025-10-01</div><a class="font-semibold underline" href="/tracker/fy-2026-budget.html">Adopt FY 2026 Budget</a><div class="text-sm text-gray-600 mt-1">General fund appropriations and capital plan adoption.</div><div class="mt-2"><a class="underline text-sm" href="/tracker/fy-2026-budget.html">Open breakdown →</a></div></div></div>
+  <!-- Mobile cards -->
+  <div id="mobile" class="md:hidden space-y-3 mt-3">
+    <div class="card p-3">
+      <div class="text-xs text-gray-500">Date</div>
+      <div class="mb-2">2025-09-22</div>
+      <a class="font-semibold underline" href="/tracker/h14-etj-removal-fee.html">
+        Agenda Item H14: Amendment to City Fee Schedule (ETJ Removal Fee)
+      </a>
+      <div class="text-sm text-gray-500">Council Approves Item H14, Removes Proposed ETJ Removal Fee</div>
+      <div class="text-sm text-gray-600 mt-1">
+        Proposal to add a $1,000 fee for ETJ removal requests.
+      </div>
+      <div class="mt-2">
+        <a class="underline text-sm" href="/tracker/h14-etj-removal-fee.html">Open breakdown →</a>
+      </div>
+    </div>
+  </div>
 </main>
+
 <footer class="border-t mt-12">
   <div class="mx-auto container-narrow px-4 py-8 grid md:grid-cols-2 gap-6 text-sm text-gray-700">
     <div>
       <div>&copy; <span id="y"></span> The Princeton Journal. All rights reserved.</div>
       <div class="mt-3">
         <form name="subscribe" method="POST" data-netlify="true" netlify-honeypot="b" action="/thank-you.html" class="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center">
-  <input type="hidden" name="form-name" value="subscribe">
-  <input class="hidden" name="b">
-  <input class="border rounded px-3 py-2 min-w-0 w-full sm:flex-1" type="email" name="email" placeholder="Your email" required>
-  <div data-netlify-recaptcha="true"></div>
-  <button class="px-3 py-2 border rounded">Subscribe</button>
-</form>
+          <input type="hidden" name="form-name" value="subscribe">
+          <input class="hidden" name="b">
+          <input class="border rounded px-3 py-2 min-w-0 w-full sm:flex-1" type="email" name="email" placeholder="Your email" required>
+          <div data-netlify-recaptcha="true"></div>
+          <button class="px-3 py-2 border rounded">Subscribe</button>
+        </form>
       </div>
     </div>
     <div class="flex gap-4 md:justify-end">
@@ -124,52 +154,69 @@
   </div>
   <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
 </footer>
+
 <script>
 (function(){
-  // Progressive enhancement: baseline HTML stays. Only enhance if we can parse data & build DOM.
   function linkFor(slug){ return "/tracker/" + slug + ".html"; }
 
   function buildEnhanced(items){
-    // Build desktop tbody
     var tbody = document.getElementById('tbody');
-    if (!tbody) return false;
-    var frag = document.createDocumentFragment();
+    var mobile = document.getElementById('mobile');
+    var empty = document.getElementById('emptyDesktop');
+
+    if (!tbody || !mobile) return false;
+
+    // Desktop
+    const frag = document.createDocumentFragment();
+    if (!items.length && empty) { empty.style.display = ""; } else if (empty) { empty.style.display = "none"; }
+
     items.forEach(function(it){
-      var tr = document.createElement('tr');
-      var tdDate = document.createElement('td'); tdDate.textContent = it.date; tr.appendChild(tdDate);
-      var tdTitle = document.createElement('td'); tdTitle.innerHTML = "<a class='underline font-semibold' href='"+linkFor(it.slug)+"'>"+it.title+"</a>"; tr.appendChild(tdTitle);
-      var tdSummary = document.createElement('td'); tdSummary.innerHTML = (it.explanation||"") + " <a class='underline text-sm ml-2' href='"+linkFor(it.slug)+"'>Full breakdown →</a>"; tr.appendChild(tdSummary);
+      const tr = document.createElement('tr');
+
+      const tdDate = document.createElement('td');
+      tdDate.textContent = it.date;
+      tr.appendChild(tdDate);
+
+      const tdTitle = document.createElement('td');
+      tdTitle.innerHTML =
+        "<a class='underline font-semibold' href='"+linkFor(it.slug)+"'>"+it.title+"</a>"
+        + (it.subtitle ? "<div class='text-sm text-gray-500'>"+it.subtitle+"</div>" : "");
+      tr.appendChild(tdTitle);
+
+      const tdSummary = document.createElement('td');
+      tdSummary.innerHTML = (it.explanation||"") + " <a class='underline text-sm ml-2' href='"+linkFor(it.slug)+"'>Full breakdown →</a>";
+      tr.appendChild(tdSummary);
+
       frag.appendChild(tr);
     });
-
-    // Build mobile cards
-    var mobile = document.getElementById('mobile');
-    if (!mobile) return false;
-    var mobileFrag = document.createDocumentFragment();
-    items.forEach(function(it){
-      var card = document.createElement('div'); card.className = "card p-3";
-      card.innerHTML = "<div class='text-xs text-gray-500'>Date</div><div class='mb-2'>"+it.date+"</div>"
-                     + "<a class='font-semibold underline' href='"+linkFor(it.slug)+"'>"+it.title+"</a>"
-                     + "<div class='text-sm text-gray-600 mt-1'>"+(it.explanation||"")+"</div>"
-                     + "<div class='mt-2'><a class='underline text-sm' href='"+linkFor(it.slug)+"'>Open breakdown →</a></div>";
-      mobileFrag.appendChild(card);
-    });
-
-    // If we got here, enhancements succeeded. Replace DOM in one commit.
     tbody.innerHTML = ""; tbody.appendChild(frag);
-    mobile.innerHTML = ""; mobile.appendChild(mobileFrag);
-    return true;
+
+    // Mobile
+    const mfrag = document.createDocumentFragment();
+    items.forEach(function(it){
+      const card = document.createElement('div'); card.className = "card p-3";
+      card.innerHTML =
+        "<div class='text-xs text-gray-500'>Date</div><div class='mb-2'>"+it.date+"</div>"
+        + "<a class='font-semibold underline' href='"+linkFor(it.slug)+"'>"+it.title+"</a>"
+        + (it.subtitle ? "<div class='text-sm text-gray-500'>"+it.subtitle+"</div>" : "")
+        + "<div class='text-sm text-gray-600 mt-1'>"+(it.explanation||"")+"</div>"
+        + "<div class='mt-2'><a class='underline text-sm' href='"+linkFor(it.slug)+"'>Open breakdown →</a></div>";
+      mfrag.appendChild(card);
+    });
+    mobile.innerHTML = ""; mobile.appendChild(mfrag);
   }
 
   function filterAndRender(allItems){
-    var qEl = document.getElementById('q');
-    var dEl = document.getElementById('dateFilter');
+    const qEl = document.getElementById('q');
+    const dEl = document.getElementById('dateFilter');
+
     function apply(){
-      var q = (qEl && qEl.value || "").toLowerCase();
-      var d = (dEl && dEl.value || "");
-      var filtered = allItems.filter(function(it){
-        var matchText = (it.title||"").toLowerCase().includes(q) || (it.explanation||"").toLowerCase().includes(q);
-        var matchDate = d ? it.date === d : true;
+      const q = (qEl && qEl.value || "").toLowerCase();
+      const d = (dEl && dEl.value || "");
+      const filtered = allItems.filter(function(it){
+        const text = ((it.title||"") + " " + (it.subtitle||"") + " " + (it.explanation||"")).toLowerCase();
+        const matchText = text.includes(q);
+        const matchDate = d ? it.date === d : true;
         return matchText && matchDate;
       });
       buildEnhanced(filtered);
@@ -180,23 +227,27 @@
   }
 
   try{
-    var dataEl = document.getElementById('trackerData');
+    const dataEl = document.getElementById('trackerData');
     if (!dataEl) return;
-    var items = JSON.parse(dataEl.textContent);
-    if (Array.isArray(items) && items.length){
-      filterAndRender(items);
-    }
-  }catch(e){
-    // If anything fails, do nothing; baseline HTML remains.
-  }
+    const items = JSON.parse(dataEl.textContent);
+    if (Array.isArray(items)) filterAndRender(items);
+  }catch(e){}
 })();
 </script>
+
+<!-- Mobile Drawer -->
 <div id="siteDrawer" class="fixed inset-0 z-50 md:hidden pointer-events-auto transition">
   <div id="siteDrawerBackdrop" class="absolute inset-0 bg-black/40 transition-opacity duration-200"></div>
   <aside class="absolute right-0 top-0 h-full w-80 max-w-[85%] bg-white transition-transform duration-200 shadow-xl">
     <div class="p-4 border-b-2 border-gray-900 flex items-center justify-between">
       <div class="font-semibold">Menu</div>
       <label for="siteMenuToggle" class="p-2 border rounded" aria-label="Close menu">Close</label>
+    </div>
+    <div class="p-4 border-b">
+      <form action="/search.html" method="get" class="flex">
+        <input type="search" name="q" placeholder="Search articles…" class="flex-1 border rounded-l px-3 py-2" aria-label="Search">
+        <button class="px-4 py-2 border rounded-r">Search</button>
+      </form>
     </div>
     <nav class="p-4 grid gap-3 text-base">
       <a class="hover:underline" href="/index.html">Home</a>
@@ -205,9 +256,19 @@
       <a class="hover:underline" href="/council-tracker.html">City Council Tracker</a>
       <a class="hover:underline" href="/about.html">About</a>
       <a class="hover:underline" href="/contact.html">Contact</a>
+      <a class="hover:underline" href="/subscribe.html">Subscribe</a>
     </nav>
   </aside>
 </div>
-<script id="trackerData" type="application/json">[{"slug": "us-380-night-work", "date": "2025-10-08", "title": "Resolution on US-380 night work", "explanation": "Set hours, segments, and mitigations for overnight construction."}, {"slug": "fy-2026-budget", "date": "2025-10-01", "title": "Adopt FY 2026 Budget", "explanation": "General fund appropriations and capital plan adoption."}]</script>
+
+<script id="trackerData" type="application/json">[
+  {
+    "slug": "h14-etj-removal-fee",
+    "date": "2025-09-22",
+    "title": "Agenda Item H14: Amendment to City Fee Schedule (ETJ Removal Fee)",
+    "subtitle": "Council Approves Item H14, Removes Proposed ETJ Removal Fee",
+    "explanation": "Proposal to add a $1,000 fee for ETJ removal requests."
+  }
+]</script>
 </body>
 </html>
