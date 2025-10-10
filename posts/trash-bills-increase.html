@@ -16,6 +16,7 @@
   .prose p{ margin:1em 0; line-height:1.7; }
   .prose h2{ font-family: var(--font-mast); font-size:1.5rem; margin-top:1.25rem; }
 
+  /* Drawer toggle like index */
   #siteMenuToggle{position:absolute;opacity:0;pointer-events:none;}
   #siteDrawer{transform:translateX(100%);opacity:1;}
   #siteDrawerBackdrop{opacity:0;}
@@ -28,7 +29,11 @@
 <header class="border-b-2 border-gray-900">
   <div class="mx-auto container-narrow px-4 py-6 relative text-center">
     <a href="/index.html" class="inline-block"><div class="tpj-masthead text-3xl md:text-5xl leading-none">The Princeton Journal</div></a>
-    <label for="siteMenuToggle" class="absolute right-4 top-6 p-2 border rounded md:hidden" aria-label="Open menu"><div class="w-5 h-0.5 bg-black mb-1"></div><div class="w-5 h-0.5 bg-black mb-1"></div><div class="w-5 h-0.5 bg-black"></div></label>
+    <label for="siteMenuToggle" class="absolute right-4 top-6 p-2 border rounded md:hidden" aria-label="Open menu">
+      <div class="w-5 h-0.5 bg-black mb-1"></div><div class="w-5 h-0.5 bg-black mb-1"></div><div class="w-5 h-0.5 bg-black"></div>
+    </label>
+
+    <!-- Desktop Nav (exactly like index) -->
     <nav class="mt-4 hidden md:flex flex-wrap items-center justify-center gap-6 text-sm">
       <a class="hover:underline font-semibold" href="/index.html">Home</a>
       <a class="hover:underline font-medium" href="/us-news.html">U.S. News</a>
@@ -38,6 +43,8 @@
       <a class="hover:underline font-medium" href="/contact.html">Contact</a>
       <a class="hover:underline font-medium" href="/subscribe.html">Subscribe</a>
     </nav>
+
+    <!-- Desktop Search (like index) -->
     <div class="mt-4 hidden md:block">
       <form action="/search.html" method="get" class="max-w-xl mx-auto flex">
         <input type="search" name="q" placeholder="Search articles…" class="flex-1 border rounded-l px-3 py-2" aria-label="Search">
@@ -47,6 +54,7 @@
   </div>
 </header>
 
+<!-- Hero placeholder (same sizing pattern as other posts) -->
 <div class="w-full"><div class="w-full max-h-[500px] h-64 md:h-[420px] bg-gray-200"></div></div>
 
 <main class="mx-auto container-narrow px-4 py-8 max-w-3xl prose">
@@ -113,6 +121,7 @@
   <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
 </footer>
 
+<!-- Mobile Drawer (with search, like index) -->
 <div id="siteDrawer" class="fixed inset-0 z-50 md:hidden pointer-events-auto transition">
   <div id="siteDrawerBackdrop" class="absolute inset-0 bg-black/40 transition-opacity duration-200"></div>
   <aside class="absolute right-0 top-0 h-full w-80 max-w-[85%] bg-white transition-transform duration-200 shadow-xl">
