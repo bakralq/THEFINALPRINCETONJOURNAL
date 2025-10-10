@@ -16,7 +16,7 @@
   .container-narrow{ max-width:1100px; }
   .prose p{ margin:1em 0; line-height:1.7; }
   .prose h2{ font-family: var(--font-mast); font-size:1.5rem; margin-top:1.5rem; }
-
+  /* Drawer toggle */
   #siteMenuToggle{position:absolute;opacity:0;pointer-events:none;}
   #siteDrawer{transform:translateX(100%);opacity:1;}
   #siteDrawerBackdrop{opacity:0;}
@@ -36,6 +36,7 @@
       <div class="w-5 h-0.5 bg-black mb-1"></div>
       <div class="w-5 h-0.5 bg-black"></div>
     </label>
+    <!-- Desktop Nav (exactly like index.html) -->
     <nav class="mt-4 hidden md:flex flex-wrap items-center justify-center gap-6 text-sm">
       <a class="hover:underline font-semibold" href="/index.html">Home</a>
       <a class="hover:underline font-medium" href="/us-news.html">U.S. News</a>
@@ -45,12 +46,22 @@
       <a class="hover:underline font-medium" href="/contact.html">Contact</a>
       <a class="hover:underline font-medium" href="/subscribe.html">Subscribe</a>
     </nav>
+    <!-- Desktop Search (was missing) -->
+    <div class="mt-4 hidden md:block">
+      <form action="/search.html" method="get" class="max-w-xl mx-auto flex">
+        <input type="search" name="q" placeholder="Search articles…" class="flex-1 border rounded-l px-3 py-2" aria-label="Search">
+        <button class="px-4 py-2 border rounded-r">Search</button>
+      </form>
+    </div>
   </div>
 </header>
 
-<!-- Hero Image -->
+<!-- Hero (same sizing pattern as other posts) -->
 <div class="w-full">
-  <img src="/second-380-images.jpg" alt="Traffic on US-380" class="w-full object-cover object-bottom max-h-[500px]">
+  <div class="w-full max-h-[500px] h-64 md:h-[420px] bg-gray-200">
+    <img src="/second-380-images.jpg" alt="Traffic on US-380"
+         class="w-full h-full object-cover object-bottom">
+  </div>
 </div>
 
 <main class="mx-auto container-narrow px-4 py-8 max-w-3xl prose">
@@ -129,7 +140,7 @@
   <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
 </footer>
 
-<!-- Mobile Drawer -->
+<!-- Mobile Drawer (with search) -->
 <div id="siteDrawer" class="fixed inset-0 z-50 md:hidden pointer-events-auto transition">
   <div id="siteDrawerBackdrop" class="absolute inset-0 bg-black/40 transition-opacity duration-200"></div>
   <aside class="absolute right-0 top-0 h-full w-80 max-w-[85%] bg-white transition-transform duration-200 shadow-xl">
