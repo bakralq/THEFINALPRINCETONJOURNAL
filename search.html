@@ -167,7 +167,6 @@
       const json = await res.json();
       const arr = Array.isArray(json) ? json : [];
       window.__TPJ_INDEX__ = arr;
-      metaEl.textContent = `Loaded ${arr.length} articles`;
       return arr;
     } catch (err) {
       metaEl.textContent = 'Could not load the search index.';
@@ -176,40 +175,50 @@
     }
   }
 
-  // Normalizer so "US-380" matches "380"
-  const normalize = s => (s || '')
-    .toLowerCase()
-    .normalize('NFKD')
-    .replace(/[\u2010-\u2015]/g, '-')      // various dashes to hyphen
-    .replace(/[^a-z0-9\s\-]/g, ' ');      // strip punctuation
+  // Basic highlighter (case-insensitive)
+  function highlight(text, q) {
+    if (!q || !text) return escapeHTML(text || '');
+    const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const words = q.split(/\s+/).filter(Boolean).map(esc);
+    if (!words.length) return escapeHTML(text);
+    const re = new RegExp('(' + words.join('|') + ')', 'ig');
+    return escapeHTML(text).replace(re, '<mark>$1</mark>');
+  }
 
+  // Parse date strings (puts unparseable ones at the end)
+  function dateValue(d) {
+    if (!d) return -1;
+    if (/updated/i.test(d)) return -1;
+    const t = Date.parse(d);
+    return isNaN(t) ? -1 : t;
+  }
+
+  // Fuse fallback: simple substring search in title/description
   function basicSearch(docs, q) {
-    const nq = normalize(q);
-    return docs.filter(d => {
-      const t = normalize(d.title);
-      const desc = normalize(d.description);
-      return t.includes(nq) || desc.includes(nq);
-    });
+    const nq = (q || '').toLowerCase();
+    return docs.filter(d => (d.title||'').toLowerCase().includes(nq) || (d.description||'').toLowerCase().includes(nq));
   }
 
   async function run(q) {
     const docs = await loadIndex();
-    if (!docs.length) { resultsEl.innerHTML = ''; return; }
+    if (!docs.length) { resultsEl.innerHTML = ''; metaEl.textContent=''; return; }
 
+    // No query: show all articles, newest first (best-effort by date string)
     if (!q) {
-      // No query: show all articles sorted by title
-      const list = [...docs].sort((a,b) => (a.title||'').localeCompare(b.title||''));
+      const list = [...docs].sort((a,b) => dateValue(b.date) - dateValue(a.date) || (a.title||'').localeCompare(b.title||''));
       metaEl.textContent = `All articles (${list.length})`;
       resultsEl.innerHTML = list.map(renderItem).join('');
       return;
     }
 
+    // With query: Fuse if available, else fallback
     let matches = [];
     if (window.Fuse) {
       const fuse = new Fuse(docs, {
         keys: [
-          { name: 'title', weight: 0.7 },
-          { name: 'description', weight: 0.3 }
+          { name: 'title', weight: 0.60 },
+          { name: 'description', weight: 0.30 },
+          { name: 'section', weight: 0.10 }
         ],
         threshold: 0.33,
         ignoreLocation: true
@@ -220,24 +229,33 @@
       matches = basicSearch(docs, q);
     }
 
-    metaEl.textContent = `${matches.length} result${matches.length === 1 ? '' : 's'} for “${q}”`;
-    resultsEl.innerHTML = matches.map(renderItem).join('');
+    metaEl.innerHTML = `${matches.length} result${matches.length === 1 ? '' : 's'} for “<strong>${escapeHTML(q)}</strong>”`;
+    resultsEl.innerHTML = matches.map(item => renderItem(item, q)).join('');
   }
 
-  function renderItem(item) {
-    const title = escapeHTML(item.title || '');
-    const desc  = escapeHTML(item.description || '');
+  function renderItem(item, q='') {
+    const title = item.title || '';
+    const desc  = item.description || '';
     const url   = item.url || '#';
+    const section = item.section || 'Article';
+    const date = item.date || '';
+    const editor = item.editor ? `By ${item.editor}` : '';
+
     return `
-      <a class="card p-4 hover:bg-gray-50 block" href="${url}">
-        <div class="font-semibold text-lg mb-1">${title}</div>
-        <div class="text-gray-700 text-sm">${desc}</div>
+      <a class="card p-5 hover:bg-gray-50 transition block" href="${escapeAttr(url)}">
+        <div class="text-sm text-gray-500 mb-1">${escapeHTML(section)}${date ? ' • ' + escapeHTML(date) : ''}</div>
+        <div class="font-semibold text-lg mb-1">${highlight(title, q)}</div>
+        <div class="text-gray-700 text-sm mb-2">${highlight(desc, q)}</div>
+        ${editor ? `<div class="text-xs text-gray-500">${escapeHTML(editor)}</div>` : ''}
       </a>
     `;
   }
 
   function escapeHTML(s) {
     return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  function escapeAttr(s) {
+    return (s || '').replace(/"/g, '&quot;');
   }
 })();
 </script>
