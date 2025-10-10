@@ -19,6 +19,12 @@
   .tpj-masthead{ font-family: var(--font-mast); letter-spacing:.2px; }
   .container-narrow{ max-width: 1100px; }
   .card{ border:1px solid #e5e7eb; border-radius:.75rem; }
+  /* Drawer styles */
+  #siteMenuToggle{position:absolute;opacity:0;pointer-events:none;}
+  #siteDrawer{transform:translateX(100%);opacity:1;}
+  #siteDrawerBackdrop{opacity:0;}
+  #siteMenuToggle:checked ~ #siteDrawer{transform:translateX(0);}
+  #siteMenuToggle:checked ~ #siteDrawer #siteDrawerBackdrop{opacity:1;}
 </style>
 </head>
 <body>
@@ -38,7 +44,7 @@
     <!-- Desktop nav -->
  <nav class="mt-4 hidden md:flex flex-wrap items-center justify-center gap-6 text-sm">
   <a class="hover:underline font-medium" href="/index.html">Home</a>
-  <a class="hover:underline font-medium" href="/community-voices.html">Community Voices</a>
+  <a class="hover:underline font-medium" href="/us-news.html">U.S. News</a>
   <a class="hover:underline font-semibold" href="/princeton-governance.html">Princeton Governance</a>
   <a class="hover:underline font-medium" href="/council-tracker.html">City Council Tracker</a>
   <a class="hover:underline font-medium" href="/about.html">About</a>
@@ -69,7 +75,7 @@
     </div>
     <nav class="p-4 grid gap-3 text-base">
       <a class="hover:underline" href="/index.html">Home</a>
-      <a class="hover:underline" href="/community-voices.html">Community Voices</a>
+      <a class="hover:underline" href="/us-news.html">U.S. News</a>
       <a class="hover:underline font-semibold" href="/princeton-governance.html">Princeton Governance</a>
       <a class="hover:underline" href="/council-tracker.html">City Council Tracker</a>
       <a class="hover:underline" href="/about.html">About</a>
@@ -81,7 +87,7 @@
 
 <main class="mx-auto container-narrow px-4 py-8">
   <h1 class="tpj-masthead text-3xl mb-2">Princeton Governance</h1>
-  <p class="text-gray-700 mb-6">Coverage of City Hall, policy, budgets, and local decisions.</p>
+  <p class="text-gray-700 mb-6">Coverage of Princeton city government: city council, budgets, policy decisions, and public records.</p>
 
   <div class="grid md:grid-cols-3 gap-6">
 
@@ -166,14 +172,6 @@
   </div>
   <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
 </footer>
-
-<style>
-  #siteMenuToggle{position:absolute;opacity:0;pointer-events:none;}
-  #siteDrawer{transform:translateX(100%);opacity:1;}
-  #siteDrawerBackdrop{opacity:0;}
-  #siteMenuToggle:checked ~ #siteDrawer{transform:translateX(0);}
-  #siteMenuToggle:checked ~ #siteDrawer #siteDrawerBackdrop{opacity:1;}
-</style>
 
 </body>
 </html>
