@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Search | The Princeton Journal</title>
+<link rel="icon" href="/assets/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script defer data-domain="theprincetonjournal.com" src="https://plausible.io/js/plausible.js"></script>
+<style>
+  :root{
+    --font-mast:"Grenze Gotisch", serif;
+    --font-body:"Inter", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans";
+  }
+  body{ font-family: var(--font-body); }
+  .tpj-masthead{ font-family: var(--font-mast); letter-spacing:.2px; }
+  .container-narrow{ max-width:1100px; }
+  .card{ border:1px solid #e5e7eb; border-radius:.75rem; }
+  #siteMenuToggle{position:absolute;opacity:0;pointer-events:none;}
+  #siteDrawer{transform:translateX(100%);opacity:1;}
+  #siteDrawerBackdrop{opacity:0;}
+  #siteMenuToggle:checked ~ #siteDrawer{transform:translateX(0);}
+  #siteMenuToggle:checked ~ #siteDrawer #siteDrawerBackdrop{opacity:1;}
+  mark{ background: #fffb91; padding: 0 .15em; }
+</style>
+<!-- Fuse.js for fuzzy search -->
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
+</head>
+<body class="bg-white text-gray-900">
+<input type="checkbox" id="siteMenuToggle" />
+<header class="border-b-2 border-gray-900">
+  <div class="mx-auto container-narrow px-4 py-6 relative text-center">
+    <a href="/index.html" class="inline-block">
+      <div class="tpj-masthead text-3xl md:text-5xl leading-none">The Princeton Journal</div>
+    </a>
+    <label for="siteMenuToggle" class="absolute right-4 top-6 p-2 border rounded md:hidden" aria-label="Open menu">
+      <div class="w-5 h-0.5 bg-black mb-1"></div>
+      <div class="w-5 h-0.5 bg-black mb-1"></div>
+      <div class="w-5 h-0.5 bg-black"></div>
+    </label>
+    <nav class="mt-4 hidden md:flex flex-wrap items-center justify-center gap-6 text-sm">
+      <a class="hover:underline font-semibold" href="/index.html">Home</a>
+      <a class="hover:underline font-medium" href="/us-news.html">U.S. News</a>
+      <a class="hover:underline font-medium" href="/princeton-governance.html">Princeton Governance</a>
+      <a class="hover:underline font-medium" href="/council-tracker.html">City Council Tracker</a>
+      <a class="hover:underline font-medium" href="/about.html">About</a>
+      <a class="hover:underline font-medium" href="/contact.html">Contact</a>
+      <a class="hover:underline font-medium" href="/subscribe.html">Subscribe</a>
+    </nav>
+    <div class="mt-4 hidden md:block">
+      <form action="/search.html" method="get" class="max-w-xl mx-auto flex">
+        <input id="q" type="search" name="q" placeholder="Search articles…" class="flex-1 border rounded-l px-3 py-2" aria-label="Search">
+        <button class="px-4 py-2 border rounded-r">Search</button>
+      </form>
+    </div>
+  </div>
+</header>
+
+<main class="mx-auto container-narrow px-4 py-8">
+  <h1 class="tpj-masthead text-3xl mb-4">Search</h1>
+
+  <!-- Mobile search -->
+  <form action="/search.html" method="get" class="md:hidden mb-6">
+    <div class="flex">
+      <input id="mq" type="search" name="q" placeholder="Search articles…" class="flex-1 border rounded-l px-3 py-2" aria-label="Search">
+      <button class="px-4 py-2 border rounded-r">Search</button>
+    </div>
+  </form>
+
+  <div id="meta" class="text-sm text-gray-600 mb-4"></div>
+  <div id="results" class="grid gap-4"></div>
+
+  <template id="result-tpl">
+    <a class="block card p-4 hover:bg-gray-50" href="#">
+      <div class="text-sm text-gray-500 mb-1"><span class="section"></span> • <span class="date"></span></div>
+      <div class="font-semibold text-lg title mb-1"></div>
+      <div class="text-gray-700 text-sm excerpt"></div>
+    </a>
+  </template>
+</main>
+
+<footer class="border-t mt-12">
+  <div class="mx-auto container-narrow px-4 py-8 grid md:grid-cols-2 gap-6 text-sm text-gray-700">
+    <div>
+      <div>&copy; <span id="y"></span> The Princeton Journal. All rights reserved.</div>
+      <div class="mt-3">
+        <form name="subscribe" method="POST" data-netlify="true" netlify-honeypot="b" action="/thank-you.html" class="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center">
+          <input type="hidden" name="form-name" value="subscribe">
+          <input class="hidden" name="b">
+          <input class="border rounded px-3 py-2 min-w-0 w-full sm:flex-1" type="email" name="email" placeholder="Your email" required>
+          <div data-netlify-recaptcha="true"></div>
+          <button class="px-3 py-2 border rounded">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="flex gap-4 md:justify-end">
+      <a class="hover:underline" href="/about.html">About</a>
+      <a class="hover:underline" href="/privacy.html">Privacy</a>
+      <a class="hover:underline" href="/contact.html">Contact</a>
+      <a class="hover:underline" href="/subscribe.html">Subscribe</a>
+    </div>
+  </div>
+  <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+</footer>
+
+<!-- Mobile Drawer -->
+<div id="siteDrawer" class="fixed inset-0 z-50 md:hidden pointer-events-auto transition">
+  <div id="siteDrawerBackdrop" class="absolute inset-0 bg-black/40 transition-opacity duration-200"></div>
+  <aside class="absolute right-0 top-0 h-full w-80 max-w-[85%] bg-white transition-transform duration-200 shadow-xl">
+    <div class="p-4 border-b-2 border-gray-900 flex items-center justify-between">
+      <div class="font-semibold">Menu</div>
+      <label for="siteMenuToggle" class="p-2 border rounded" aria-label="Close menu">Close</label>
+    </div>
+    <div class="p-4 border-b">
+      <form action="/search.html" method="get" class="flex">
+        <input type="search" name="q" placeholder="Search articles…" class="flex-1 border rounded-l px-3 py-2" aria-label="Search">
+        <button class="px-4 py-2 border rounded-r">Search</button>
+      </form>
+    </div>
+    <nav class="p-4 grid gap-3 text-base">
+      <a class="hover:underline font-semibold" href="/index.html">Home</a>
+      <a class="hover:underline" href="/us-news.html">U.S. News</a>
+      <a class="hover:underline" href="/princeton-governance.html">Princeton Governance</a>
+      <a class="hover:underline" href="/council-tracker.html">City Council Tracker</a>
+      <a class="hover:underline" href="/about.html">About</a>
+      <a class="hover:underline" href="/contact.html">Contact</a>
+      <a class="hover:underline" href="/subscribe.html">Subscribe</a>
+    </nav>
+  </aside>
+</div>
+
+<script>
+  // Read ?q=... from URL
+  const params = new URLSearchParams(location.search);
+  const q = (params.get('q') || '').trim();
+  const qEls = [document.getElementById('q'), document.getElementById('mq')].filter(Boolean);
+  qEls.forEach(el => el && (el.value = q));
+
+  // Load index and search
+  async function runSearch() {
+    const meta = document.getElementById('meta');
+    const resultsEl = document.getElementById('results');
+    resultsEl.innerHTML = '';
+
+    // Update page title
+    if (q) document.title = `Search: ${q} | The Princeton Journal`;
+
+    // Fetch the index
+    let docs = [];
+    try {
+      const res = await fetch('/search-index.json', { cache: 'no-store' });
+      docs = await res.json();
+    } catch (e) {
+      meta.textContent = 'Search index not found.';
+      return;
+    }
+
+    // If no query, show newest first (simple list)
+    if (!q) {
+      meta.textContent = 'Type above to search all articles.';
+      docs.sort((a,b) => (b.date || '').localeCompare(a.date || ''));
+      docs.forEach(d => resultsEl.appendChild(renderCard(d)));
+      return;
+    }
+
+    // Fuse search options
+    const fuse = new Fuse(docs, {
+      includeScore: true,
+      includeMatches: true,
+      shouldSort: true,
+      threshold: 0.35,           // fuzziness
+      minMatchCharLength: 2,
+      ignoreLocation: true,
+      useExtendedSearch: false,
+      keys: [
+        { name: 'title',   weight: 0.55 },
+        { name: 'content', weight: 0.35 },
+        { name: 'tags',    weight: 0.10 }
+      ]
+    });
+
+    const hits = fuse.search(q);
+    meta.textContent = `${hits.length} result${hits.length === 1 ? '' : 's'} for “${q}”`;
+
+    hits.forEach(hit => {
+      const doc = hit.item;
+      resultsEl.appendChild(renderCard(doc, hit.matches));
+    });
+  }
+
+  function renderCard(doc, matches = []) {
+    const tpl = document.getElementById('result-tpl');
+    const node = tpl.content.firstElementChild.cloneNode(true);
+    node.href = doc.url;
+
+    // Meta
+    node.querySelector('.section').textContent = doc.section || 'Article';
+    node.querySelector('.date').textContent = doc.prettyDate || doc.date || '';
+
+    // Title + excerpt
+    node.querySelector('.title').innerHTML = highlight(doc.title, matches, 'title') || escapeHTML(doc.title);
+    const snippet = makeSnippet(doc.content || '', matches) || (doc.excerpt || '').slice(0, 240);
+    node.querySelector('.excerpt').innerHTML = snippet ? highlight(snippet, matches, 'content') : '';
+
+    return node;
+  }
+
+  function makeSnippet(content, matches) {
+    if (!content) return '';
+    // Find first match in content and show a short window around it
+    const m = (matches || []).find(m => m.key === 'content');
+    if (!m || !m.indices || !m.indices.length) return escapeHTML(content.slice(0, 240)) + '…';
+    const [start, end] = m.indices[0];
+    const pad = 80;
+    const s = Math.max(0, start - pad);
+    const e = Math.min(content.length, end + pad);
+    const chunk = content.slice(s, e);
+    const prefix = s > 0 ? '…' : '';
+    const suffix = e < content.length ? '…' : '';
+    return escapeHTML(prefix + chunk + suffix);
+  }
+
+  function highlight(text, matches, key) {
+    if (!matches || !matches.length) return escapeHTML(text);
+    const m = matches.find(m => m.key === key);
+    if (!m || !m.indices) return escapeHTML(text);
+    // Build ranges
+    let result = '';
+    let last = 0;
+    m.indices.forEach(([start, end]) => {
+      result += escapeHTML(text.slice(last, start));
+      result += '<mark>' + escapeHTML(text.slice(start, end + 1)) + '</mark>';
+      last = end + 1;
+    });
+    result += escapeHTML(text.slice(last));
+    return result;
+  }
+
+  function escapeHTML(s) {
+    return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  runSearch();
+</script>
+</body>
+</html>
