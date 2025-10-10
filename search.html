@@ -20,7 +20,8 @@
   .tpj-masthead{ font-family: var(--font-mast); letter-spacing:.2px; }
   .container-narrow{ max-width:1100px; }
   .card{ border:1px solid #e5e7eb; border-radius:.75rem; }
-  mark{ background: #fffb91; padding: 0 .15em; }
+  mark{ background:#fffb91; padding:0 .15em; }
+  /* Drawer */
   #siteMenuToggle{position:absolute;opacity:0;pointer-events:none;}
   #siteDrawer{transform:translateX(100%);opacity:1;}
   #siteDrawerBackdrop{opacity:0;}
@@ -62,6 +63,7 @@
 <main class="mx-auto container-narrow px-4 py-8">
   <h1 class="tpj-masthead text-3xl mb-4">Search</h1>
 
+  <!-- Mobile search -->
   <form action="/search.html" method="get" class="md:hidden mb-6">
     <div class="flex">
       <input id="mq" type="search" name="q" placeholder="Search articles…" class="flex-1 border rounded-l px-3 py-2" aria-label="Search">
@@ -97,6 +99,7 @@
   <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
 </footer>
 
+<!-- Mobile Drawer -->
 <div id="siteDrawer" class="fixed inset-0 z-50 md:hidden pointer-events-auto transition">
   <div id="siteDrawerBackdrop" class="absolute inset-0 bg-black/40 transition-opacity duration-200"></div>
   <aside class="absolute right-0 top-0 h-full w-80 max-w-[85%] bg-white transition-transform duration-200 shadow-xl">
@@ -106,7 +109,7 @@
     </div>
     <div class="p-4 border-b">
       <form action="/search.html" method="get" class="flex">
-        <input type="search" name="q" placeholder="Search articles…" class="flex-1 border rounded-l px-3 py-2" aria-label="Search">
+        <input id="dq" type="search" name="q" placeholder="Search articles…" class="flex-1 border rounded-l px-3 py-2" aria-label="Search">
         <button class="px-4 py-2 border rounded-r">Search</button>
       </form>
     </div>
@@ -123,39 +126,70 @@
 </div>
 
 <script>
-(async function() {
-  const params = new URLSearchParams(window.location.search);
-  const query = params.get('q')?.trim();
-  const meta = document.getElementById('meta');
+(async function () {
+  const params = new URLSearchParams(location.search);
+  const q = (params.get('q') || '').trim();
+
+  // Mirror query into all search inputs (desktop header, mobile form, drawer)
+  [['q'], ['mq'], ['dq']].forEach(([id]) => {
+    const el = document.getElementById(id);
+    if (el) el.value = q;
+  });
+
+  // Update title if searching
+  if (q) document.title = `Search: ${q} | The Princeton Journal`;
+
+  const metaEl = document.getElementById('meta');
   const resultsEl = document.getElementById('results');
 
-  if (!query) {
-    meta.innerHTML = '<p>Type something above to search.</p>';
+  // Load the index
+  let docs = [];
+  try {
+    const res = await fetch('/assets/search-index.json', { cache: 'no-store' });
+    docs = await res.json();
+  } catch (err) {
+    metaEl.textContent = 'Could not load the search index.';
     return;
   }
 
-  const res = await fetch('/assets/search-index.json');
-  const articles = await res.json();
+  // If no query, prompt user (you can also list all docs here if you want)
+  if (!q) {
+    metaEl.textContent = 'Type above to search all articles.';
+    resultsEl.innerHTML = '';
+    return;
+  }
 
-  const fuse = new Fuse(articles, {
-    keys: ['title', 'description'],
-    threshold: 0.3
+  // Fuse search
+  const fuse = new Fuse(docs, {
+    keys: [
+      { name: 'title', weight: 0.7 },
+      { name: 'description', weight: 0.3 }
+    ],
+    threshold: 0.33,
+    ignoreLocation: true
   });
 
-  const results = fuse.search(query);
-  meta.innerHTML = `<p class="mb-4 text-gray-600">Results for "<strong>${query}</strong>":</p>`;
+  const hits = fuse.search(q);
+  metaEl.textContent = `${hits.length} result${hits.length === 1 ? '' : 's'} for “${q}”`;
 
-  if (results.length === 0) {
+  // Render
+  if (hits.length === 0) {
     resultsEl.innerHTML = '<p>No articles found.</p>';
     return;
   }
 
-  resultsEl.innerHTML = results.map(r => `
-    <div class="card p-4 hover:bg-gray-50">
-      <a href="${r.item.url}" class="text-lg font-semibold hover:underline">${r.item.title}</a>
-      <p class="text-sm text-gray-700 mt-1">${r.item.description}</p>
-    </div>
+  resultsEl.innerHTML = hits.map(({ item }) => `
+    <a class="card p-4 hover:bg-gray-50 block" href="${item.url}">
+      <div class="font-semibold text-lg mb-1">${escapeHTML(item.title)}</div>
+      <div class="text-gray-700 text-sm">${escapeHTML(item.description || '')}</div>
+    </a>
   `).join('');
+
+  function escapeHTML(s) {
+    return (s || '').replace(/[&<>"']/g, c => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[c]));
+  }
 })();
 </script>
 </body>
