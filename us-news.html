@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Community Voices | The Princeton Journal</title>
+<title>U.S. News | The Princeton Journal</title>
 <link rel="icon" href="/assets/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,6 +19,12 @@
   .tpj-masthead{ font-family: var(--font-mast); letter-spacing:.2px; }
   .container-narrow{ max-width: 1100px; }
   .card{ border:1px solid #e5e7eb; border-radius:.75rem; }
+  /* Drawer styles */
+  #siteMenuToggle{position:absolute;opacity:0;pointer-events:none;}
+  #siteDrawer{transform:translateX(100%);opacity:1;}
+  #siteDrawerBackdrop{opacity:0;}
+  #siteMenuToggle:checked ~ #siteDrawer{transform:translateX(0);}
+  #siteMenuToggle:checked ~ #siteDrawer #siteDrawerBackdrop{opacity:1;}
 </style>
 </head>
 <body>
@@ -35,7 +41,7 @@
       <div class="w-5 h-0.5 bg-black"></div>
     </label>
 
-    <!-- Desktop nav (Community Voices active) -->
+    <!-- Desktop nav -->
     <nav class="mt-4 hidden md:flex flex-wrap items-center justify-center gap-6 text-sm">
       <a class="hover:underline font-medium" href="/index.html">Home</a>
       <a class="hover:underline font-semibold" href="/us-news.html">U.S. News</a>
@@ -46,7 +52,7 @@
       <a class="hover:underline font-medium" href="/subscribe.html">Subscribe</a>
     </nav>
 
-    <!-- Search (desktop, same as homepage) -->
+    <!-- Search (desktop) -->
     <div class="mt-4 hidden md:block">
       <form action="/search.html" method="get" class="max-w-xl mx-auto flex">
         <input type="search" name="q" placeholder="Search articles…" class="flex-1 border rounded-l px-3 py-2" aria-label="Search">
@@ -56,7 +62,7 @@
   </div>
 </header>
 
-<!-- Mobile Drawer (single, matching Governance) -->
+<!-- Mobile Drawer -->
 <div id="siteDrawer" class="fixed inset-0 z-50 md:hidden pointer-events-auto transition">
   <div id="siteDrawerBackdrop" class="absolute inset-0 bg-black/40 transition-opacity duration-200"></div>
   <aside class="absolute right-0 top-0 h-full w-80 max-w-[85%] bg-white transition-transform duration-200 shadow-xl">
@@ -71,10 +77,10 @@
         <button class="px-4 py-2 border rounded-r">Search</button>
       </form>
     </div>
-    <!-- Nav (Community Voices active) -->
+    <!-- Nav -->
     <nav class="p-4 grid gap-3 text-base">
       <a class="hover:underline" href="/index.html">Home</a>
-      <a class="hover:underline font-semibold" href="/community-voices.html">Community Voices</a>
+      <a class="hover:underline font-semibold" href="/us-news.html">U.S. News</a>
       <a class="hover:underline" href="/princeton-governance.html">Princeton Governance</a>
       <a class="hover:underline" href="/council-tracker.html">City Council Tracker</a>
       <a class="hover:underline" href="/about.html">About</a>
@@ -85,24 +91,24 @@
 </div>
 
 <main class="mx-auto container-narrow px-4 py-8">
-  <h1 class="tpj-masthead text-3xl mb-2">Community Voices</h1>
-  <p class="text-gray-700 mb-6">Guest commentary and op-eds from Princeton residents.</p>
+  <h1 class="tpj-masthead text-3xl mb-2">U.S. News &amp; Princeton Impact</h1>
+  <p class="text-gray-700 mb-6">U.S. policy and national developments explained for Princeton: what changed, why it matters locally, and what to watch next.</p>
 
   <div class="grid md:grid-cols-3 gap-6">
     <a href="/posts/op-ed-growth.html" class="card p-4 hover:bg-gray-50">
       <div class="h-40 bg-gray-200 rounded"></div>
       <div class="font-semibold mt-3">Opinion: Growth is only good if trust grows with it</div>
-      <div class="text-sm text-gray-500 mt-1">Community Voices • Sep 27, 2025</div>
+      <div class="text-sm text-gray-500 mt-1">U.S. News • Sep 27, 2025</div>
     </a>
     <a href="/posts/op-ed-parkland.html" class="card p-4 hover:bg-gray-50">
       <div class="h-40 bg-gray-200 rounded"></div>
       <div class="font-semibold mt-3">A resident’s case for parkland funding</div>
-      <div class="text-sm text-gray-500 mt-1">Community Voices • Sep 22, 2025</div>
+      <div class="text-sm text-gray-500 mt-1">U.S. News • Sep 22, 2025</div>
     </a>
     <a href="/posts/op-ed-transit.html" class="card p-4 hover:bg-gray-50">
       <div class="h-40 bg-gray-200 rounded"></div>
       <div class="font-semibold mt-3">Transit and the future of Main Street</div>
-      <div class="text-sm text-gray-500 mt-1">Community Voices • Sep 15, 2025</div>
+      <div class="text-sm text-gray-500 mt-1">U.S. News • Sep 15, 2025</div>
     </a>
   </div>
 </main>
@@ -130,15 +136,5 @@
   </div>
   <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
 </footer>
-
-<!-- Drawer styles (same everywhere) -->
-<style>
-  #siteMenuToggle{position:absolute;opacity:0;pointer-events:none;}
-  #siteDrawer{transform:translateX(100%);opacity:1;}
-  #siteDrawerBackdrop{opacity:0;}
-  #siteMenuToggle:checked ~ #siteDrawer{transform:translateX(0);}
-  #siteMenuToggle:checked ~ #siteDrawer #siteDrawerBackdrop{opacity:1;}
-</style>
-
 </body>
 </html>
