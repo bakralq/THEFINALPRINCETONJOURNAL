@@ -39,21 +39,22 @@
       <div class="w-5 h-0.5 bg-black mb-1"></div>
       <div class="w-5 h-0.5 bg-black"></div>
     </label>
-<nav class="mt-4 hidden md:flex flex-wrap items-center justify-center gap-6 text-sm">
-  <a class="hover:underline font-semibold" href="/index.html">Home</a>
-  <a class="hover:underline font-medium" href="/us-news.html">U.S. News</a>
-  <a class="hover:underline font-medium" href="/princeton-governance.html">Princeton Governance</a>
-  <a class="hover:underline font-medium" href="/council-tracker.html">City Council Tracker</a>
-  <a class="hover:underline font-medium" href="/about.html">About</a>
-  <a class="hover:underline font-medium" href="/contact.html">Contact</a>
-  <a class="hover:underline font-medium" href="/subscribe.html">Subscribe</a>
+    <nav class="mt-4 hidden md:flex flex-wrap items-center justify-center gap-6 text-sm">
+      <a class="hover:underline font-semibold" href="/index.html">Home</a>
+      <a class="hover:underline font-medium" href="/us-news.html">U.S. News</a>
+      <a class="hover:underline font-medium" href="/princeton-governance.html">Princeton Governance</a>
+      <a class="hover:underline font-medium" href="/council-tracker.html">City Council Tracker</a>
+      <a class="hover:underline font-medium" href="/about.html">About</a>
+      <a class="hover:underline font-medium" href="/contact.html">Contact</a>
+      <a class="hover:underline font-medium" href="/subscribe.html">Subscribe</a>
     </nav>
-<div class="mt-4 hidden md:block">
-  <form action="/search.html" method="get" class="max-w-xl mx-auto flex">
-    <input type="search" name="q" placeholder="Search articles…" class="flex-1 border rounded-l px-3 py-2" aria-label="Search">
-    <button class="px-4 py-2 border rounded-r">Search</button>
-  </form>
-</div>
+    <div class="mt-4 hidden md:block">
+      <form action="/search.html" method="get" class="max-w-xl mx-auto flex">
+        <input type="search" name="q" placeholder="Search articles…" class="flex-1 border rounded-l px-3 py-2" aria-label="Search">
+        <button class="px-4 py-2 border rounded-r">Search</button>
+      </form>
+    </div>
+  </div>
 </header>
 
 <main>
@@ -62,10 +63,11 @@
     <article class="grid md:grid-cols-12 gap-6 items-stretch">
       <div class="md:col-span-7">
         <a href="/us-380-night-work.html" class="block group">
-  <img src="/assets/us-380-image.jpg"
-       alt="Night highway work along US-380 near Princeton"
-       class="w-full h-64 md:h-80 object-cover object-bottom rounded"
-       width="1200" height="640">          <h1 class="tpj-masthead text-3xl md:text-4xl mt-4 group-hover:underline">
+          <img src="/assets/us-380-image.jpg"
+               alt="Night highway work along US-380 near Princeton"
+               class="w-full h-64 md:h-80 object-cover object-bottom rounded"
+               width="1200" height="640">
+          <h1 class="tpj-masthead text-3xl md:text-4xl mt-4 group-hover:underline">
             US-380 Expansion Starts Oct. 6, But the Hardest Miles Are Through Princeton
           </h1>
           <p class="text-gray-600 text-sm mt-2">By Bakr Al Qaraghuli, Editor</p>
@@ -79,13 +81,19 @@
           </div>
         </a>
       </div>
+
+      <!-- In this issue -->
       <div class="md:col-span-5 grid gap-4 content-start">
         <div class="text-xs uppercase tracking-wide text-gray-500">In this issue</div>
-        <a href="/posts/budget-2026.html" class="block border rounded p-4 hover:bg-gray-50">
+
+        <!-- Curated pick 1 -->
+        <a href="/fy-2026-budget.html" class="block border rounded p-4 hover:bg-gray-50">
           <div class="font-semibold">Inside the FY 2026 budget: what changes and why it matters</div>
           <div class="text-sm text-gray-500 mt-1">Princeton Governance • Oct 1, 2025</div>
         </a>
-        <a href="/posts/op-ed-growth.html" class="block border rounded p-4 hover:bg-gray-50">
+
+        <!-- Curated pick 2 -->
+        <a href="/op-ed-growth.html" class="block border rounded p-4 hover:bg-gray-50">
           <div class="font-semibold">Opinion: Growth is only good if trust grows with it</div>
           <div class="text-sm text-gray-500 mt-1">U.S. News • Sep 27, 2025</div>
         </a>
@@ -93,22 +101,27 @@
     </article>
   </section>
 
-  <!-- Recent Articles (newest → older) -->
+  <!-- Recent Articles (newest → older; excludes the top story) -->
   <section class="mx-auto container-narrow px-4">
     <h2 class="tpj-masthead text-2xl mb-3">Recent Articles</h2>
     <div class="grid md:grid-cols-3 gap-6">
+      <!-- Sep 20 -->
       <a href="/posts/council-meeting-sept22.html" class="card p-4 hover:bg-gray-50">
         <div class="h-40 bg-gray-200 rounded flex items-center justify-center text-gray-500 text-xs">[Image]</div>
         <div class="font-semibold mt-3">What Residents Need to Know About Monday’s Council Meeting</div>
         <div class="text-sm text-gray-500">Princeton Governance • Sep 20, 2025</div>
       </a>
+
+      <!-- Sep 15 (has image) -->
       <a href="/posts/office-audit.html" class="card p-4 hover:bg-gray-50">
-        <div class="h-40 bg-gray-200 rounded flex items-center justify-center text-gray-500 text-xs">[Image]</div>
+        <img src="/assets/40000k%20office%20image.jpg" alt="City office with documents and computer on desk" class="h-40 w-full object-cover rounded">
         <div class="font-semibold mt-3">Princeton Finds $40,000 for an Office, but Not for an Audit</div>
         <div class="text-sm text-gray-500">Princeton Governance • Sep 15, 2025</div>
       </a>
+
+      <!-- Sep 13 (has image) -->
       <a href="/posts/walmart-apartments.html" class="card p-4 hover:bg-gray-50">
-        <div class="h-40 bg-gray-200 rounded flex items-center justify-center text-gray-500 text-xs">[Image]</div>
+        <img src="/assets/seb-doe-8uMLkPmIDk0-unsplash.jpg" alt="Half-built apartments and housing construction site" class="h-40 w-full object-cover rounded">
         <div class="font-semibold mt-3">Princeton’s Delays Left the Walmart Apartments Half-Built and Rotting</div>
         <div class="text-sm text-gray-500">Princeton Governance • Sep 13, 2025</div>
       </a>
@@ -128,7 +141,7 @@
       <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
         <div>
           <div class="text-sm text-gray-500">Next meeting</div>
-          <div class="font-semibold">—</div>
+          <div class="font-semibold">October 14, 2025</div>
         </div>
         <a class="px-4 py-2 border rounded hover:bg-gray-50 inline-block" href="/council-tracker.html">Open the Tracker</a>
       </div>
