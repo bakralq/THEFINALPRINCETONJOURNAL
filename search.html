@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script defer data-domain="theprincetonjournal.com" src="https://plausible.io/js/plausible.js"></script>
+<!-- Fuse is optional; we gracefully fallback if blocked by CSP -->
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
 <style>
   :root{ --font-mast:"Grenze Gotisch", serif; --font-body:"Inter", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans"; }
@@ -126,27 +127,12 @@
 
 <script>
 (() => {
+  'use strict';
+
   const metaEl = document.getElementById('meta');
   const resultsEl = document.getElementById('results');
 
-  // Intercept submits on THIS page so searching works even without a full reload.
-  document.querySelectorAll('form[action="/search.html"]').forEach(form => {
-    form.addEventListener('submit', (e) => {
-      if (location.pathname.endsWith('/search.html')) {
-        e.preventDefault();
-        const q = (form.querySelector('input[name="q"]')?.value || '').trim();
-        // Update URL without reload so you can share it
-        history.replaceState({}, '', '/search.html' + (q ? ('?q=' + encodeURIComponent(q)) : ''));
-        run(q);
-      }
-    });
-  });
-
-  // Run once on load with ?q=
-  const urlQ = (new URLSearchParams(location.search).get('q') || '').trim();
-  setInputs(urlQ);
-  run(urlQ);
-
+  // Keep inputs in sync with ?q=
   function setInputs(q) {
     ['q','mq','dq'].forEach(id => {
       const el = document.getElementById(id);
@@ -155,14 +141,34 @@
     if (q) document.title = `Search: ${q} | The Princeton Journal`;
   }
 
+  // Intercept submits on this page so it searches without a full reload
+  document.querySelectorAll('form[action="/search.html"]').forEach(form => {
+    form.addEventListener('submit', (e) => {
+      if (location.pathname.endsWith('/search.html')) {
+        e.preventDefault();
+        const q = (form.querySelector('input[name="q"]')?.value || '').trim();
+        history.replaceState({}, '', '/search.html' + (q ? ('?q=' + encodeURIComponent(q)) : ''));
+        setInputs(q);
+        run(q);
+      }
+    });
+  });
+
+  const urlQ = (new URLSearchParams(location.search).get('q') || '').trim();
+  setInputs(urlQ);
+  run(urlQ);
+
   async function loadIndex() {
     if (window.__TPJ_INDEX__) return window.__TPJ_INDEX__;
     try {
-      const res = await fetch('/assets/search-index.json', { cache: 'no-store' });
+      // Cache-bust to avoid stale JSON after deploys
+      const res = await fetch('/assets/search-index.json?ts=' + Date.now(), { cache: 'no-store' });
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const json = await res.json();
-      window.__TPJ_INDEX__ = Array.isArray(json) ? json : [];
-      return window.__TPJ_INDEX__;
+      const arr = Array.isArray(json) ? json : [];
+      window.__TPJ_INDEX__ = arr;
+      metaEl.textContent = `Loaded ${arr.length} articles`;
+      return arr;
     } catch (err) {
       metaEl.textContent = 'Could not load the search index.';
       console.error('Search index load error:', err);
@@ -170,31 +176,52 @@
     }
   }
 
+  // Normalizer so "US-380" matches "380"
+  const normalize = s => (s || '')
+    .toLowerCase()
+    .normalize('NFKD')
+    .replace(/[\u2010-\u2015]/g, '-')      // various dashes to hyphen
+    .replace(/[^a-z0-9\s\-]/g, ' ');      // strip punctuation
+
+  function basicSearch(docs, q) {
+    const nq = normalize(q);
+    return docs.filter(d => {
+      const t = normalize(d.title);
+      const desc = normalize(d.description);
+      return t.includes(nq) || desc.includes(nq);
+    });
+  }
+
   async function run(q) {
     const docs = await loadIndex();
     if (!docs.length) { resultsEl.innerHTML = ''; return; }
 
-    // No query: show all articles (sorted by title)
     if (!q) {
-      metaEl.textContent = `All articles (${docs.length})`;
+      // No query: show all articles sorted by title
       const list = [...docs].sort((a,b) => (a.title||'').localeCompare(b.title||''));
+      metaEl.textContent = `All articles (${list.length})`;
       resultsEl.innerHTML = list.map(renderItem).join('');
       return;
     }
 
-    // Search
-    const fuse = new Fuse(docs, {
-      keys: [
-        { name: 'title', weight: 0.7 },
-        { name: 'description', weight: 0.3 }
-      ],
-      threshold: 0.33,
-      ignoreLocation: true
-    });
+    let matches = [];
+    if (window.Fuse) {
+      const fuse = new Fuse(docs, {
+        keys: [
+          { name: 'title', weight: 0.7 },
+          { name: 'description', weight: 0.3 }
+        ],
+        threshold: 0.33,
+        ignoreLocation: true
+      });
+      matches = fuse.search(q).map(h => h.item);
+    } else {
+      console.warn('Fuse not available — using basic substring search.');
+      matches = basicSearch(docs, q);
+    }
 
-    const hits = fuse.search(q);
-    metaEl.textContent = `${hits.length} result${hits.length === 1 ? '' : 's'} for “${q}”`;
-    resultsEl.innerHTML = hits.map(h => renderItem(h.item)).join('');
+    metaEl.textContent = `${matches.length} result${matches.length === 1 ? '' : 's'} for “${q}”`;
+    resultsEl.innerHTML = matches.map(renderItem).join('');
   }
 
   function renderItem(item) {
