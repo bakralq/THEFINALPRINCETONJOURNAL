@@ -2,81 +2,121 @@
   {
     "title": "US-380 Expansion Starts Oct. 6, But the Hardest Miles Are Through Princeton",
     "description": "Night work begins near Airport Road, moving east through Princeton. Closures, noise, and traffic detours expected for the next 2.5 years.",
-    "url": "/us-380-night-work.html"
+    "url": "/us-380-night-work.html",
+    "section": "U.S. News",
+    "date": "October 3, 2025",
+    "editor": "Bakr Al Qaraghuli"
   },
   {
     "title": "Inside the FY 2026 Budget: What Changes and Why It Matters",
     "description": "A breakdown of Princeton’s FY 2026 city budget and what residents should expect.",
-    "url": "/fy-2026-budget.html"
+    "url": "/fy-2026-budget.html",
+    "section": "Princeton Governance",
+    "date": "September 30, 2025",
+    "editor": "Bakr Al Qaraghuli"
   },
   {
     "title": "Opinion: Growth is Only Good If Trust Grows With It",
     "description": "An editorial on the pace of local expansion and community accountability.",
-    "url": "/op-ed-growth.html"
+    "url": "/op-ed-growth.html",
+    "section": "Community Voices",
+    "date": "September 24, 2025",
+    "editor": "Bakr Al Qaraghuli"
   },
   {
     "title": "Princeton Finds $40,000 for an Office, but Not for an Audit",
     "description": "A detailed look into fiscal priorities and oversight gaps within the city government.",
-    "url": "/office-audit.html"
+    "url": "/office-audit.html",
+    "section": "Princeton Governance",
+    "date": "September 28, 2025",
+    "editor": "Bakr Al Qaraghuli"
   },
   {
     "title": "Growth Houses First: The Cost of Rapid Expansion",
     "description": "An investigative report into Princeton’s residential growth, zoning decisions, and the tradeoffs behind development-first planning.",
-    "url": "/growth-houses-first.html"
-  },
-  {
-    "title": "Budget 2026: City Spending Priorities and What They Mean for Residents",
-    "description": "Detailed coverage of the FY 2026 city budget debate, focusing on funding allocations, tax rates, and long-term infrastructure planning.",
-    "url": "/budget-2026.html"
+    "url": "/growth-houses-first.html",
+    "section": "U.S. News",
+    "date": "September 26, 2025",
+    "editor": "Bakr Al Qaraghuli"
   },
   {
     "title": "Collin County ESD Proposal: What It Means for Princeton",
     "description": "A look at the proposed Emergency Services District in Collin County, including how it could affect fire protection and taxes in Princeton.",
-    "url": "/collin-county-esd.html"
+    "url": "/collin-county-esd.html",
+    "section": "Princeton Governance",
+    "date": "September 25, 2025",
+    "editor": "Bakr Al Qaraghuli"
   },
   {
     "title": "The H14 ETJ Removal Fee: What Council Voted On",
     "description": "A breakdown of the H14 ETJ Removal Fee agenda item, what a ‘Yes’ and ‘No’ vote meant, and how it impacts Princeton residents.",
-    "url": "/tracker/h14-etj-removal-fee.html"
+    "url": "/tracker/h14-etj-removal-fee.html",
+    "section": "City Council Tracker",
+    "date": "September 22, 2025",
+    "editor": "Bakr Al Qaraghuli"
   },
   {
     "title": "Parkland or Parking Lots: The Debate Over Princeton’s Future",
     "description": "An analysis of local land-use debates and how open space and development priorities define Princeton’s next decade.",
-    "url": "/op-ed-parkland.html"
+    "url": "/op-ed-parkland.html",
+    "section": "Community Voices",
+    "date": "September 19, 2025",
+    "editor": "Bakr Al Qaraghuli"
   },
   {
     "title": "Transit and Trust: The Missing Link in Princeton’s Growth Plan",
     "description": "An opinion piece exploring why transportation planning is crucial to sustainable city growth.",
-    "url": "/op-ed-transit.html"
+    "url": "/op-ed-transit.html",
+    "section": "Community Voices",
+    "date": "September 17, 2025",
+    "editor": "Bakr Al Qaraghuli"
   },
   {
     "title": "Transparency and Trust: The Core of Princeton Governance",
     "description": "An overview of how open records, meeting accountability, and community engagement are shaping local governance reform.",
-    "url": "/transparency.html"
+    "url": "/transparency.html",
+    "section": "Princeton Governance",
+    "date": "September 12, 2025",
+    "editor": "Bakr Al Qaraghuli"
   },
   {
     "title": "City Council Tracker: Meetings, Votes, and Outcomes",
     "description": "A searchable record of Princeton City Council meetings, including agendas, motions, and voting results.",
-    "url": "/council-tracker.html"
+    "url": "/council-tracker.html",
+    "section": "City Council Tracker",
+    "date": "Updated Weekly",
+    "editor": "Bakr Al Qaraghuli"
   },
   {
     "title": "About The Princeton Journal",
     "description": "Information about The Princeton Journal’s mission, values, and editorial standards.",
-    "url": "/about.html"
+    "url": "/about.html",
+    "section": "Information",
+    "date": "Updated Regularly",
+    "editor": "Editorial Board"
   },
   {
     "title": "Contact The Princeton Journal",
     "description": "How to reach the editorial team, submit tips, or get in touch about coverage.",
-    "url": "/contact.html"
+    "url": "/contact.html",
+    "section": "Information",
+    "date": "Updated Regularly",
+    "editor": "Editorial Board"
   },
   {
     "title": "Subscribe for Updates",
     "description": "Sign up to receive email updates from The Princeton Journal on local news and governance.",
-    "url": "/subscribe.html"
+    "url": "/subscribe.html",
+    "section": "Information",
+    "date": "Updated Regularly",
+    "editor": "Editorial Board"
   },
   {
     "title": "Privacy Policy",
     "description": "How The Princeton Journal handles user data, cookies, and subscriptions.",
-    "url": "/privacy.html"
+    "url": "/privacy.html",
+    "section": "Information",
+    "date": "Updated Regularly",
+    "editor": "Editorial Board"
   }
 ]
