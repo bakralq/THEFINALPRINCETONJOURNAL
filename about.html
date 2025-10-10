@@ -20,29 +20,49 @@
   .container-narrow{ max-width: 1100px; }
   .prose p{ margin: 1em 0; line-height: 1.7; }
   .prose h2{ font-family: var(--font-mast); font-size: 1.5rem; margin-top: 1.25rem; }
+
+  /* Drawer styles (must match other pages) */
+  #siteMenuToggle{position:absolute;opacity:0;pointer-events:none;}
+  #siteDrawer{transform:translateX(100%);opacity:1;}
+  #siteDrawerBackdrop{opacity:0;}
+  #siteMenuToggle:checked ~ #siteDrawer{transform:translateX(0);}
+  #siteMenuToggle:checked ~ #siteDrawer #siteDrawerBackdrop{opacity:1;}
 </style>
 </head>
 <body>
 <input type="checkbox" id="siteMenuToggle" />
+
 <header class="border-b-2 border-gray-900">
   <div class="mx-auto container-narrow px-4 py-6 relative text-center">
     <a href="/index.html" class="inline-block">
       <div class="tpj-masthead text-3xl md:text-5xl leading-none">The Princeton Journal</div>
     </a>
+
+    <!-- Mobile hamburger -->
     <label for="siteMenuToggle" class="absolute right-4 top-6 p-2 border rounded md:hidden" aria-label="Open menu">
       <div class="w-5 h-0.5 bg-black mb-1"></div>
       <div class="w-5 h-0.5 bg-black mb-1"></div>
       <div class="w-5 h-0.5 bg-black"></div>
     </label>
-    <nav class="mt-4 hidden md:flex flex-wrap items-center justify-center gap-6 text-sm">
-      <a class="hover:underline" href="/index.html">Home</a>
-      <a class="hover:underline" href="/community-voices.html">Community Voices</a>
-      <a class="hover:underline" href="/princeton-governance.html">Princeton Governance</a>
-      <a class="hover:underline" href="/council-tracker.html">City Council Tracker</a>
-      <a class="hover:underline" href="/about.html">About</a>
-      <a class="hover:underline" href="/contact.html">Contact</a>
-      <a class="hover:underline" href="/subscribe.html">Subscribe</a>
-    </nav>
+
+    <!-- Desktop nav -->
+   <nav class="mt-4 hidden md:flex flex-wrap items-center justify-center gap-6 text-sm">
+  <a class="hover:underline font-medium" href="/index.html">Home</a>
+  <a class="hover:underline font-medium" href="/us-news.html">U.S. News</a>
+  <a class="hover:underline font-medium" href="/princeton-governance.html">Princeton Governance</a>
+  <a class="hover:underline font-medium" href="/council-tracker.html">City Council Tracker</a>
+  <a class="hover:underline font-semibold" href="/about.html">About</a>
+  <a class="hover:underline font-medium" href="/contact.html">Contact</a>
+  <a class="hover:underline font-medium" href="/subscribe.html">Subscribe</a>
+</nav>
+
+    <!-- Desktop search -->
+    <div class="mt-4 hidden md:block">
+      <form action="/search.html" method="get" class="max-w-xl mx-auto flex">
+        <input type="search" name="q" placeholder="Search articles…" class="flex-1 border rounded-l px-3 py-2" aria-label="Search">
+        <button class="px-4 py-2 border rounded-r">Search</button>
+      </form>
+    </div>
   </div>
 </header>
 
@@ -98,7 +118,7 @@
       </div>
     </div>
     <div class="flex gap-4 md:justify-end">
-      <a class="hover:underline" href="/about.html">About</a>
+      <a class="hover:underline font-semibold" href="/about.html">About</a>
       <a class="hover:underline" href="/privacy.html">Privacy</a>
       <a class="hover:underline" href="/contact.html">Contact</a>
       <a class="hover:underline" href="/subscribe.html">Subscribe</a>
@@ -106,5 +126,32 @@
   </div>
   <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
 </footer>
+
+<!-- Mobile Drawer (must come after the checkbox so the CSS selector works) -->
+<div id="siteDrawer" class="fixed inset-0 z-50 md:hidden pointer-events-auto transition">
+  <div id="siteDrawerBackdrop" class="absolute inset-0 bg-black/40 transition-opacity duration-200"></div>
+  <aside class="absolute right-0 top-0 h-full w-80 max-w-[85%] bg-white transition-transform duration-200 shadow-xl">
+    <div class="p-4 border-b-2 border-gray-900 flex items-center justify-between">
+      <div class="font-semibold">Menu</div>
+      <label for="siteMenuToggle" class="p-2 border rounded" aria-label="Close menu">Close</label>
+    </div>
+    <div class="p-4 border-b">
+      <form action="/search.html" method="get" class="flex">
+        <input type="search" name="q" placeholder="Search articles…" class="flex-1 border rounded-l px-3 py-2" aria-label="Search">
+        <button class="px-4 py-2 border rounded-r">Search</button>
+      </form>
+    </div>
+    <nav class="p-4 grid gap-3 text-base">
+      <a class="hover:underline" href="/index.html">Home</a>
+      <a class="hover:underline" href="/us-news.html">U.S. News</a>
+      <a class="hover:underline" href="/princeton-governance.html">Princeton Governance</a>
+      <a class="hover:underline" href="/council-tracker.html">City Council Tracker</a>
+      <a class="hover:underline font-semibold" href="/about.html">About</a>
+      <a class="hover:underline" href="/privacy.html">Privacy</a>
+      <a class="hover:underline" href="/contact.html">Contact</a>
+      <a class="hover:underline" href="/subscribe.html">Subscribe</a>
+    </nav>
+  </aside>
+</div>
 </body>
 </html>

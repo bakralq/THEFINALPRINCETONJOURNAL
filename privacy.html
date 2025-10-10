@@ -10,7 +10,7 @@
 </style>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Princeton Journal</title>
+<title>Privacy Policy | The Princeton Journal</title>
 <link rel="icon" href="/assets/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,23 +28,14 @@
   .prose p{ margin: 1em 0; line-height: 1.7; }
   .prose h2{ font-family: var(--font-mast); font-size: 1.5rem; margin-top: 1.25rem; }
   .prose h3{ font-weight: 600; margin-top: 1rem; }
-  .tpj-table{ width:100%; border-collapse: collapse; }
-  .tpj-table th, .tpj-table td{ border:1px solid #e5e7eb; padding:.75rem; }
-  .tpj-table thead th{ position:sticky; top:0; background:#fff; }
-  .tpj-legend span{ margin-right: 1rem; display:inline-flex; align-items:center; gap:.4rem;}
-  .dot{ display:inline-block; width:.8rem; height:.8rem; border-radius:9999px; }
-  .dot-yes{ background:#16a34a;}
-  .dot-no{ background:#dc2626;}
-  .dot-abstain{ background:#ca8a04;}
-  .dot-absent{ background:#6b7280;}
   .card{ border:1px solid #e5e7eb; border-radius: .75rem; }
+  /* Drawer styles (keep consistent sitewide) */
+  #siteMenuToggle{position:absolute;opacity:0;pointer-events:none;}
+  #siteDrawer{transform:translateX(100%);opacity:1;}
+  #siteDrawerBackdrop{opacity:0;}
+  #siteMenuToggle:checked ~ #siteDrawer{transform:translateX(0);}
+  #siteMenuToggle:checked ~ #siteDrawer #siteDrawerBackdrop{opacity:1;}
 </style>
-<script>
-  function shareX(title){ const url=encodeURIComponent(window.location.href); window.open('https://twitter.com/intent/tweet?url='+url+'&text='+encodeURIComponent(title),'_blank','noopener'); }
-  function shareFB(){ const url=encodeURIComponent(window.location.href); window.open('https://www.facebook.com/sharer/sharer.php?u='+url,'_blank','noopener'); }
-  function shareMail(title){ const url=encodeURIComponent(window.location.href); location.href='mailto:?subject='+encodeURIComponent(title)+'&body='+url; }
-</script>
-
 </head>
 <body>
 <input type="checkbox" id="siteMenuToggle" />
@@ -60,36 +51,130 @@
     </label>
     <nav class="mt-4 hidden md:flex flex-wrap items-center justify-center gap-6 text-sm">
       <a class="hover:underline" href="/index.html">Home</a>
-      <a class="hover:underline" href="/community-voices.html">Community Voices</a>
+      <a class="hover:underline" href="/us-news.html">U.S. News</a>
       <a class="hover:underline" href="/princeton-governance.html">Princeton Governance</a>
       <a class="hover:underline" href="/council-tracker.html">City Council Tracker</a>
       <a class="hover:underline" href="/about.html">About</a>
       <a class="hover:underline" href="/contact.html">Contact</a>
+      <a class="hover:underline" href="/subscribe.html">Subscribe</a>
     </nav>
   </div>
 </header>
 
 <main class="mx-auto container-narrow px-4 py-8 max-w-3xl">
   <h1 class="tpj-masthead text-3xl mb-2">Privacy Policy</h1>
-  <p class="text-gray-700">Independent, community‑driven reporting for Princeton, Texas.</p>
+  <p class="text-gray-700">Independent, community-driven reporting for Princeton, Texas.</p>
+  <p class="text-gray-500 text-sm mt-1">Effective date: October 1, 2025</p>
+
+  <div class="prose mt-6">
+    <h2>Summary</h2>
+    <ul>
+      <li>We collect the minimum personal information needed to respond to you (e.g., contact form messages and newsletter email addresses).</li>
+      <li>We use <strong>cookie-free, privacy-friendly analytics</strong> to understand site traffic in aggregate—no ad tracking, no cross-site profiling.</li>
+      <li>Forms are processed by our hosting provider (Netlify). Some pages use <strong>Google reCAPTCHA</strong> to prevent spam; Google may process data for security purposes.</li>
+      <li>We do not sell personal information. We share data only with service providers who help run this site.</li>
+      <li>You can unsubscribe at any time and you can request access, correction, or deletion of your data.</li>
+    </ul>
+
+    <h2>What we collect</h2>
+    <h3>Information you provide</h3>
+    <ul>
+      <li><strong>Contact form</strong>: your name, email, and message content.</li>
+      <li><strong>Tips and documents</strong>: anything you choose to send us by email or form. Please avoid submitting sensitive personal data unless necessary.</li>
+      <li><strong>Newsletter</strong>: your email address to deliver updates.</li>
+    </ul>
+
+    <h3>Information we do not intentionally collect</h3>
+    <p>We do not ask for government IDs, precise geolocation, or financial information. Please do not include these in form submissions.</p>
+
+    <h3>Automatic collection &amp; analytics</h3>
+    <p>We use <strong>Plausible Analytics</strong> to measure site usage in an aggregated, privacy-respecting manner. It does not use cookies or cross-site tracking. We see high-level metrics such as page views, referring sites, device types, and approximate geography. We cannot identify individual visitors from these reports.</p>
+
+    <h3>Cookies and similar technologies</h3>
+    <ul>
+      <li><strong>Our site</strong>: We do not set first-party tracking cookies for analytics or advertising.</li>
+      <li><strong>reCAPTCHA</strong>: Some forms are protected by Google reCAPTCHA to block spam and abuse. Google may set cookies and collect device/network data solely for security. <em>This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.</em></li>
+    </ul>
+
+    <h2>How we use information</h2>
+    <ul>
+      <li>Respond to messages and process tips you submit.</li>
+      <li>Send newsletters you asked to receive.</li>
+      <li>Operate, secure, and improve the website (including detecting/preventing abuse).</li>
+      <li>Comply with legal obligations and enforce our terms.</li>
+    </ul>
+
+    <h2>Legal bases (EEA/UK visitors)</h2>
+    <ul>
+      <li><strong>Consent</strong> for newsletters.</li>
+      <li><strong>Legitimate interests</strong> for security (e.g., reCAPTCHA) and aggregated analytics.</li>
+      <li><strong>Contract/Legal obligation</strong> when we must respond or retain records where required by law.</li>
+    </ul>
+
+    <h2>How we share information</h2>
+    <p>We don’t sell your personal information. We share it only with vendors who help us operate the site, each bound by appropriate agreements:</p>
+    <ul>
+      <li><strong>Hosting &amp; Forms:</strong> Netlify (site hosting, form processing).</li>
+      <li><strong>Analytics:</strong> Plausible (aggregated, cookie-free analytics).</li>
+      <li><strong>Email:</strong> Our email service provider (for contact replies and newsletter delivery).</li>
+      <li><strong>Security:</strong> Google reCAPTCHA (spam and abuse prevention).</li>
+    </ul>
+    <p>We may disclose information if required by law, to protect the rights and safety of our readers and staff, or to investigate abuse of our services.</p>
+
+    <h2>Data retention</h2>
+    <ul>
+      <li><strong>Contact messages:</strong> up to <strong>24 months</strong> after our last correspondence, unless required longer for legal reasons.</li>
+      <li><strong>Newsletter records:</strong> until you unsubscribe or we close the list; minimal suppression data may be kept to honor opt-outs.</li>
+      <li><strong>Server/edge logs:</strong> typically <strong>30 days</strong> (short-term security and reliability).</li>
+      <li><strong>Aggregated analytics:</strong> up to <strong>24 months</strong>.</li>
+    </ul>
+
+    <h2>Your choices &amp; rights</h2>
+    <ul>
+      <li><strong>Unsubscribe</strong>: Use the link in any newsletter or email us to be removed.</li>
+      <li><strong>Access, correction, deletion</strong>: Email us and we’ll help, subject to verification.</li>
+      <li><strong>State law rights (e.g., CA/CO/CT/UT/VA/TX)</strong>: Residents of certain U.S. states may have additional rights to access, delete, or opt out of certain processing. Contact us to exercise these rights.</li>
+      <li><strong>EEA/UK</strong>: You may have rights to access, rectify, erase, restrict, or object to processing, and data portability. You can lodge a complaint with your data protection authority.</li>
+      <li><strong>Analytics</strong>: Our analytics are cookie-free and aggregated. You can also use content blockers or disable JavaScript if you prefer.</li>
+    </ul>
+
+    <h2>Children’s privacy</h2>
+    <p>Our site is not directed to children under 13, and we do not knowingly collect personal information from them. If you believe a child provided personal information, please contact us so we can delete it.</p>
+
+    <h2>Security</h2>
+    <p>We use reputable providers, encrypted transport (HTTPS), and access controls. No method of transmission or storage is 100% secure, but we work to safeguard your information.</p>
+
+    <h2>International transfers</h2>
+    <p>Our service providers may process data in the United States and other countries. Where required, we rely on appropriate safeguards (such as standard contractual clauses) for cross-border transfers.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>We may update this policy to reflect changes to our practices. We’ll revise the effective date above and, when appropriate, provide more prominent notice.</p>
+
+    <h2>Contact us</h2>
+    <p>Questions or requests about your data? Email <a href="mailto:bakralqq@gmail.com">bakralqq@gmail.com</a> with the subject line “Privacy Request.” Please include the email address you used with us so we can verify your request.</p>
+
+    <p class="text-xs text-gray-500 mt-6">This policy explains our practices but is not legal advice.</p>
+  </div>
 </main>
+
 <footer class="border-t mt-12">
   <div class="mx-auto container-narrow px-4 py-8 grid md:grid-cols-2 gap-6 text-sm text-gray-700">
     <div>
       <div>&copy; <span id="y"></span> The Princeton Journal. All rights reserved.</div>
       <div class="mt-3">
         <form name="subscribe" method="POST" data-netlify="true" netlify-honeypot="b" action="/thank-you.html" class="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center">
-  <input type="hidden" name="form-name" value="subscribe">
-  <input class="hidden" name="b">
-  <input class="border rounded px-3 py-2 min-w-0 w-full sm:flex-1" type="email" name="email" placeholder="Your email" required>
-  <div data-netlify-recaptcha="true"></div>
-  <button class="px-3 py-2 border rounded">Subscribe</button>
-</form>
+          <input type="hidden" name="form-name" value="subscribe">
+          <input class="hidden" name="b">
+          <input class="border rounded px-3 py-2 min-w-0 w-full sm:flex-1" type="email" name="email" placeholder="Your email" required>
+          <div data-netlify-recaptcha="true"></div>
+          <button class="px-3 py-2 border rounded">Subscribe</button>
+        </form>
+        <p class="text-xs text-gray-500 mt-2">This site is protected by reCAPTCHA and the Google <a class="underline" href="https://policies.google.com/privacy">Privacy Policy</a> and <a class="underline" href="https://policies.google.com/terms">Terms of Service</a> apply.</p>
       </div>
     </div>
-    <div class="flex gap-4 md:justify-end">
+    <div class="flex flex-wrap gap-4 md:justify-end">
       <a class="hover:underline" href="/about.html">About</a>
-      <a class="hover:underline" href="/privacy.html">Privacy</a>
+      <a class="hover:underline font-semibold" href="/privacy.html">Privacy</a>
       <a class="hover:underline" href="/contact.html">Contact</a>
       <a class="hover:underline" href="/subscribe.html">Subscribe</a>
     </div>
@@ -97,7 +182,7 @@
   <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
 </footer>
 
-
+<!-- Mobile Drawer -->
 <div id="siteDrawer" class="fixed inset-0 z-50 md:hidden pointer-events-auto transition">
   <div id="siteDrawerBackdrop" class="absolute inset-0 bg-black/40 transition-opacity duration-200"></div>
   <aside class="absolute right-0 top-0 h-full w-80 max-w-[85%] bg-white transition-transform duration-200 shadow-xl">
@@ -107,11 +192,14 @@
     </div>
     <nav class="p-4 grid gap-3 text-base">
       <a class="hover:underline" href="/index.html">Home</a>
-      <a class="hover:underline" href="/community-voices.html">Community Voices</a>
+      <a class="hover:underline" href="/us-news.html">U.S. News</a>
       <a class="hover:underline" href="/princeton-governance.html">Princeton Governance</a>
       <a class="hover:underline" href="/council-tracker.html">City Council Tracker</a>
       <a class="hover:underline" href="/about.html">About</a>
+<a class="hover:underline font-semibold" href="/privacy.html" aria-current="page">
+  Privacy</a>
       <a class="hover:underline" href="/contact.html">Contact</a>
+      <a class="hover:underline" href="/subscribe.html">Subscribe</a>
     </nav>
   </aside>
 </div>
