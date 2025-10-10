@@ -39,6 +39,13 @@
   .dot-abstain{ background:#ca8a04;}
   .dot-absent{ background:#6b7280;}
   .card{ border:1px solid #e5e7eb; border-radius: .75rem; }
+
+  /* Drawer styles */
+  #siteMenuToggle{position:absolute;opacity:0;pointer-events:none;}
+  #siteDrawer{transform:translateX(100%);opacity:1;}
+  #siteDrawerBackdrop{opacity:0;}
+  #siteMenuToggle:checked ~ #siteDrawer{transform:translateX(0);}
+  #siteMenuToggle:checked ~ #siteDrawer #siteDrawerBackdrop{opacity:1;}
 </style>
 <script>
   function shareX(title){ const url=encodeURIComponent(window.location.href); window.open('https://twitter.com/intent/tweet?url='+url+'&text='+encodeURIComponent(title),'_blank','noopener'); }
@@ -60,7 +67,7 @@
     </label>
     <nav class="mt-4 hidden md:flex flex-wrap items-center justify-center gap-6 text-sm">
       <a class="hover:underline font-medium" href="/index.html">Home</a>
-      <a class="hover:underline font-medium" href="/community-voices.html">Community Voices</a>
+      <a class="hover:underline font-medium" href="/us-news.html">U.S. News</a>
       <a class="hover:underline font-medium" href="/princeton-governance.html">Princeton Governance</a>
       <a class="hover:underline font-semibold" href="/council-tracker.html">City Council Tracker</a>
       <a class="hover:underline font-medium" href="/about.html">About</a>
@@ -251,7 +258,7 @@
     </div>
     <nav class="p-4 grid gap-3 text-base">
       <a class="hover:underline" href="/index.html">Home</a>
-      <a class="hover:underline" href="/community-voices.html">Community Voices</a>
+      <a class="hover:underline" href="/us-news.html">U.S. News</a>
       <a class="hover:underline" href="/princeton-governance.html">Princeton Governance</a>
       <a class="hover:underline font-semibold" href="/council-tracker.html">City Council Tracker</a>
       <a class="hover:underline" href="/about.html">About</a>
