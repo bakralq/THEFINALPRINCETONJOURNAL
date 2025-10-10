@@ -18,5 +18,65 @@
     "title": "Princeton Finds $40,000 for an Office, but Not for an Audit",
     "description": "A detailed look into fiscal priorities and oversight gaps within the city government.",
     "url": "/office-audit.html"
+  },
+  {
+    "title": "Growth Houses First: The Cost of Rapid Expansion",
+    "description": "An investigative report into Princeton’s residential growth, zoning decisions, and the tradeoffs behind development-first planning.",
+    "url": "/growth-houses-first.html"
+  },
+  {
+    "title": "Budget 2026: City Spending Priorities and What They Mean for Residents",
+    "description": "Detailed coverage of the FY 2026 city budget debate, focusing on funding allocations, tax rates, and long-term infrastructure planning.",
+    "url": "/budget-2026.html"
+  },
+  {
+    "title": "Collin County ESD Proposal: What It Means for Princeton",
+    "description": "A look at the proposed Emergency Services District in Collin County, including how it could affect fire protection and taxes in Princeton.",
+    "url": "/collin-county-esd.html"
+  },
+  {
+    "title": "The H14 ETJ Removal Fee: What Council Voted On",
+    "description": "A breakdown of the H14 ETJ Removal Fee agenda item, what a ‘Yes’ and ‘No’ vote meant, and how it impacts Princeton residents.",
+    "url": "/tracker/h14-etj-removal-fee.html"
+  },
+  {
+    "title": "Parkland or Parking Lots: The Debate Over Princeton’s Future",
+    "description": "An analysis of local land-use debates and how open space and development priorities define Princeton’s next decade.",
+    "url": "/op-ed-parkland.html"
+  },
+  {
+    "title": "Transit and Trust: The Missing Link in Princeton’s Growth Plan",
+    "description": "An opinion piece exploring why transportation planning is crucial to sustainable city growth.",
+    "url": "/op-ed-transit.html"
+  },
+  {
+    "title": "Transparency and Trust: The Core of Princeton Governance",
+    "description": "An overview of how open records, meeting accountability, and community engagement are shaping local governance reform.",
+    "url": "/transparency.html"
+  },
+  {
+    "title": "City Council Tracker: Meetings, Votes, and Outcomes",
+    "description": "A searchable record of Princeton City Council meetings, including agendas, motions, and voting results.",
+    "url": "/council-tracker.html"
+  },
+  {
+    "title": "About The Princeton Journal",
+    "description": "Information about The Princeton Journal’s mission, values, and editorial standards.",
+    "url": "/about.html"
+  },
+  {
+    "title": "Contact The Princeton Journal",
+    "description": "How to reach the editorial team, submit tips, or get in touch about coverage.",
+    "url": "/contact.html"
+  },
+  {
+    "title": "Subscribe for Updates",
+    "description": "Sign up to receive email updates from The Princeton Journal on local news and governance.",
+    "url": "/subscribe.html"
+  },
+  {
+    "title": "Privacy Policy",
+    "description": "How The Princeton Journal handles user data, cookies, and subscriptions.",
+    "url": "/privacy.html"
   }
 ]
