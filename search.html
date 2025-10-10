@@ -12,10 +12,7 @@
 <script defer data-domain="theprincetonjournal.com" src="https://plausible.io/js/plausible.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
 <style>
-  :root{
-    --font-mast:"Grenze Gotisch", serif;
-    --font-body:"Inter", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans";
-  }
+  :root{ --font-mast:"Grenze Gotisch", serif; --font-body:"Inter", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans"; }
   body{ font-family: var(--font-body); }
   .tpj-masthead{ font-family: var(--font-mast); letter-spacing:.2px; }
   .container-narrow{ max-width:1100px; }
@@ -70,6 +67,8 @@
       <button class="px-4 py-2 border rounded-r">Search</button>
     </div>
   </form>
+
+  <noscript><p class="text-sm text-red-700">Search requires JavaScript.</p></noscript>
 
   <div id="meta" class="text-sm text-gray-600 mb-4"></div>
   <div id="results" class="grid gap-4"></div>
@@ -126,69 +125,92 @@
 </div>
 
 <script>
-(async function () {
-  const params = new URLSearchParams(location.search);
-  const q = (params.get('q') || '').trim();
-
-  // Mirror query into all search inputs (desktop header, mobile form, drawer)
-  [['q'], ['mq'], ['dq']].forEach(([id]) => {
-    const el = document.getElementById(id);
-    if (el) el.value = q;
-  });
-
-  // Update title if searching
-  if (q) document.title = `Search: ${q} | The Princeton Journal`;
-
+(() => {
   const metaEl = document.getElementById('meta');
   const resultsEl = document.getElementById('results');
 
-  // Load the index
-  let docs = [];
-  try {
-    const res = await fetch('/assets/search-index.json', { cache: 'no-store' });
-    docs = await res.json();
-  } catch (err) {
-    metaEl.textContent = 'Could not load the search index.';
-    return;
-  }
-
-  // If no query, prompt user (you can also list all docs here if you want)
-  if (!q) {
-    metaEl.textContent = 'Type above to search all articles.';
-    resultsEl.innerHTML = '';
-    return;
-  }
-
-  // Fuse search
-  const fuse = new Fuse(docs, {
-    keys: [
-      { name: 'title', weight: 0.7 },
-      { name: 'description', weight: 0.3 }
-    ],
-    threshold: 0.33,
-    ignoreLocation: true
+  // Intercept submits on THIS page so searching works even without a full reload.
+  document.querySelectorAll('form[action="/search.html"]').forEach(form => {
+    form.addEventListener('submit', (e) => {
+      if (location.pathname.endsWith('/search.html')) {
+        e.preventDefault();
+        const q = (form.querySelector('input[name="q"]')?.value || '').trim();
+        // Update URL without reload so you can share it
+        history.replaceState({}, '', '/search.html' + (q ? ('?q=' + encodeURIComponent(q)) : ''));
+        run(q);
+      }
+    });
   });
 
-  const hits = fuse.search(q);
-  metaEl.textContent = `${hits.length} result${hits.length === 1 ? '' : 's'} for “${q}”`;
+  // Run once on load with ?q=
+  const urlQ = (new URLSearchParams(location.search).get('q') || '').trim();
+  setInputs(urlQ);
+  run(urlQ);
 
-  // Render
-  if (hits.length === 0) {
-    resultsEl.innerHTML = '<p>No articles found.</p>';
-    return;
+  function setInputs(q) {
+    ['q','mq','dq'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = q || '';
+    });
+    if (q) document.title = `Search: ${q} | The Princeton Journal`;
   }
 
-  resultsEl.innerHTML = hits.map(({ item }) => `
-    <a class="card p-4 hover:bg-gray-50 block" href="${item.url}">
-      <div class="font-semibold text-lg mb-1">${escapeHTML(item.title)}</div>
-      <div class="text-gray-700 text-sm">${escapeHTML(item.description || '')}</div>
-    </a>
-  `).join('');
+  async function loadIndex() {
+    if (window.__TPJ_INDEX__) return window.__TPJ_INDEX__;
+    try {
+      const res = await fetch('/assets/search-index.json', { cache: 'no-store' });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const json = await res.json();
+      window.__TPJ_INDEX__ = Array.isArray(json) ? json : [];
+      return window.__TPJ_INDEX__;
+    } catch (err) {
+      metaEl.textContent = 'Could not load the search index.';
+      console.error('Search index load error:', err);
+      return [];
+    }
+  }
+
+  async function run(q) {
+    const docs = await loadIndex();
+    if (!docs.length) { resultsEl.innerHTML = ''; return; }
+
+    // No query: show all articles (sorted by title)
+    if (!q) {
+      metaEl.textContent = `All articles (${docs.length})`;
+      const list = [...docs].sort((a,b) => (a.title||'').localeCompare(b.title||''));
+      resultsEl.innerHTML = list.map(renderItem).join('');
+      return;
+    }
+
+    // Search
+    const fuse = new Fuse(docs, {
+      keys: [
+        { name: 'title', weight: 0.7 },
+        { name: 'description', weight: 0.3 }
+      ],
+      threshold: 0.33,
+      ignoreLocation: true
+    });
+
+    const hits = fuse.search(q);
+    metaEl.textContent = `${hits.length} result${hits.length === 1 ? '' : 's'} for “${q}”`;
+    resultsEl.innerHTML = hits.map(h => renderItem(h.item)).join('');
+  }
+
+  function renderItem(item) {
+    const title = escapeHTML(item.title || '');
+    const desc  = escapeHTML(item.description || '');
+    const url   = item.url || '#';
+    return `
+      <a class="card p-4 hover:bg-gray-50 block" href="${url}">
+        <div class="font-semibold text-lg mb-1">${title}</div>
+        <div class="text-gray-700 text-sm">${desc}</div>
+      </a>
+    `;
+  }
 
   function escapeHTML(s) {
-    return (s || '').replace(/[&<>"']/g, c => ({
-      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
-    }[c]));
+    return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   }
 })();
 </script>
