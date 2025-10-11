@@ -19,7 +19,6 @@
 </head>
 <body>
 <input type="checkbox" id="siteMenuToggle" />
-
 <header class="border-b-2 border-gray-900">
   <div class="mx-auto container-narrow px-4 py-6 relative text-center">
     <a href="/index.html" class="inline-block"><div class="tpj-masthead text-3xl md:text-5xl leading-none">The Princeton Journal</div></a>
@@ -45,16 +44,61 @@
 </header>
 
 <div class="w-full">
-  <img src="/assets/lake%20park%20image.jpg" alt="Person fishing alone on a calm lake" class="w-full h-64 md:h-[420px] max-h-[500px] object-cover">
+  <img src="/assets/lake%20park%20image.jpg"
+       alt="Person fishing alone on a calm lake"
+       class="w-full h-64 md:h-[420px] max-h-[500px] object-cover">
 </div>
-
 <main class="mx-auto container-narrow px-4 py-8 max-w-3xl prose">
   <div class="text-sm text-gray-500 mb-2">Princeton Governance • September 6, 2025</div>
   <h1 class="tpj-masthead text-3xl mb-2">Lake Parks Under Princeton’s Control: Upgrades, Costs, and Questions Ahead</h1>
   <p class="text-gray-600 text-sm mb-1">By Bakr Al Qaraghuli, Editor</p>
   <p class="text-gray-500 text-sm mb-6">September 6, 2025</p>
 
-  <!-- ARTICLE CONTENT ... (unchanged) -->
+  <p>There’s been a lot of talk about Princeton “taking over” some lakeside parks, and plenty of confusion about what that actually means. Let’s clear it up. Here’s what’s happening, why it matters, and what comes next.</p>
+
+  <h2>WHAT HAPPENED</h2>
+  <p>On August 20, 2025, the Princeton Community Development Corporation (PCDC) voted unanimously to support local management of three Lavon Lake sites:</p>
+  <ul>
+    <li>Twin Groves (access point)</li>
+    <li>Tickey Creek Park</li>
+    <li>Clear Lake Park</li>
+  </ul>
+  <p>These parks still belong to the U.S. Army Corps of Engineers (USACE), but the plan is for Princeton to lease and manage them locally.</p>
+  <p>PCDC approved up to $50,000 per site each year for maintenance; that’s $150,000 total once the leases are signed.</p>
+  <p>Day-to-day operations would be handled by the City of Princeton, with PCDC funding and backing the effort as a community investment.</p>
+  <p>USACE has said the full transition could take 3–5 years.</p>
+
+  <h2>WHY THIS MATTERS</h2>
+  <h3>Local management and accountability</h3>
+  <p>Instead of calling a federal office miles away, Princeton residents will have direct city channels for service requests, upgrades, and programming.</p>
+  <h3>Room for upgrades</h3>
+  <p>Under local oversight, improvements like trails, lighting, parking, and safety could finally move forward, if the funding holds.</p>
+  <h3>Community identity</h3>
+  <p>From fishing at Clear Lake to family picnics at Twin Groves, these parks are part of Princeton life. Local control means local priorities.</p>
+  <h3>Economic impact</h3>
+  <p>Good parks raise nearby property values, bring visitors, and support small businesses like bait shops and food trucks.</p>
+
+  <h2>THE BIGGER PICTURE</h2>
+  <p>Princeton isn’t just growing; it’s the fastest-growing city in America (up about 30.6% from July 2023–2024). At this pace, parks aren’t extras. They’re part of the core infrastructure that makes the city livable.</p>
+
+  <h2>CHALLENGES AHEAD</h2>
+  <ul>
+    <li><strong>Funding:</strong> PCDC’s $150,000 is only a starting point. Real upgrades will cost more.</li>
+    <li><strong>Environmental pressure:</strong> More use means more strain on shorelines and habitats. Conservation has to be part of the plan.</li>
+    <li><strong>Governance:</strong> Transparency matters. Residents should track City Council agendas and PCDC minutes to see what’s really happening.</li>
+  </ul>
+
+  <h2>WHAT RESIDENTS CAN DO</h2>
+  <ul>
+    <li><strong>Engage now:</strong> Attend City Council and PCDC meetings. Ask about the leases, timelines, and upgrades.</li>
+    <li><strong>Push for near-term wins:</strong> Bathrooms, lighting, ADA access, and basics first.</li>
+    <li><strong>Think long-term:</strong> Shoreline restoration, connected trails, water-safe programming.</li>
+    <li><strong>Demand accountability:</strong> Require public reporting every year on conditions, spending, and progress.</li>
+  </ul>
+
+  <h2>BOTTOM LINE</h2>
+  <p>For the first time, Princeton is set to manage its own lakeside parks. Done right, this could mean better amenities, a stronger community identity, and real economic benefits. Done wrong, it could stall in red tape and underfunding.</p>
+  <p>The responsibility is now with Princeton’s leaders and with residents who stay engaged and keep the pressure on.</p>
 
   <hr class="my-8">
   <div class="text-xs text-gray-500">Published September 6, 2025. Corrections or updates will appear here.</div>
@@ -65,24 +109,17 @@
     <div>
       <div>&copy; <span id="y"></span> The Princeton Journal. All rights reserved.</div>
       <div class="mt-3">
-        <!-- reCAPTCHA-gated subscribe -->
-        <form name="subscribe" method="POST" data-netlify="true" netlify-honeypot="b"
-              action="/thank-you.html" onsubmit="return tpjValidateCaptcha(this)"
-              class="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center">
-          <input type="hidden" name="form-name" value="subscribe">
-          <input class="hidden" name="b">
-          <input class="border rounded px-3 py-2 min-w-0 w-full sm:flex-1"
-                 type="email" name="email" placeholder="Your email" required disabled>
-          <div data-netlify-recaptcha="true"></div>
-          <button class="px-3 py-2 border rounded" disabled>Subscribe</button>
+        <form name="subscribe" method="POST" data-netlify="true" netlify-honeypot="b" action="/thank-you.html"
+              class="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center"
+              onsubmit="return tpjValidateCaptcha(this)">
+          <input type="hidden" name="form-name" value="subscribe"><input class="hidden" name="b">
+          <input class="border rounded px-3 py-2 min-w-0 w-full sm:flex-1" type="email" name="email" placeholder="Your email" required disabled>
+          <div data-netlify-recaptcha="true"></div><button class="px-3 py-2 border rounded" disabled>Subscribe</button>
         </form>
       </div>
     </div>
     <div class="flex gap-4 md:justify-end">
-      <a class="hover:underline" href="/about.html">About</a>
-      <a class="hover:underline" href="/privacy.html">Privacy</a>
-      <a class="hover:underline" href="/contact.html">Contact</a>
-      <a class="hover:underline" href="/subscribe.html">Subscribe</a>
+      <a class="hover:underline" href="/about.html">About</a><a class="hover:underline" href="/privacy.html">Privacy</a><a class="hover:underline" href="/contact.html">Contact</a><a class="hover:underline" href="/subscribe.html">Subscribe</a>
     </div>
   </div>
   <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
@@ -114,30 +151,38 @@
 <!-- reCAPTCHA gate -->
 <script>
 (function(){
-  if (window.__tpjRecaptchaInit) return; window.__tpjRecaptchaInit = true;
-  function updateFormState(form){
-    var token=form.querySelector('[name="g-recaptcha-response"]');
+  function enableIfSolved(form){
+    var tokenEl=form.querySelector('[name="g-recaptcha-response"]');
+    var solved=tokenEl&&tokenEl.value.trim().length>0;
     var email=form.querySelector('input[type="email"][name="email"]');
     var btn=form.querySelector('button, input[type="submit"]');
-    if(token){var ok=token.value.trim().length>0; if(email) email.disabled=!ok; if(btn) btn.disabled=!ok;}
-    else{ if(email) email.disabled=false; if(btn) btn.disabled=false; }
+    if(email) email.disabled=!solved;
+    if(btn) btn.disabled=!solved;
   }
   window.tpjValidateCaptcha=function(form){
-    var t=form.querySelector('[name="g-recaptcha-response"]');
-    if(t && !t.value.trim()){ alert("Please complete the reCAPTCHA before subscribing."); return false; }
+    var tokenEl=form.querySelector('[name="g-recaptcha-response"]');
+    if(!tokenEl||!tokenEl.value.trim()){
+      alert("Please complete the reCAPTCHA before subscribing.");
+      return false;
+    }
     return true;
   };
   window.addEventListener('load',function(){
     document.querySelectorAll('form[name="subscribe"]').forEach(function(form){
-      updateFormState(form);
-      var obs=new MutationObserver(function(){ updateFormState(form); });
+      var email=form.querySelector('input[type="email"][name="email"]');
+      var btn=form.querySelector('button, input[type="submit"]');
+      if(email) email.disabled=true;
+      if(btn) btn.disabled=true;
+      form.addEventListener('submit',function(e){
+        if(!window.tpjValidateCaptcha(form)) e.preventDefault();
+      });
+      var obs=new MutationObserver(function(){ enableIfSolved(form); });
       obs.observe(form,{childList:true,subtree:true});
       var iv=setInterval(function(){
-        updateFormState(form);
+        enableIfSolved(form);
         var t=form.querySelector('[name="g-recaptcha-response"]');
-        if(t && t.value.trim()) clearInterval(iv);
+        if(t&&t.value.trim()) clearInterval(iv);
       },500);
-      form.addEventListener('submit',function(e){ if(!window.tpjValidateCaptcha(form)) e.preventDefault(); });
     });
   });
 })();
