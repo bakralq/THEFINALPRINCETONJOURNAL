@@ -46,51 +46,22 @@
     </label>
 
     <!-- Desktop nav -->
-   <nav class="mt-4 hidden md:flex flex-wrap items-center justify-center gap-6 text-sm">
-  <a class="hover:underline font-medium" href="/index.html">Home</a>
-  <a class="hover:underline font-medium" href="/us-news.html">U.S. News</a>
-  <a class="hover:underline font-medium" href="/princeton-governance.html">Princeton Governance</a>
-  <a class="hover:underline font-medium" href="/council-tracker.html">City Council Tracker</a>
-  <a class="hover:underline font-semibold" href="/about.html">About</a>
-  <a class="hover:underline font-medium" href="/contact.html">Contact</a>
-  <a class="hover:underline font-medium" href="/subscribe.html">Subscribe</a>
-</nav>
+    <nav class="mt-4 hidden md:flex flex-wrap items-center justify-center gap-6 text-sm">
+      <a class="hover:underline font-medium" href="/index.html">Home</a>
+      <a class="hover:underline font-medium" href="/us-news.html">U.S. News</a>
+      <a class="hover:underline font-medium" href="/princeton-governance.html">Princeton Governance</a>
+      <a class="hover:underline font-medium" href="/council-tracker.html">City Council Tracker</a>
+      <a class="hover:underline font-semibold" href="/about.html">About</a>
+      <a class="hover:underline font-medium" href="/contact.html">Contact</a>
+      <a class="hover:underline font-medium" href="/subscribe.html">Subscribe</a>
+    </nav>
 
     <!-- Desktop search -->
     <div class="mt-4 hidden md:block">
-      <form name="subscribe" method="POST" data-netlify="true" netlify-honeypot="b" action="/thank-you.html"
-  onsubmit="return validateCaptcha()" 
-  class="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center">
-  <input type="hidden" name="form-name" value="subscribe">
-  <input class="hidden" name="b">
-  <input id="emailInput" class="border rounded px-3 py-2 min-w-0 w-full sm:flex-1" type="email" name="email" placeholder="Your email" required disabled>
-  <div data-netlify-recaptcha="true"></div>
-  <button id="subscribeBtn" class="px-3 py-2 border rounded" disabled>Subscribe</button>
-</form>
-
-<script>
-function validateCaptcha() {
-  const response = document.querySelector('[name="g-recaptcha-response"]').value;
-  if (!response) {
-    alert("Please complete the reCAPTCHA before subscribing.");
-    return false;
-  }
-  return true;
-}
-
-// Enable input and button once CAPTCHA is complete
-window.addEventListener('load', () => {
-  const observer = new MutationObserver(() => {
-    const captchaValue = document.querySelector('[name="g-recaptcha-response"]').value;
-    if (captchaValue.length > 0) {
-      document.getElementById('emailInput').disabled = false;
-      document.getElementById('subscribeBtn').disabled = false;
-    }
-  });
-  const target = document.querySelector('.g-recaptcha');
-  if (target) observer.observe(target, { childList: true, subtree: true });
-});
-</script>
+      <form action="/search.html" method="get" class="max-w-xl mx-auto flex">
+        <input type="search" name="q" placeholder="Search articles…" class="flex-1 border rounded-l px-3 py-2" aria-label="Search">
+        <button class="px-4 py-2 border rounded-r">Search</button>
+      </form>
     </div>
   </div>
 </header>
@@ -137,12 +108,16 @@ window.addEventListener('load', () => {
     <div>
       <div>&copy; <span id="y"></span> The Princeton Journal. All rights reserved.</div>
       <div class="mt-3">
-        <form name="subscribe" method="POST" data-netlify="true" netlify-honeypot="b" action="/thank-you.html" class="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center">
+        <!-- GATED SUBSCRIBE FORM -->
+        <form name="subscribe" method="POST" data-netlify="true" netlify-honeypot="b"
+              action="/thank-you.html" onsubmit="return validateCaptcha()"
+              class="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center">
           <input type="hidden" name="form-name" value="subscribe">
           <input class="hidden" name="b">
-          <input class="border rounded px-3 py-2 min-w-0 w-full sm:flex-1" type="email" name="email" placeholder="Your email" required>
+          <input id="emailInput" class="border rounded px-3 py-2 min-w-0 w-full sm:flex-1"
+                 type="email" name="email" placeholder="Your email" required disabled>
           <div data-netlify-recaptcha="true"></div>
-          <button class="px-3 py-2 border rounded">Subscribe</button>
+          <button id="subscribeBtn" class="px-3 py-2 border rounded" disabled>Subscribe</button>
         </form>
       </div>
     </div>
@@ -153,7 +128,51 @@ window.addEventListener('load', () => {
       <a class="hover:underline" href="/subscribe.html">Subscribe</a>
     </div>
   </div>
-  <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+
+  <script>
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Block submission unless reCAPTCHA solved
+    function validateCaptcha() {
+      const el = document.querySelector('[name="g-recaptcha-response"]');
+      const response = el ? el.value.trim() : "";
+      if (!response) {
+        alert("Please complete the reCAPTCHA before subscribing.");
+        return false;
+      }
+      return true;
+    }
+
+    // Enable email + button after reCAPTCHA solved
+    window.addEventListener('load', () => {
+      const email = document.getElementById('emailInput');
+      const btn = document.getElementById('subscribeBtn');
+
+      // Observer for changes inside the recaptcha container
+      const observer = new MutationObserver(() => {
+        const token = document.querySelector('[name="g-recaptcha-response"]');
+        if (token && token.value.trim().length > 0) {
+          email.disabled = false;
+          btn.disabled = false;
+        }
+      });
+
+      // Observe when the widget renders/updates
+      const target = document.querySelector('.g-recaptcha') || document.querySelector('[data-netlify-recaptcha]');
+      if (target) observer.observe(target, { childList: true, subtree: true });
+
+      // Fallback: poll every 500ms in case MutationObserver misses it
+      const iv = setInterval(() => {
+        const token = document.querySelector('[name="g-recaptcha-response"]');
+        if (token && token.value.trim().length > 0) {
+          email.disabled = false;
+          btn.disabled = false;
+          clearInterval(iv);
+        }
+      }, 500);
+    });
+  </script>
 </footer>
 
 <!-- Mobile Drawer (must come after the checkbox so the CSS selector works) -->
