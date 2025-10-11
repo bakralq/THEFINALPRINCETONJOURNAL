@@ -16,8 +16,6 @@
   .prose p{ margin:1em 0; line-height:1.7; }
   .prose h2{ font-family: var(--font-mast); font-size:1.5rem; margin-top:1.25rem; }
   .prose h3{ font-weight:600; margin-top:1rem; }
-
-  /* Drawer styles to match index.html */
   #siteMenuToggle{position:absolute;opacity:0;pointer-events:none;}
   #siteDrawer{transform:translateX(100%);opacity:1;}
   #siteDrawerBackdrop{opacity:0;}
@@ -31,15 +29,9 @@
 <header class="border-b-2 border-gray-900">
   <div class="mx-auto container-narrow px-4 py-6 relative text-center">
     <a href="/index.html" class="inline-block"><div class="tpj-masthead text-3xl md:text-5xl leading-none">The Princeton Journal</div></a>
-
-    <!-- Mobile hamburger -->
     <label for="siteMenuToggle" class="absolute right-4 top-6 p-2 border rounded md:hidden" aria-label="Open menu">
-      <div class="w-5 h-0.5 bg-black mb-1"></div>
-      <div class="w-5 h-0.5 bg-black mb-1"></div>
-      <div class="w-5 h-0.5 bg-black"></div>
+      <div class="w-5 h-0.5 bg-black mb-1"></div><div class="w-5 h-0.5 bg-black mb-1"></div><div class="w-5 h-0.5 bg-black"></div>
     </label>
-
-    <!-- Desktop nav (exactly like index.html) -->
     <nav class="mt-4 hidden md:flex flex-wrap items-center justify-center gap-6 text-sm">
       <a class="hover:underline font-semibold" href="/index.html">Home</a>
       <a class="hover:underline font-medium" href="/us-news.html">U.S. News</a>
@@ -49,8 +41,6 @@
       <a class="hover:underline font-medium" href="/contact.html">Contact</a>
       <a class="hover:underline font-medium" href="/subscribe.html">Subscribe</a>
     </nav>
-
-    <!-- Desktop search -->
     <div class="mt-4 hidden md:block">
       <form action="/search.html" method="get" class="max-w-xl mx-auto flex">
         <input type="search" name="q" placeholder="Search articles…" class="flex-1 border rounded-l px-3 py-2" aria-label="Search">
@@ -61,15 +51,16 @@
 </header>
 
 <div class="w-full">
-  <img src="/assets/esd%20image.jpg"
-       alt="Firefighters operating a hose"
-       class="w-full h-64 md:h-[420px] max-h-[500px] object-cover">
+  <img src="/assets/esd%20image.jpg" alt="Firefighters operating a hose" class="w-full h-64 md:h-[420px] max-h-[500px] object-cover">
 </div>
+
 <main class="mx-auto container-narrow px-4 py-8 max-w-3xl prose">
   <div class="text-sm text-gray-500 mb-2">Princeton Governance • July 29, 2025</div>
   <h1 class="tpj-masthead text-3xl mb-2">Collin County Emergency Services District No. 1 heads to the November ballot</h1>
   <p class="text-gray-600 text-sm mb-1">By Bakr Al Qaraghuli, Editor</p>
   <p class="text-gray-500 text-sm mb-6">July 29, 2025</p>
+
+  <!-- ARTICLE CONTENT ... (unchanged from your version) -->
 
   <h2>EXECUTIVE BRIEF</h2>
   <p>On Monday the Collin County Commissioners Court voted to call an election for November 4, 2025, to confirm creation of “Collin County Emergency Services District No. 1” and to authorize its permanent funding stream. Voters who live inside the proposed district, which covers all unincorporated land, all consenting ETJs, and the City of New Hope itself, will decide. If the measure passes, the first tax year begins January 1, 2026, with bills issued later that year, and the district is scheduled to assume full responsibility for fire and ambulance service on October 1, 2026, per the transition timetable adopted July 28.</p>
@@ -134,24 +125,40 @@
 
 <footer class="border-t mt-12">
   <div class="mx-auto container-narrow px-4 py-8 grid md:grid-cols-2 gap-6 text-sm text-gray-700">
-    <div><div>&copy; <span id="y"></span> The Princeton Journal. All rights reserved.</div>
+    <div>
+      <div>&copy; <span id="y"></span> The Princeton Journal. All rights reserved.</div>
       <div class="mt-3">
-        <form name="subscribe" method="POST" data-netlify="true" netlify-honeypot="b" action="/thank-you.html" class="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center">
-          <input type="hidden" name="form-name" value="subscribe"><input class="hidden" name="b">
-          <input class="border rounded px-3 py-2 min-w-0 w-full sm:flex-1" type="email" name="email" placeholder="Your email" required>
-          <div data-netlify-recaptcha="true"></div><button class="px-3 py-2 border rounded">Subscribe</button>
+        <!-- reCAPTCHA-gated subscribe -->
+        <form name="subscribe" method="POST" data-netlify="true" netlify-honeypot="b"
+              action="/thank-you.html" onsubmit="return tpjValidateCaptcha(this)"
+              class="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center">
+          <input type="hidden" name="form-name" value="subscribe">
+          <input class="hidden" name="b">
+          <input class="border rounded px-3 py-2 min-w-0 w-full sm:flex-1"
+                 type="email" name="email" placeholder="Your email" required disabled>
+          <div data-netlify-recaptcha="true"></div>
+          <button class="px-3 py-2 border rounded" disabled>Subscribe</button>
         </form>
-      </div></div>
-    <div class="flex gap-4 md:justify-end"><a class="hover:underline" href="/about.html">About</a><a class="hover:underline" href="/privacy.html">Privacy</a><a class="hover:underline" href="/contact.html">Contact</a><a class="hover:underline" href="/subscribe.html">Subscribe</a></div>
+      </div>
+    </div>
+    <div class="flex gap-4 md:justify-end">
+      <a class="hover:underline" href="/about.html">About</a>
+      <a class="hover:underline" href="/privacy.html">Privacy</a>
+      <a class="hover:underline" href="/contact.html">Contact</a>
+      <a class="hover:underline" href="/subscribe.html">Subscribe</a>
+    </div>
   </div>
   <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
 </footer>
 
-<!-- Mobile Drawer (with search + Privacy) -->
+<!-- Mobile Drawer -->
 <div id="siteDrawer" class="fixed inset-0 z-50 md:hidden pointer-events-auto transition">
   <div id="siteDrawerBackdrop" class="absolute inset-0 bg-black/40 transition-opacity duration-200"></div>
   <aside class="absolute right-0 top-0 h-full w-80 max-w-[85%] bg-white transition-transform duration-200 shadow-xl">
-    <div class="p-4 border-b-2 border-gray-900 flex items-center justify-between"><div class="font-semibold">Menu</div><label for="siteMenuToggle" class="p-2 border rounded" aria-label="Close menu">Close</label></div>
+    <div class="p-4 border-b-2 border-gray-900 flex items-center justify-between">
+      <div class="font-semibold">Menu</div>
+      <label for="siteMenuToggle" class="p-2 border rounded" aria-label="Close menu">Close</label>
+    </div>
     <div class="p-4 border-b">
       <form action="/search.html" method="get" class="flex">
         <input type="search" name="q" placeholder="Search articles…" class="flex-1 border rounded-l px-3 py-2" aria-label="Search">
@@ -170,4 +177,53 @@
     </nav>
   </aside>
 </div>
-</body></html>
+
+<!-- reCAPTCHA gate (shared across pages) -->
+<script>
+(function(){
+  if (window.__tpjRecaptchaInit) return;
+  window.__tpjRecaptchaInit = true;
+
+  function updateFormState(form){
+    var tokenEl = form.querySelector('[name="g-recaptcha-response"]');
+    var email = form.querySelector('input[type="email"][name="email"]');
+    var btn = form.querySelector('button, input[type="submit"]');
+    if (tokenEl) {
+      var solved = tokenEl.value.trim().length > 0;
+      if (email) email.disabled = !solved;
+      if (btn) btn.disabled = !solved;
+    } else {
+      // Fallback: if widget didn't render, don't block the form
+      if (email) email.disabled = false;
+      if (btn) btn.disabled = false;
+    }
+  }
+
+  window.tpjValidateCaptcha = function(form){
+    var tokenEl = form.querySelector('[name="g-recaptcha-response"]');
+    if (tokenEl && !tokenEl.value.trim()){
+      alert("Please complete the reCAPTCHA before subscribing.");
+      return false;
+    }
+    return true;
+  };
+
+  window.addEventListener('load', function(){
+    document.querySelectorAll('form[name="subscribe"]').forEach(function(form){
+      updateFormState(form);
+      var obs = new MutationObserver(function(){ updateFormState(form); });
+      obs.observe(form, { childList:true, subtree:true });
+      var iv = setInterval(function(){
+        updateFormState(form);
+        var t = form.querySelector('[name="g-recaptcha-response"]');
+        if (t && t.value.trim()) clearInterval(iv);
+      }, 500);
+      form.addEventListener('submit', function(e){
+        if (!window.tpjValidateCaptcha(form)) e.preventDefault();
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
