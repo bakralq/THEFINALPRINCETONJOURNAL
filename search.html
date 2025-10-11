@@ -1,16 +1,13 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Search | The Princeton Journal</title>
 <link rel="icon" href="/assets/favicon.ico">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script defer data-domain="theprincetonjournal.com" src="https://plausible.io/js/plausible.js"></script>
-<!-- Fuse is optional; we gracefully fallback if blocked by CSP -->
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
 <style>
   :root{ --font-mast:"Grenze Gotisch", serif; --font-body:"Inter", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans"; }
@@ -19,7 +16,6 @@
   .container-narrow{ max-width:1100px; }
   .card{ border:1px solid #e5e7eb; border-radius:.75rem; }
   mark{ background:#fffb91; padding:0 .15em; }
-  /* Drawer */
   #siteMenuToggle{position:absolute;opacity:0;pointer-events:none;}
   #siteDrawer{transform:translateX(100%);opacity:1;}
   #siteDrawerBackdrop{opacity:0;}
@@ -32,13 +28,9 @@
 
 <header class="border-b-2 border-gray-900">
   <div class="mx-auto container-narrow px-4 py-6 relative text-center">
-    <a href="/index.html" class="inline-block">
-      <div class="tpj-masthead text-3xl md:text-5xl leading-none">The Princeton Journal</div>
-    </a>
+    <a href="/index.html" class="inline-block"><div class="tpj-masthead text-3xl md:text-5xl leading-none">The Princeton Journal</div></a>
     <label for="siteMenuToggle" class="absolute right-4 top-6 p-2 border rounded md:hidden" aria-label="Open menu">
-      <div class="w-5 h-0.5 bg-black mb-1"></div>
-      <div class="w-5 h-0.5 bg-black mb-1"></div>
-      <div class="w-5 h-0.5 bg-black"></div>
+      <div class="w-5 h-0.5 bg-black mb-1"></div><div class="w-5 h-0.5 bg-black mb-1"></div><div class="w-5 h-0.5 bg-black"></div>
     </label>
     <nav class="mt-4 hidden md:flex flex-wrap items-center justify-center gap-6 text-sm">
       <a class="hover:underline font-semibold" href="/index.html">Home</a>
@@ -80,12 +72,13 @@
     <div>
       <div>&copy; <span id="y"></span> The Princeton Journal. All rights reserved.</div>
       <div class="mt-3">
-        <form name="subscribe" method="POST" data-netlify="true" netlify-honeypot="b" action="/thank-you.html" class="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center">
+        <!-- GATED SUBSCRIBE FORM -->
+        <form name="subscribe" method="POST" data-netlify="true" netlify-honeypot="b" action="/thank-you.html" onsubmit="return tpjValidateCaptcha(this)" class="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center">
           <input type="hidden" name="form-name" value="subscribe">
           <input class="hidden" name="b">
-          <input class="border rounded px-3 py-2 min-w-0 w-full sm:flex-1" type="email" name="email" placeholder="Your email" required>
+          <input class="border rounded px-3 py-2 min-w-0 w-full sm:flex-1" type="email" name="email" placeholder="Your email" required disabled>
           <div data-netlify-recaptcha="true"></div>
-          <button class="px-3 py-2 border rounded">Subscribe</button>
+          <button class="px-3 py-2 border rounded" disabled>Subscribe</button>
         </form>
       </div>
     </div>
@@ -128,135 +121,98 @@
 <script>
 (() => {
   'use strict';
-
   const metaEl = document.getElementById('meta');
   const resultsEl = document.getElementById('results');
-
-  // Keep inputs in sync with ?q=
-  function setInputs(q) {
-    ['q','mq','dq'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.value = q || '';
-    });
-    if (q) document.title = `Search: ${q} | The Princeton Journal`;
-  }
-
-  // Intercept submits on this page so it searches without a full reload
-  document.querySelectorAll('form[action="/search.html"]').forEach(form => {
-    form.addEventListener('submit', (e) => {
+  function setInputs(q){ ['q','mq','dq'].forEach(id=>{const el=document.getElementById(id); if(el) el.value=q||'';}); if(q) document.title=`Search: ${q} | The Princeton Journal`; }
+  document.querySelectorAll('form[action="/search.html"]').forEach(form=>{
+    form.addEventListener('submit', (e)=>{
       if (location.pathname.endsWith('/search.html')) {
         e.preventDefault();
-        const q = (form.querySelector('input[name="q"]')?.value || '').trim();
-        history.replaceState({}, '', '/search.html' + (q ? ('?q=' + encodeURIComponent(q)) : ''));
-        setInputs(q);
-        run(q);
+        const q=(form.querySelector('input[name="q"]')?.value||'').trim();
+        history.replaceState({}, '', '/search.html'+(q?('?q='+encodeURIComponent(q)):''));
+        setInputs(q); run(q);
       }
     });
   });
-
-  const urlQ = (new URLSearchParams(location.search).get('q') || '').trim();
-  setInputs(urlQ);
-  run(urlQ);
-
-  async function loadIndex() {
+  const urlQ=(new URLSearchParams(location.search).get('q')||'').trim();
+  setInputs(urlQ); run(urlQ);
+  async function loadIndex(){
     if (window.__TPJ_INDEX__) return window.__TPJ_INDEX__;
-    try {
-      // Cache-bust to avoid stale JSON after deploys
-      const res = await fetch('/assets/search-index.json?ts=' + Date.now(), { cache: 'no-store' });
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      const json = await res.json();
-      const arr = Array.isArray(json) ? json : [];
-      window.__TPJ_INDEX__ = arr;
-      return arr;
-    } catch (err) {
-      metaEl.textContent = 'Could not load the search index.';
-      console.error('Search index load error:', err);
-      return [];
+    try{
+      const res=await fetch('/assets/search-index.json?ts='+Date.now(),{cache:'no-store'});
+      if(!res.ok) throw new Error('HTTP '+res.status);
+      const json=await res.json(); const arr=Array.isArray(json)?json:[];
+      window.__TPJ_INDEX__=arr; return arr;
+    }catch(err){ metaEl.textContent='Could not load the search index.'; console.error('Search index load error:',err); return[]; }
+  }
+  function highlight(text,q){
+    if(!q||!text) return escapeHTML(text||'');
+    const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+    const words=q.split(/\s+/).filter(Boolean).map(esc);
+    if(!words.length) return escapeHTML(text);
+    const re=new RegExp('('+words.join('|')+')','ig');
+    return escapeHTML(text).replace(re,'<mark>$1</mark>');
+  }
+  function dateValue(d){ if(!d) return -1; if(/updated/i.test(d)) return -1; const t=Date.parse(d); return isNaN(t)?-1:t; }
+  function basicSearch(docs,q){ const nq=(q||'').toLowerCase(); return docs.filter(d=>(d.title||'').toLowerCase().includes(nq)||(d.description||'').toLowerCase().includes(nq)); }
+  async function run(q){
+    const docs=await loadIndex(); if(!docs.length){ resultsEl.innerHTML=''; metaEl.textContent=''; return; }
+    if(!q){ const list=[...docs].sort((a,b)=>dateValue(b.date)-dateValue(a.date)||(a.title||'').localeCompare(b.title||'')); metaEl.textContent=`All articles (${list.length})`; resultsEl.innerHTML=list.map(renderItem).join(''); return; }
+    let matches=[]; if(window.Fuse){ const fuse=new Fuse(docs,{keys:[{name:'title',weight:0.60},{name:'description',weight:0.30},{name:'section',weight:0.10}],threshold:0.33,ignoreLocation:true}); matches=fuse.search(q).map(h=>h.item);} else { matches=basicSearch(docs,q); }
+    metaEl.innerHTML=`${matches.length} result${matches.length===1?'':'s'} for “<strong>${escapeHTML(q)}</strong>”`;
+    resultsEl.innerHTML=matches.map(item=>renderItem(item,q)).join('');
+  }
+  function renderItem(item,q=''){
+    const title=item.title||''; const desc=item.description||''; const url=item.url||'#'; const section=item.section||'Article'; const date=item.date||''; const editor=item.editor?`By ${item.editor}`:'';
+    return `<a class="card p-5 hover:bg-gray-50 transition block" href="${escapeAttr(url)}">
+      <div class="text-sm text-gray-500 mb-1">${escapeHTML(section)}${date?' • '+escapeHTML(date):''}</div>
+      <div class="font-semibold text-lg mb-1">${highlight(title,q)}</div>
+      <div class="text-gray-700 text-sm mb-2">${highlight(desc,q)}</div>
+      ${editor?`<div class="text-xs text-gray-500">${escapeHTML(editor)}</div>`:''}
+    </a>`;
+  }
+  function escapeHTML(s){ return (s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function escapeAttr(s){ return (s||'').replace(/"/g,'&quot;'); }
+})();
+</script>
+
+<!-- reCAPTCHA gate (page-wide) -->
+<script>
+(function(){
+  function enableIfSolved(form){
+    var tokenEl = form.querySelector('[name="g-recaptcha-response"]');
+    var email = form.querySelector('input[type="email"][name="email"]');
+    var btn = form.querySelector('button, input[type="submit"]');
+    var solved = tokenEl && tokenEl.value.trim().length > 0;
+    if (email) email.disabled = !solved;
+    if (btn) btn.disabled = !solved;
+  }
+  window.tpjValidateCaptcha = function(form){
+    var tokenEl = form.querySelector('[name="g-recaptcha-response"]');
+    if (!tokenEl || !tokenEl.value.trim()){
+      alert("Please complete the reCAPTCHA before subscribing.");
+      return false;
     }
-  }
-
-  // Basic highlighter (case-insensitive)
-  function highlight(text, q) {
-    if (!q || !text) return escapeHTML(text || '');
-    const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const words = q.split(/\s+/).filter(Boolean).map(esc);
-    if (!words.length) return escapeHTML(text);
-    const re = new RegExp('(' + words.join('|') + ')', 'ig');
-    return escapeHTML(text).replace(re, '<mark>$1</mark>');
-  }
-
-  // Parse date strings (puts unparseable ones at the end)
-  function dateValue(d) {
-    if (!d) return -1;
-    if (/updated/i.test(d)) return -1;
-    const t = Date.parse(d);
-    return isNaN(t) ? -1 : t;
-  }
-
-  // Fuse fallback: simple substring search in title/description
-  function basicSearch(docs, q) {
-    const nq = (q || '').toLowerCase();
-    return docs.filter(d => (d.title||'').toLowerCase().includes(nq) || (d.description||'').toLowerCase().includes(nq));
-  }
-
-  async function run(q) {
-    const docs = await loadIndex();
-    if (!docs.length) { resultsEl.innerHTML = ''; metaEl.textContent=''; return; }
-
-    // No query: show all articles, newest first (best-effort by date string)
-    if (!q) {
-      const list = [...docs].sort((a,b) => dateValue(b.date) - dateValue(a.date) || (a.title||'').localeCompare(b.title||''));
-      metaEl.textContent = `All articles (${list.length})`;
-      resultsEl.innerHTML = list.map(renderItem).join('');
-      return;
-    }
-
-    // With query: Fuse if available, else fallback
-    let matches = [];
-    if (window.Fuse) {
-      const fuse = new Fuse(docs, {
-        keys: [
-          { name: 'title', weight: 0.60 },
-          { name: 'description', weight: 0.30 },
-          { name: 'section', weight: 0.10 }
-        ],
-        threshold: 0.33,
-        ignoreLocation: true
+    return true;
+  };
+  window.addEventListener('load', function(){
+    document.querySelectorAll('form[name="subscribe"]').forEach(function(form){
+      var email = form.querySelector('input[type="email"][name="email"]');
+      var btn = form.querySelector('button, input[type="submit"]');
+      if (email) email.disabled = true;
+      if (btn) btn.disabled = true;
+      form.addEventListener('submit', function(e){
+        if (!window.tpjValidateCaptcha(form)) e.preventDefault();
       });
-      matches = fuse.search(q).map(h => h.item);
-    } else {
-      console.warn('Fuse not available — using basic substring search.');
-      matches = basicSearch(docs, q);
-    }
-
-    metaEl.innerHTML = `${matches.length} result${matches.length === 1 ? '' : 's'} for “<strong>${escapeHTML(q)}</strong>”`;
-    resultsEl.innerHTML = matches.map(item => renderItem(item, q)).join('');
-  }
-
-  function renderItem(item, q='') {
-    const title = item.title || '';
-    const desc  = item.description || '';
-    const url   = item.url || '#';
-    const section = item.section || 'Article';
-    const date = item.date || '';
-    const editor = item.editor ? `By ${item.editor}` : '';
-
-    return `
-      <a class="card p-5 hover:bg-gray-50 transition block" href="${escapeAttr(url)}">
-        <div class="text-sm text-gray-500 mb-1">${escapeHTML(section)}${date ? ' • ' + escapeHTML(date) : ''}</div>
-        <div class="font-semibold text-lg mb-1">${highlight(title, q)}</div>
-        <div class="text-gray-700 text-sm mb-2">${highlight(desc, q)}</div>
-        ${editor ? `<div class="text-xs text-gray-500">${escapeHTML(editor)}</div>` : ''}
-      </a>
-    `;
-  }
-
-  function escapeHTML(s) {
-    return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  }
-  function escapeAttr(s) {
-    return (s || '').replace(/"/g, '&quot;');
-  }
+      var obs = new MutationObserver(function(){ enableIfSolved(form); });
+      obs.observe(form, { childList:true, subtree:true });
+      var iv = setInterval(function(){
+        enableIfSolved(form);
+        var t = form.querySelector('[name="g-recaptcha-response"]');
+        if (t && t.value.trim()) clearInterval(iv);
+      }, 500);
+    });
+  });
 })();
 </script>
 </body>
