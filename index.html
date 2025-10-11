@@ -198,10 +198,39 @@
       <label for="siteMenuToggle" class="p-2 border rounded" aria-label="Close menu">Close</label>
     </div>
     <div class="p-4 border-b">
-      <form action="/search.html" method="get" class="flex">
-        <input type="search" name="q" placeholder="Search articles…" class="flex-1 border rounded-l px-3 py-2" aria-label="Search">
-        <button class="px-4 py-2 border rounded-r">Search</button>
-      </form>
+<form name="subscribe" method="POST" data-netlify="true" netlify-honeypot="b" action="/thank-you.html"
+  onsubmit="return validateCaptcha()" 
+  class="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center">
+  <input type="hidden" name="form-name" value="subscribe">
+  <input class="hidden" name="b">
+  <input id="emailInput" class="border rounded px-3 py-2 min-w-0 w-full sm:flex-1" type="email" name="email" placeholder="Your email" required disabled>
+  <div data-netlify-recaptcha="true"></div>
+  <button id="subscribeBtn" class="px-3 py-2 border rounded" disabled>Subscribe</button>
+</form>
+
+<script>
+function validateCaptcha() {
+  const response = document.querySelector('[name="g-recaptcha-response"]').value;
+  if (!response) {
+    alert("Please complete the reCAPTCHA before subscribing.");
+    return false;
+  }
+  return true;
+}
+
+// Enable input and button once CAPTCHA is complete
+window.addEventListener('load', () => {
+  const observer = new MutationObserver(() => {
+    const captchaValue = document.querySelector('[name="g-recaptcha-response"]').value;
+    if (captchaValue.length > 0) {
+      document.getElementById('emailInput').disabled = false;
+      document.getElementById('subscribeBtn').disabled = false;
+    }
+  });
+  const target = document.querySelector('.g-recaptcha');
+  if (target) observer.observe(target, { childList: true, subtree: true });
+});
+</script>
     </div>
     <nav class="p-4 grid gap-3 text-base">
       <a class="hover:underline font-semibold" href="/index.html">Home</a>
