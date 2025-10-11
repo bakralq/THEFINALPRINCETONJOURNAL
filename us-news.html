@@ -1,12 +1,10 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>U.S. News | The Princeton Journal</title>
 <link rel="icon" href="/assets/favicon.ico">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script defer data-domain="theprincetonjournal.com" src="https://plausible.io/js/plausible.js"></script>
@@ -17,7 +15,6 @@
   .container-narrow{ max-width:1100px; }
   .card{ border:1px solid #e5e7eb; border-radius:.75rem; }
   .card img{ width:100%; height:10rem; object-fit:cover; border-radius:.75rem; }
-  /* Drawer */
   #siteMenuToggle{position:absolute;opacity:0;pointer-events:none;}
   #siteDrawer{transform:translateX(100%);opacity:1;}
   #siteDrawerBackdrop{opacity:0;}
@@ -26,20 +23,13 @@
 </style>
 </head>
 <body>
-
 <input type="checkbox" id="siteMenuToggle" />
 <header class="border-b-2 border-gray-900">
   <div class="mx-auto container-narrow px-4 py-6 relative text-center">
-    <a href="/index.html" class="inline-block">
-      <div class="tpj-masthead text-3xl md:text-5xl leading-none">The Princeton Journal</div>
-    </a>
+    <a href="/index.html" class="inline-block"><div class="tpj-masthead text-3xl md:text-5xl leading-none">The Princeton Journal</div></a>
     <label for="siteMenuToggle" class="absolute right-4 top-6 p-2 border rounded md:hidden" aria-label="Open menu">
-      <div class="w-5 h-0.5 bg-black mb-1"></div>
-      <div class="w-5 h-0.5 bg-black mb-1"></div>
-      <div class="w-5 h-0.5 bg-black"></div>
+      <div class="w-5 h-0.5 bg-black mb-1"></div><div class="w-5 h-0.5 bg-black mb-1"></div><div class="w-5 h-0.5 bg-black"></div>
     </label>
-
-    <!-- Desktop nav -->
     <nav class="mt-4 hidden md:flex flex-wrap items-center justify-center gap-6 text-sm">
       <a class="hover:underline font-medium" href="/index.html">Home</a>
       <a class="hover:underline font-semibold" href="/us-news.html">U.S. News</a>
@@ -49,8 +39,6 @@
       <a class="hover:underline font-medium" href="/contact.html">Contact</a>
       <a class="hover:underline font-medium" href="/subscribe.html">Subscribe</a>
     </nav>
-
-    <!-- Search (desktop) -->
     <div class="mt-4 hidden md:block">
       <form action="/search.html" method="get" class="max-w-xl mx-auto flex">
         <input type="search" name="q" placeholder="Search articles…" class="flex-1 border rounded-l px-3 py-2" aria-label="Search">
@@ -68,14 +56,12 @@
       <div class="font-semibold">Menu</div>
       <label for="siteMenuToggle" class="p-2 border rounded" aria-label="Close menu">Close</label>
     </div>
-    <!-- Search (mobile) -->
     <div class="p-4 border-b">
       <form action="/search.html" method="get" class="flex">
         <input type="search" name="q" placeholder="Search articles…" class="flex-1 border rounded-l px-3 py-2" aria-label="Search">
         <button class="px-4 py-2 border rounded-r">Search</button>
       </form>
     </div>
-    <!-- Nav -->
     <nav class="p-4 grid gap-3 text-base">
       <a class="hover:underline" href="/index.html">Home</a>
       <a class="hover:underline font-semibold" href="/us-news.html">U.S. News</a>
@@ -94,8 +80,6 @@
   <p class="text-gray-700 mb-6">U.S. policy and national developments explained for Princeton: what changed, why it matters locally, and what to watch next.</p>
 
   <div class="grid md:grid-cols-3 gap-6">
-
-    <!-- FEATURED: US-380 -->
     <a href="/us-380-night-work.html" class="card p-4 hover:bg-gray-50">
       <img loading="lazy" src="/assets/us-380-image.jpg" alt="Road work equipment and cones along US-380">
       <div class="font-semibold mt-3">US-380 Expansion Starts Oct. 6, But the Hardest Miles Are Through Princeton</div>
@@ -103,7 +87,6 @@
       <div class="text-sm text-gray-500 mt-1">U.S. News • Oct 3, 2025</div>
     </a>
 
-    <!-- Coming soon cards -->
     <div class="card p-6 flex items-center justify-center text-center bg-white">
       <div>
         <div class="text-sm uppercase tracking-wide text-gray-500">More U.S. coverage</div>
@@ -119,7 +102,6 @@
         <p class="text-sm text-gray-600 mt-2">Send records or tips to <a class="underline" href="mailto:bakralqq@gmail.com">bakralqq@gmail.com</a>.</p>
       </div>
     </div>
-
   </div>
 </main>
 
@@ -128,12 +110,13 @@
     <div>
       <div>&copy; <span id="y"></span> The Princeton Journal. All rights reserved.</div>
       <div class="mt-3">
-        <form name="subscribe" method="POST" data-netlify="true" netlify-honeypot="b" action="/thank-you.html" class="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center">
+        <!-- GATED SUBSCRIBE FORM -->
+        <form name="subscribe" method="POST" data-netlify="true" netlify-honeypot="b" action="/thank-you.html" onsubmit="return tpjValidateCaptcha(this)" class="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center">
           <input type="hidden" name="form-name" value="subscribe">
           <input class="hidden" name="b">
-          <input class="border rounded px-3 py-2 min-w-0 w-full sm:flex-1" type="email" name="email" placeholder="Your email" required>
+          <input class="border rounded px-3 py-2 min-w-0 w-full sm:flex-1" type="email" name="email" placeholder="Your email" required disabled>
           <div data-netlify-recaptcha="true"></div>
-          <button class="px-3 py-2 border rounded">Subscribe</button>
+          <button class="px-3 py-2 border rounded" disabled>Subscribe</button>
         </form>
       </div>
     </div>
@@ -147,5 +130,44 @@
   <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
 </footer>
 
+<!-- reCAPTCHA gate (page-wide) -->
+<script>
+(function(){
+  function enableIfSolved(form){
+    var tokenEl = form.querySelector('[name="g-recaptcha-response"]');
+    var email = form.querySelector('input[type="email"][name="email"]');
+    var btn = form.querySelector('button, input[type="submit"]');
+    var solved = tokenEl && tokenEl.value.trim().length > 0;
+    if (email) email.disabled = !solved;
+    if (btn) btn.disabled = !solved;
+  }
+  window.tpjValidateCaptcha = function(form){
+    var tokenEl = form.querySelector('[name="g-recaptcha-response"]');
+    if (!tokenEl || !tokenEl.value.trim()){
+      alert("Please complete the reCAPTCHA before subscribing.");
+      return false;
+    }
+    return true;
+  };
+  window.addEventListener('load', function(){
+    document.querySelectorAll('form[name="subscribe"]').forEach(function(form){
+      var email = form.querySelector('input[type="email"][name="email"]');
+      var btn = form.querySelector('button, input[type="submit"]');
+      if (email) email.disabled = true;
+      if (btn) btn.disabled = true;
+      form.addEventListener('submit', function(e){
+        if (!window.tpjValidateCaptcha(form)) e.preventDefault();
+      });
+      var obs = new MutationObserver(function(){ enableIfSolved(form); });
+      obs.observe(form, { childList:true, subtree:true });
+      var iv = setInterval(function(){
+        enableIfSolved(form);
+        var t = form.querySelector('[name="g-recaptcha-response"]');
+        if (t && t.value.trim()) clearInterval(iv);
+      }, 500);
+    });
+  });
+})();
+</script>
 </body>
 </html>
