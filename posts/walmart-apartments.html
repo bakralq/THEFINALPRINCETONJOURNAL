@@ -1,11 +1,12 @@
-<!-- walmart-apartments.html -->
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Princeton’s Delays Left the Walmart Apartments Half-Built and Rotting</title>
 <link rel="icon" href="/assets/favicon.ico">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script defer data-domain="theprincetonjournal.com" src="https://plausible.io/js/plausible.js"></script>
@@ -14,13 +15,13 @@
   body{ font-family: var(--font-body); }
   .tpj-masthead{ font-family: var(--font-mast); letter-spacing:.2px; }
   .container-narrow{ max-width:1100px; }
-
+  /* Drawer */
   #siteMenuToggle{position:absolute;opacity:0;pointer-events:none;}
   #siteDrawer{transform:translateX(100%);opacity:1;}
   #siteDrawerBackdrop{opacity:0;}
   #siteMenuToggle:checked ~ #siteDrawer{transform:translateX(0);}
   #siteMenuToggle:checked ~ #siteDrawer #siteDrawerBackdrop{opacity:1;}
-
+  /* Article */
   .prose p{ margin:1em 0; line-height:1.7; }
   .prose h2{ font-family: var(--font-mast); font-size:1.5rem; margin-top:1.25rem; }
 </style>
@@ -39,6 +40,7 @@
       <div class="w-5 h-0.5 bg-black"></div>
     </label>
 
+    <!-- Desktop nav -->
     <nav class="mt-4 hidden md:flex flex-wrap items-center justify-center gap-6 text-sm">
       <a class="hover:underline font-semibold" href="/index.html">Home</a>
       <a class="hover:underline font-medium" href="/us-news.html">U.S. News</a>
@@ -49,6 +51,7 @@
       <a class="hover:underline font-medium" href="/subscribe.html">Subscribe</a>
     </nav>
 
+    <!-- Desktop search -->
     <div class="mt-4 hidden md:block">
       <form action="/search.html" method="get" class="max-w-xl mx-auto flex">
         <input type="search" name="q" placeholder="Search articles…" class="flex-1 border rounded-l px-3 py-2" aria-label="Search">
@@ -58,6 +61,7 @@
   </div>
 </header>
 
+<!-- Hero image -->
 <div class="w-full">
   <img
     src="/assets/seb-doe-8uMLkPmIDk0-unsplash.jpg"
@@ -128,12 +132,12 @@
     <div>
       <div>&copy; <span id="y"></span> The Princeton Journal. All rights reserved.</div>
       <div class="mt-3">
-        <form name="subscribe" method="POST" data-netlify="true" netlify-honeypot="b" action="/thank-you.html" class="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center">
+        <form name="subscribe" method="POST" data-netlify="true" netlify-honeypot="b" action="/thank-you.html" class="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center" onsubmit="return tpjValidateCaptcha(this)">
           <input type="hidden" name="form-name" value="subscribe">
           <input class="hidden" name="b">
-          <input class="border rounded px-3 py-2 min-w-0 w-full sm:flex-1" type="email" name="email" placeholder="Your email" required>
+          <input class="border rounded px-3 py-2 min-w-0 w-full sm:flex-1" type="email" name="email" placeholder="Your email" required disabled>
           <div data-netlify-recaptcha="true"></div>
-          <button class="px-3 py-2 border rounded">Subscribe</button>
+          <button class="px-3 py-2 border rounded" disabled>Subscribe</button>
         </form>
       </div>
     </div>
@@ -147,6 +151,7 @@
   <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
 </footer>
 
+<!-- Mobile Drawer (with search) -->
 <div id="siteDrawer" class="fixed inset-0 z-50 md:hidden pointer-events-auto transition">
   <div id="siteDrawerBackdrop" class="absolute inset-0 bg-black/40 transition-opacity duration-200"></div>
   <aside class="absolute right-0 top-0 h-full w-80 max-w-[85%] bg-white transition-transform duration-200 shadow-xl">
@@ -172,5 +177,44 @@
     </nav>
   </aside>
 </div>
+
+<script>
+(function(){
+  function enableIfSolved(form){
+    var tokenEl=form.querySelector('[name="g-recaptcha-response"]');
+    var solved=tokenEl&&tokenEl.value.trim().length>0;
+    var email=form.querySelector('input[type="email"][name="email"]');
+    var btn=form.querySelector('button, input[type="submit"]');
+    if(email) email.disabled=!solved;
+    if(btn) btn.disabled=!solved;
+  }
+  window.tpjValidateCaptcha=function(form){
+    var tokenEl=form.querySelector('[name="g-recaptcha-response"]');
+    if(!tokenEl||!tokenEl.value.trim()){
+      alert("Please complete the reCAPTCHA before subscribing.");
+      return false;
+    }
+    return true;
+  };
+  window.addEventListener('load',function(){
+    document.querySelectorAll('form[name="subscribe"]').forEach(function(form){
+      var email=form.querySelector('input[type="email"][name="email"]');
+      var btn=form.querySelector('button, input[type="submit"]');
+      if(email) email.disabled=true;
+      if(btn) btn.disabled=true;
+      form.addEventListener('submit',function(e){
+        if(!window.tpjValidateCaptcha(form)) e.preventDefault();
+      });
+      var obs=new MutationObserver(function(){ enableIfSolved(form); });
+      obs.observe(form,{childList:true,subtree:true});
+      var iv=setInterval(function(){
+        enableIfSolved(form);
+        var t=form.querySelector('[name="g-recaptcha-response"]');
+        if(t&&t.value.trim()) clearInterval(iv);
+      },500);
+    });
+  });
+})();
+</script>
 </body>
 </html>
