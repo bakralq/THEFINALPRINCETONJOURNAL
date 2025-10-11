@@ -4,18 +4,42 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Princeton Journal</title>
+<meta name="description" content="Independent, nonpartisan reporting for Princeton, Texas. Government, budgets, infrastructure, and the decisions that affect residents.">
 <link rel="icon" href="/assets/favicon.ico">
+
+<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Tailwind -->
 <script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Analytics -->
 <script defer data-domain="theprincetonjournal.com" src="https://plausible.io/js/plausible.js"></script>
+
+<!-- Open Graph / Twitter -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Princeton Journal">
+<meta property="og:title" content="The Princeton Journal">
+<meta property="og:description" content="Independent, nonpartisan reporting for Princeton, Texas.">
+<meta property="og:url" content="https://theprincetonjournal.com/">
+<meta property="og:image" content="https://theprincetonjournal.com/assets/us-380-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Princeton Journal">
+<meta name="twitter:description" content="Independent, nonpartisan reporting for Princeton, Texas.">
+<meta name="twitter:image" content="https://theprincetonjournal.com/assets/us-380-image.jpg">
+
 <style>
-  :root{ --font-mast:"Grenze Gotisch", serif; --font-body:"Inter", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans"; }
+  :root{
+    --font-mast:"Grenze Gotisch", serif;
+    --font-body:"Inter", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans";
+  }
   body{ font-family: var(--font-body); }
   .tpj-masthead{ font-family: var(--font-mast); letter-spacing:.2px; }
   .container-narrow{ max-width: 1100px; }
   .card{ border:1px solid #e5e7eb; border-radius: .75rem; }
+
   /* Drawer toggle */
   #siteMenuToggle{position:absolute;opacity:0;pointer-events:none;}
   #siteDrawer{transform:translateX(100%);opacity:1;}
@@ -26,18 +50,23 @@
 </head>
 <body class="bg-white text-gray-900">
 <input type="checkbox" id="siteMenuToggle" />
+
 <header class="border-b-2 border-gray-900">
   <div class="mx-auto container-narrow px-4 py-6 relative text-center">
     <a href="/index.html" class="inline-block">
       <div class="tpj-masthead text-3xl md:text-5xl leading-none">The Princeton Journal</div>
     </a>
-    <label for="siteMenuToggle" class="absolute right-4 top-6 p-2 border rounded md:hidden" aria-label="Open menu">
+
+    <!-- Mobile hamburger -->
+    <label for="siteMenuToggle" class="absolute right-4 top-6 p-2 border rounded md:hidden" aria-label="Open menu" aria-controls="siteDrawer">
       <div class="w-5 h-0.5 bg-black mb-1"></div>
       <div class="w-5 h-0.5 bg-black mb-1"></div>
       <div class="w-5 h-0.5 bg-black"></div>
     </label>
+
+    <!-- Desktop nav -->
     <nav class="mt-4 hidden md:flex flex-wrap items-center justify-center gap-6 text-sm">
-      <a class="hover:underline font-semibold" href="/index.html">Home</a>
+      <a class="hover:underline font-semibold" href="/index.html" aria-current="page">Home</a>
       <a class="hover:underline font-medium" href="/us-news.html">U.S. News</a>
       <a class="hover:underline font-medium" href="/princeton-governance.html">Princeton Governance</a>
       <a class="hover:underline font-medium" href="/council-tracker.html">City Council Tracker</a>
@@ -45,6 +74,8 @@
       <a class="hover:underline font-medium" href="/contact.html">Contact</a>
       <a class="hover:underline font-medium" href="/subscribe.html">Subscribe</a>
     </nav>
+
+    <!-- Desktop search -->
     <div class="mt-4 hidden md:block">
       <form action="/search.html" method="get" class="max-w-xl mx-auto flex">
         <input type="search" name="q" placeholder="Search articles…" class="flex-1 border rounded-l px-3 py-2" aria-label="Search">
@@ -60,12 +91,22 @@
     <article class="grid md:grid-cols-12 gap-6 items-stretch">
       <div class="md:col-span-7">
         <a href="/us-380-night-work.html" class="block group">
-          <img src="/assets/us-380-image.jpg" alt="Night highway work along US-380 near Princeton" class="w-full h-64 md:h-80 object-cover object-bottom rounded" width="1200" height="640">
-          <h1 class="tpj-masthead text-3xl md:text-4xl mt-4 group-hover:underline">US-380 Expansion Starts Oct. 6, But the Hardest Miles Are Through Princeton</h1>
+          <img src="/assets/us-380-image.jpg"
+               alt="Night highway work along US-380 near Princeton"
+               class="w-full h-64 md:h-80 object-cover object-bottom rounded"
+               width="1200" height="640">
+          <h1 class="tpj-masthead text-3xl md:text-4xl mt-4 group-hover:underline">
+            US-380 Expansion Starts Oct. 6, But the Hardest Miles Are Through Princeton
+          </h1>
           <p class="text-gray-600 text-sm mt-2">By Bakr Al Qaraghuli, Editor</p>
           <p class="text-gray-500 text-sm mb-3">October 3, 2025</p>
-          <p class="text-gray-700">Night work begins Oct. 6 near Airport Road, moving east through Princeton. Residents can expect closures, noise, and traffic detours for the next 2.5 years.</p>
-          <div class="mt-3"><span class="inline-block px-3 py-2 border rounded">Read the full article</span></div>
+          <p class="text-gray-700">
+            Night work begins Oct. 6 near Airport Road, moving east through Princeton.
+            Residents can expect closures, noise, and traffic detours for the next 2.5 years.
+          </p>
+          <div class="mt-3">
+            <span class="inline-block px-3 py-2 border rounded">Read the full article</span>
+          </div>
         </a>
       </div>
 
@@ -91,7 +132,10 @@
         <!-- Editor’s note / tips -->
         <div class="border rounded p-4">
           <div class="text-xs text-gray-500 uppercase tracking-wide">Editor’s note</div>
-          <p class="text-sm mt-1 text-gray-700">We’re growing our coverage. Send tips and documents: <a href="mailto:bakralqq@gmail.com" class="underline">bakralqq@gmail.com</a>.</p>
+          <p class="text-sm mt-1 text-gray-700">
+            We’re growing our coverage. Send tips and documents:
+            <a href="mailto:bakralqq@gmail.com" class="underline">bakralqq@gmail.com</a>.
+          </p>
         </div>
       </div>
     </article>
@@ -102,19 +146,34 @@
     <h2 class="tpj-masthead text-2xl mb-3">Recent Articles</h2>
     <div class="grid md:grid-cols-3 gap-6">
       <a href="/posts/council-meeting-sept22.html" class="card p-4 hover:bg-gray-50">
-        <img loading="lazy" src="/assets/pexels-ekaterina-bolovtsova-6077326.jpg" alt="Gavel and legal documents on a desk in council setting" class="w-full h-40 object-cover rounded">
+        <img
+          loading="lazy"
+          src="/assets/pexels-ekaterina-bolovtsova-6077326.jpg"
+          alt="Gavel and legal documents on a desk in council setting"
+          class="w-full h-40 object-cover rounded"
+          width="1200" height="800">
         <div class="font-semibold mt-3">What Residents Need to Know About Monday’s Council Meeting</div>
         <div class="text-sm text-gray-500">Princeton Governance • Sep 20, 2025</div>
       </a>
 
       <a href="/posts/office-audit.html" class="card p-4 hover:bg-gray-50">
-        <img src="/assets/40000k%20office%20image.jpg" alt="City office with documents and computer on desk" class="h-40 w-full object-cover rounded">
+        <img
+          loading="lazy"
+          src="/assets/40000k%20office%20image.jpg"
+          alt="City office with documents and computer on desk"
+          class="h-40 w-full object-cover rounded"
+          width="1200" height="800">
         <div class="font-semibold mt-3">Princeton Finds $40,000 for an Office, but Not for an Audit</div>
         <div class="text-sm text-gray-500">Princeton Governance • Sep 15, 2025</div>
       </a>
 
       <a href="/posts/walmart-apartments.html" class="card p-4 hover:bg-gray-50">
-        <img src="/assets/seb-doe-8uMLkPmIDk0-unsplash.jpg" alt="Half-built apartments and housing construction site" class="h-40 w-full object-cover rounded">
+        <img
+          loading="lazy"
+          src="/assets/seb-doe-8uMLkPmIDk0-unsplash.jpg"
+          alt="Half-built apartments and housing construction site"
+          class="h-40 w-full object-cover rounded"
+          width="1200" height="800">
         <div class="font-semibold mt-3">Princeton’s Delays Left the Walmart Apartments Half-Built and Rotting</div>
         <div class="text-sm text-gray-500">Princeton Governance • Sep 13, 2025</div>
       </a>
@@ -148,7 +207,9 @@
       <div>&copy; <span id="y"></span> The Princeton Journal. All rights reserved.</div>
       <div class="mt-3">
         <!-- GATED SUBSCRIBE FORM -->
-        <form name="subscribe" method="POST" data-netlify="true" netlify-honeypot="b" action="/thank-you.html" onsubmit="return tpjValidateCaptcha(this)" class="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center">
+        <form name="subscribe" method="POST" data-netlify="true" netlify-honeypot="b"
+              action="/thank-you.html" onsubmit="return tpjValidateCaptcha(this)"
+              class="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center">
           <input type="hidden" name="form-name" value="subscribe">
           <input class="hidden" name="b">
           <input class="border rounded px-3 py-2 min-w-0 w-full sm:flex-1" type="email" name="email" placeholder="Your email" required disabled>
@@ -167,23 +228,27 @@
   <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
 </footer>
 
-<!-- Mobile Drawer (with subscribe form gated too) -->
-<div id="siteDrawer" class="fixed inset-0 z-50 md:hidden pointer-events-auto transition">
+<!-- Mobile Drawer (with search + gated subscribe) -->
+<div id="siteDrawer" class="fixed inset-0 z-50 md:hidden pointer-events-auto transition" aria-hidden="true">
   <div id="siteDrawerBackdrop" class="absolute inset-0 bg-black/40 transition-opacity duration-200"></div>
-  <aside class="absolute right-0 top-0 h-full w-80 max-w-[85%] bg-white transition-transform duration-200 shadow-xl">
+  <aside class="absolute right-0 top-0 h-full w-80 max-w-[85%] bg-white transition-transform duration-200 shadow-xl"
+         role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
     <div class="p-4 border-b-2 border-gray-900 flex items-center justify-between">
-      <div class="font-semibold">Menu</div>
+      <div id="drawerTitle" class="font-semibold">Menu</div>
       <label for="siteMenuToggle" class="p-2 border rounded" aria-label="Close menu">Close</label>
     </div>
+
     <div class="p-4 border-b">
       <form action="/search.html" method="get" class="flex">
         <input type="search" name="q" placeholder="Search articles…" class="flex-1 border rounded-l px-3 py-2" aria-label="Search">
         <button class="px-4 py-2 border rounded-r">Search</button>
       </form>
     </div>
+
     <div class="p-4 border-b">
-      <!-- same gated subscribe form inside drawer -->
-      <form name="subscribe" method="POST" data-netlify="true" netlify-honeypot="b" action="/thank-you.html" onsubmit="return tpjValidateCaptcha(this)" class="flex flex-col gap-2">
+      <form name="subscribe" method="POST" data-netlify="true" netlify-honeypot="b"
+            action="/thank-you.html" onsubmit="return tpjValidateCaptcha(this)"
+            class="flex flex-col gap-2">
         <input type="hidden" name="form-name" value="subscribe">
         <input class="hidden" name="b">
         <input class="border rounded px-3 py-2" type="email" name="email" placeholder="Your email" required disabled>
@@ -191,8 +256,9 @@
         <button class="px-3 py-2 border rounded" disabled>Subscribe</button>
       </form>
     </div>
+
     <nav class="p-4 grid gap-3 text-base">
-      <a class="hover:underline font-semibold" href="/index.html">Home</a>
+      <a class="hover:underline font-semibold" href="/index.html" aria-current="page">Home</a>
       <a class="hover:underline" href="/us-news.html">U.S. News</a>
       <a class="hover:underline" href="/princeton-governance.html">Princeton Governance</a>
       <a class="hover:underline" href="/council-tracker.html">City Council Tracker</a>
@@ -225,6 +291,7 @@
   };
   window.addEventListener('load', function(){
     document.querySelectorAll('form[name="subscribe"]').forEach(function(form){
+      // Initial disable, bind submit guard
       var email = form.querySelector('input[type="email"][name="email"]');
       var btn = form.querySelector('button, input[type="submit"]');
       if (email) email.disabled = true;
@@ -232,8 +299,12 @@
       form.addEventListener('submit', function(e){
         if (!window.tpjValidateCaptcha(form)) e.preventDefault();
       });
+
+      // Watch for widget/token changes
       var obs = new MutationObserver(function(){ enableIfSolved(form); });
       obs.observe(form, { childList:true, subtree:true });
+
+      // Fallback polling in case the observer misses it
       var iv = setInterval(function(){
         enableIfSolved(form);
         var t = form.querySelector('[name="g-recaptcha-response"]');
