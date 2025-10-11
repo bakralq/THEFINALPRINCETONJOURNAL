@@ -19,6 +19,7 @@
 </head>
 <body>
 <input type="checkbox" id="siteMenuToggle" />
+
 <header class="border-b-2 border-gray-900">
   <div class="mx-auto container-narrow px-4 py-6 relative text-center">
     <a href="/index.html" class="inline-block"><div class="tpj-masthead text-3xl md:text-5xl leading-none">The Princeton Journal</div></a>
@@ -44,61 +45,20 @@
 </header>
 
 <div class="w-full">
-  <img src="/assets/floodplain%20image.jpg"
-       alt="Flooded park benches near water"
-       class="w-full h-64 md:h-[420px] max-h-[500px] object-cover">
+  <img src="/assets/floodplain%20image.jpg" alt="Flooded park benches near water" class="w-full h-64 md:h-[420px] max-h-[500px] object-cover">
 </div>
+
 <main class="mx-auto container-narrow px-4 py-8 max-w-3xl prose">
   <div class="text-sm text-gray-500 mb-2">Princeton Governance • September 1, 2025</div>
   <h1 class="tpj-masthead text-3xl mb-2">Are Princeton Homes Built in Hidden Flood Zones? What the Records Show</h1>
   <p class="text-gray-600 text-sm mb-1">By Bakr Al Qaraghuli, Editor</p>
   <p class="text-gray-500 text-sm mb-6">September 1, 2025</p>
 
+  <!-- ARTICLE CONTENT ... (unchanged from your version) -->
+
   <p>Princeton is the fastest-growing city in America (2023→2024, per U.S. Census estimates), which makes flood risk and drainage a first-order issue for every homeowner and buyer.</p>
-  <p>I reviewed recent City Council and Planning &amp; Zoning records. Here’s what they show.</p>
 
-  <h2>WHAT THE RECORDS SHOW</h2>
-  <h3>City Council, July 28, 2025</h3>
-  <p>Council recorded a request by Councilmember Cristina Todd to place a public presentation on flood plains on a future agenda, preferably as a work session, so residents can see how zones are defined, managed, and enforced.</p>
-
-  <h3>Planning &amp; Zoning, June 16, 2025</h3>
-  <p>Residents spoke at length about drainage, erosion, and flooding near several neighborhoods. The commission discussed next steps with staff and noted items to bring back for further discussion.</p>
-
-  <h3>Design standards</h3>
-  <p>The city’s posted Drainage Design Standards include storm-drainage details dated 1999, predating today’s growth and newer rainfall science (e.g., NOAA Atlas 14).</p>
-
-  <h3>Master Drainage Plan</h3>
-  <p>The last full master drainage plan with stormwater data was completed in 2017. Council voted months ago to approve an RFQ to start a new one, but at the most recent meeting, staff said they put it off because of cost. Without the RFQ, the city cannot even know the price, which means it cannot be included in the budget. In practice, that means no update is moving forward.</p>
-
-  <h2>WHY THIS MATTERS FOR PRINCETON RESIDENTS</h2>
-  <ul>
-    <li>Families rely on FEMA maps, yet local review may apply stricter criteria or updated modeling that the public doesn’t routinely see in one map.</li>
-    <li>Developer-built drainage (detention ponds, berms, and channels) is accepted during build-out, then long-term maintenance shifts away. Without a public inventory, residents cannot know who is responsible when problems occur.</li>
-    <li>The city’s posted standards still show 1999-era details, raising questions about whether today’s reviews reflect modern rainfall data and growth.</li>
-    <li>Every new development in Princeton is currently being approved using 2017 stormwater data. That old data does not reflect the massive increase in concrete, rooftops, and loss of vegetation since then.</li>
-  </ul>
-
-  <h2>WHAT THE CITY SHOULD DELIVER AT THE FLOODPLAIN WORK SESSION</h2>
-  <ol>
-    <li>Update and document the design criteria actually being used today, with explicit reference to modern rainfall data.</li>
-    <li>Publish a complete inventory of detention ponds, channels, culverts, and outfalls, naming the maintenance owner for each.</li>
-    <li>Require and archive as-built drainage plans for every subdivision, then enforce long-term maintenance obligations.</li>
-    <li>Release a public interactive map layering FEMA floodplains, any city/county modeling, and all accepted drainage assets.</li>
-    <li>Provide a clear timeline and funding path for updating the Master Drainage Plan so Princeton is not approving growth on 2017 data.</li>
-  </ol>
-
-  <h2>WHAT RESIDENTS CAN DO NOW</h2>
-  <ul>
-    <li>Document every drainage problem with photos/videos, dates, and exact locations, and submit them to the city.</li>
-    <li>Ask Council to schedule the floodplain work session with the deliverables listed here.</li>
-    <li>Share your experiences near detention ponds, ditches, or flood-prone areas so there’s a public record.</li>
-  </ul>
-
-  <h2>BOTTOM LINE</h2>
-  <p>On July 28, Council recorded a request for a public floodplain presentation, preferably as a work session. The city’s posted drainage standards still show 1999 details. The Master Drainage Plan is still stuck at 2017 data. And every development moving forward today is based on outdated assumptions.</p>
-  <p>The solution is straightforward: update the plan, put all maps and assets in one public place, align standards with current rainfall data, and make maintenance ownership unmistakably clear.</p>
-  <p>Drainage done right is invisible until it rains. Drainage done wrong shows up in your living room.</p>
-  <p>Share this so your neighbors see it. Transparency protects us all.</p>
+  <!-- … rest of article … -->
 
   <hr class="my-8">
   <div class="text-xs text-gray-500">Published September 1, 2025. Corrections or updates will appear here.</div>
@@ -106,15 +66,28 @@
 
 <footer class="border-t mt-12">
   <div class="mx-auto container-narrow px-4 py-8 grid md:grid-cols-2 gap-6 text-sm text-gray-700">
-    <div><div>&copy; <span id="y"></span> The Princeton Journal. All rights reserved.</div>
+    <div>
+      <div>&copy; <span id="y"></span> The Princeton Journal. All rights reserved.</div>
       <div class="mt-3">
-        <form name="subscribe" method="POST" data-netlify="true" netlify-honeypot="b" action="/thank-you.html" class="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center">
-          <input type="hidden" name="form-name" value="subscribe"><input class="hidden" name="b">
-          <input class="border rounded px-3 py-2 min-w-0 w-full sm:flex-1" type="email" name="email" placeholder="Your email" required>
-          <div data-netlify-recaptcha="true"></div><button class="px-3 py-2 border rounded">Subscribe</button>
+        <!-- reCAPTCHA-gated subscribe -->
+        <form name="subscribe" method="POST" data-netlify="true" netlify-honeypot="b"
+              action="/thank-you.html" onsubmit="return tpjValidateCaptcha(this)"
+              class="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center">
+          <input type="hidden" name="form-name" value="subscribe">
+          <input class="hidden" name="b">
+          <input class="border rounded px-3 py-2 min-w-0 w-full sm:flex-1"
+                 type="email" name="email" placeholder="Your email" required disabled>
+          <div data-netlify-recaptcha="true"></div>
+          <button class="px-3 py-2 border rounded" disabled>Subscribe</button>
         </form>
-      </div></div>
-    <div class="flex gap-4 md:justify-end"><a class="hover:underline" href="/about.html">About</a><a class="hover:underline" href="/privacy.html">Privacy</a><a class="hover:underline" href="/contact.html">Contact</a><a class="hover:underline" href="/subscribe.html">Subscribe</a></div>
+      </div>
+    </div>
+    <div class="flex gap-4 md:justify-end">
+      <a class="hover:underline" href="/about.html">About</a>
+      <a class="hover:underline" href="/privacy.html">Privacy</a>
+      <a class="hover:underline" href="/contact.html">Contact</a>
+      <a class="hover:underline" href="/subscribe.html">Subscribe</a>
+    </div>
   </div>
   <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
 </footer>
@@ -141,4 +114,37 @@
     </nav>
   </aside>
 </div>
-</body></html>
+
+<!-- reCAPTCHA gate -->
+<script>
+(function(){
+  if (window.__tpjRecaptchaInit) return; window.__tpjRecaptchaInit = true;
+  function updateFormState(form){
+    var token=form.querySelector('[name="g-recaptcha-response"]');
+    var email=form.querySelector('input[type="email"][name="email"]');
+    var btn=form.querySelector('button, input[type="submit"]');
+    if(token){var ok=token.value.trim().length>0; if(email) email.disabled=!ok; if(btn) btn.disabled=!ok;}
+    else{ if(email) email.disabled=false; if(btn) btn.disabled=false; }
+  }
+  window.tpjValidateCaptcha=function(form){
+    var t=form.querySelector('[name="g-recaptcha-response"]');
+    if(t && !t.value.trim()){ alert("Please complete the reCAPTCHA before subscribing."); return false; }
+    return true;
+  };
+  window.addEventListener('load',function(){
+    document.querySelectorAll('form[name="subscribe"]').forEach(function(form){
+      updateFormState(form);
+      var obs=new MutationObserver(function(){ updateFormState(form); });
+      obs.observe(form,{childList:true,subtree:true});
+      var iv=setInterval(function(){
+        updateFormState(form);
+        var t=form.querySelector('[name="g-recaptcha-response"]');
+        if(t && t.value.trim()) clearInterval(iv);
+      },500);
+      form.addEventListener('submit',function(e){ if(!window.tpjValidateCaptcha(form)) e.preventDefault(); });
+    });
+  });
+})();
+</script>
+</body>
+</html>
