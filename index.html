@@ -206,15 +206,16 @@
     <div>
       <div>&copy; <span id="y"></span> The Princeton Journal. All rights reserved.</div>
       <div class="mt-3">
-        <!-- GATED SUBSCRIBE FORM -->
+        <!-- SINGLE subscribe form with Netlify reCAPTCHA -->
         <form name="subscribe" method="POST" data-netlify="true" netlify-honeypot="b"
               action="/thank-you.html" onsubmit="return tpjValidateCaptcha(this)"
               class="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center">
           <input type="hidden" name="form-name" value="subscribe">
           <input class="hidden" name="b">
-          <input class="border rounded px-3 py-2 min-w-0 w-full sm:flex-1" type="email" name="email" placeholder="Your email" required disabled>
+          <input class="border rounded px-3 py-2 min-w-0 w-full sm:flex-1"
+                 type="email" name="email" placeholder="Your email" required>
           <div data-netlify-recaptcha="true"></div>
-          <button class="px-3 py-2 border rounded" disabled>Subscribe</button>
+          <button class="px-3 py-2 border rounded">Subscribe</button>
         </form>
       </div>
     </div>
@@ -228,7 +229,7 @@
   <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
 </footer>
 
-<!-- Mobile Drawer (with search + gated subscribe) -->
+<!-- Mobile Drawer (no duplicate subscribe form) -->
 <div id="siteDrawer" class="fixed inset-0 z-50 md:hidden pointer-events-auto transition" aria-hidden="true">
   <div id="siteDrawerBackdrop" class="absolute inset-0 bg-black/40 transition-opacity duration-200"></div>
   <aside class="absolute right-0 top-0 h-full w-80 max-w-[85%] bg-white transition-transform duration-200 shadow-xl"
@@ -237,26 +238,12 @@
       <div id="drawerTitle" class="font-semibold">Menu</div>
       <label for="siteMenuToggle" class="p-2 border rounded" aria-label="Close menu">Close</label>
     </div>
-
     <div class="p-4 border-b">
       <form action="/search.html" method="get" class="flex">
         <input type="search" name="q" placeholder="Search articles…" class="flex-1 border rounded-l px-3 py-2" aria-label="Search">
         <button class="px-4 py-2 border rounded-r">Search</button>
       </form>
     </div>
-
-    <div class="p-4 border-b">
-      <form name="subscribe" method="POST" data-netlify="true" netlify-honeypot="b"
-            action="/thank-you.html" onsubmit="return tpjValidateCaptcha(this)"
-            class="flex flex-col gap-2">
-        <input type="hidden" name="form-name" value="subscribe">
-        <input class="hidden" name="b">
-        <input class="border rounded px-3 py-2" type="email" name="email" placeholder="Your email" required disabled>
-        <div data-netlify-recaptcha="true"></div>
-        <button class="px-3 py-2 border rounded" disabled>Subscribe</button>
-      </form>
-    </div>
-
     <nav class="p-4 grid gap-3 text-base">
       <a class="hover:underline font-semibold" href="/index.html" aria-current="page">Home</a>
       <a class="hover:underline" href="/us-news.html">U.S. News</a>
@@ -270,46 +257,53 @@
   </aside>
 </div>
 
-<!-- reCAPTCHA gate (page-wide) -->
+<!-- reCAPTCHA guard: require token ONLY if widget exists -->
 <script>
 (function(){
-  function enableIfSolved(form){
+  function updateFormState(form){
     var tokenEl = form.querySelector('[name="g-recaptcha-response"]');
     var email = form.querySelector('input[type="email"][name="email"]');
     var btn = form.querySelector('button, input[type="submit"]');
-    var solved = tokenEl && tokenEl.value.trim().length > 0;
-    if (email) email.disabled = !solved;
-    if (btn) btn.disabled = !solved;
+
+    if (tokenEl) {
+      // Widget present: gate until solved
+      var solved = tokenEl.value.trim().length > 0;
+      if (email) email.disabled = !solved;
+      if (btn) btn.disabled = !solved;
+    } else {
+      // No widget on page (fallback): don't block
+      if (email) email.disabled = false;
+      if (btn) btn.disabled = false;
+    }
   }
+
   window.tpjValidateCaptcha = function(form){
     var tokenEl = form.querySelector('[name="g-recaptcha-response"]');
-    if (!tokenEl || !tokenEl.value.trim()){
+    if (tokenEl && !tokenEl.value.trim()){
       alert("Please complete the reCAPTCHA before subscribing.");
       return false;
     }
     return true;
   };
+
   window.addEventListener('load', function(){
     document.querySelectorAll('form[name="subscribe"]').forEach(function(form){
-      // Initial disable, bind submit guard
-      var email = form.querySelector('input[type="email"][name="email"]');
-      var btn = form.querySelector('button, input[type="submit"]');
-      if (email) email.disabled = true;
-      if (btn) btn.disabled = true;
-      form.addEventListener('submit', function(e){
-        if (!window.tpjValidateCaptcha(form)) e.preventDefault();
-      });
+      updateFormState(form);
 
-      // Watch for widget/token changes
-      var obs = new MutationObserver(function(){ enableIfSolved(form); });
+      // Watch for the widget being injected / token changes
+      var obs = new MutationObserver(function(){ updateFormState(form); });
       obs.observe(form, { childList:true, subtree:true });
 
-      // Fallback polling in case the observer misses it
+      // Fallback polling in case MutationObserver misses initial token
       var iv = setInterval(function(){
-        enableIfSolved(form);
+        updateFormState(form);
         var t = form.querySelector('[name="g-recaptcha-response"]');
         if (t && t.value.trim()) clearInterval(iv);
       }, 500);
+
+      form.addEventListener('submit', function(e){
+        if (!window.tpjValidateCaptcha(form)) e.preventDefault();
+      });
     });
   });
 })();
