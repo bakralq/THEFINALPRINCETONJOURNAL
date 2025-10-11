@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Staff & Civic Advisory Council | The Princeton Journal</title>
+<link rel="icon" href="/assets/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script defer data-domain="theprincetonjournal.com" src="https://plausible.io/js/plausible.js"></script>
+<style>
+  :root{ --font-mast:"Grenze Gotisch", serif; --font-body:"Inter", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans"; }
+  body{ font-family: var(--font-body); }
+  .tpj-masthead{ font-family: var(--font-mast); letter-spacing:.2px; }
+  .container-narrow{ max-width:1100px; }
+  /* Drawer toggle (match site) */
+  #siteMenuToggle{position:absolute;opacity:0;pointer-events:none;}
+  #siteDrawer{transform:translateX(100%);opacity:1;}
+  #siteDrawerBackdrop{opacity:0;}
+  #siteMenuToggle:checked ~ #siteDrawer{transform:translateX(0);}
+  #siteMenuToggle:checked ~ #siteDrawer #siteDrawerBackdrop{opacity:1;}
+
+  /* Pretty accordion */
+  details[open] > summary .chev { transform: rotate(180deg); }
+  summary::-webkit-details-marker { display:none; }
+  .card{ border:1px solid #e5e7eb; border-radius:1rem; }
+  .shadow-soft{ box-shadow: 0 1px 2px rgba(16,24,40,.06), 0 1px 3px rgba(16,24,40,.10); }
+  .avatar{ width:3rem; height:3rem; border-radius:9999px; display:grid; place-items:center; font-weight:700; }
+  .avatar--grad{ background: linear-gradient(135deg,#eef2ff,#fef3c7); color:#111827; }
+  .pill{ font-size:.75rem; border:1px solid #e5e7eb; border-radius:9999px; padding:.15rem .5rem; }
+  .section-title{ font-family: var(--font-mast); }
+  .lead{ color:#4b5563; }
+</style>
+</head>
+<body>
+<input type="checkbox" id="siteMenuToggle" />
+
+<header class="border-b-2 border-gray-900">
+  <div class="mx-auto container-narrow px-4 py-6 relative text-center">
+    <a href="/index.html" class="inline-block"><div class="tpj-masthead text-3xl md:text-5xl leading-none">The Princeton Journal</div></a>
+    <label for="siteMenuToggle" class="absolute right-4 top-6 p-2 border rounded md:hidden" aria-label="Open menu">
+      <div class="w-5 h-0.5 bg-black mb-1"></div><div class="w-5 h-0.5 bg-black mb-1"></div><div class="w-5 h-0.5 bg-black"></div>
+    </label>
+    <nav class="mt-4 hidden md:flex flex-wrap items-center justify-center gap-6 text-sm">
+      <a class="hover:underline font-semibold" href="/index.html">Home</a>
+      <a class="hover:underline font-medium" href="/us-news.html">U.S. News</a>
+      <a class="hover:underline font-medium" href="/princeton-governance.html">Princeton Governance</a>
+      <a class="hover:underline font-medium" href="/council-tracker.html">City Council Tracker</a>
+      <a class="hover:underline font-medium" href="/about.html">About</a>
+      <a class="hover:underline font-medium" href="/contact.html">Contact</a>
+      <a class="hover:underline font-medium" href="/subscribe.html">Subscribe</a>
+    </nav>
+    <div class="mt-4 hidden md:block">
+      <form action="/search.html" method="get" class="max-w-xl mx-auto flex">
+        <input type="search" name="q" placeholder="Search articles…" class="flex-1 border rounded-l px-3 py-2" aria-label="Search">
+        <button class="px-4 py-2 border rounded-r">Search</button>
+      </form>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="bg-gradient-to-br from-indigo-50 via-amber-50 to-white border-b">
+  <div class="mx-auto container-narrow px-4 py-12 text-center max-w-3xl">
+    <h1 class="section-title text-4xl md:text-5xl">Staff & Civic Advisory Council</h1>
+    <p class="lead mt-4">Meet the people behind The Princeton Journal and the community advisors who help surface facts, context, and blind spots. Editorial decisions remain independent.</p>
+    <div class="mt-6 flex items-center justify-center gap-3 text-xs">
+      <a href="#editorial" class="pill hover:bg-gray-50">Editorial Staff</a>
+      <a href="#council" class="pill hover:bg-gray-50">Civic Advisory Council</a>
+    </div>
+  </div>
+</section>
+
+<main class="mx-auto container-narrow px-4 py-10 max-w-3xl">
+
+  <!-- Editorial Staff -->
+  <section id="editorial" class="mb-12">
+    <h2 class="section-title text-3xl mb-6">Editorial Staff</h2>
+
+    <!-- Accordion group -->
+    <div class="grid gap-4" data-accordion-group>
+      <!-- Bakr -->
+      <details class="card shadow-soft overflow-hidden group">
+        <summary class="flex items-center gap-4 p-4 cursor-pointer select-none">
+          <div class="avatar avatar--grad">BA</div>
+          <div class="flex-1">
+            <div class="font-semibold">Bakr Al Qaraghuli</div>
+            <div class="text-sm text-gray-600">Editor • Investigations & Civic Accountability</div>
+          </div>
+          <svg class="chev w-5 h-5 text-gray-500 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.062l3.71-3.83a.75.75 0 111.08 1.04l-4.24 4.38a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+          </svg>
+        </summary>
+        <div class="px-4 pb-5 pt-1 text-[15px] leading-7 bg-white">
+          <p>Bakr edits and reports on Princeton’s budgets, growth finance, drainage, and day-to-day governance. Coverage centers on primary documents—agendas, contracts, audits, and statutes—translated into plain language for residents.</p>
+          <p>Prior beats: public records, local infrastructure, and city management. Send tips, corrections, or documents: <em>bakralqq [at] gmail [dot] com</em>.</p>
+          <ul class="mt-3 text-sm text-gray-600 list-disc pl-5">
+            <li>Focus areas: budgets & taxes, TIRZ/PIDs, public safety staffing, open meetings, procurement.</li>
+            <li>Policy: no anonymous sources for factual claims without document corroboration.</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Civic Advisory Council -->
+  <section id="council" class="mb-2">
+    <h2 class="section-title text-3xl mb-3">Civic Advisory Council</h2>
+    <p class="lead mb-6">
+      The Civic Advisory Council is a non-voting, volunteer network of local voices we consult for <strong>context, clarity, and fact-checking leads</strong>.
+      Members participate as individuals (not as official spokespeople), do <strong>not</strong> see drafts before publication,
+      and have <strong>no role</strong> in editorial decisions. Participation does not imply endorsement of our coverage. Membership evolves as projects and availability change.
+    </p>
+
+    <!-- Council list -->
+    <div class="grid gap-4" data-accordion-group>
+      <!-- Eugene Escobar Jr -->
+      <details class="card shadow-soft overflow-hidden">
+        <summary class="flex items-center gap-4 p-4 cursor-pointer">
+          <div class="avatar avatar--grad">EE</div>
+          <div class="flex-1">
+            <div class="font-semibold">Eugene Escobar Jr.</div>
+            <div class="text-sm text-gray-600">Mayor, City of Princeton</div>
+          </div>
+          <svg class="chev w-5 h-5 text-gray-500 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.062l3.71-3.83a.75.75 0 111.08 1.04l-4.24 4.38a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+        </summary>
+        <div class="px-4 pb-5 pt-1 text-[15px] leading-7 bg-white">
+          <p>Advises on council procedures and citywide priorities. Participates in an individual capacity.</p>
+        </div>
+      </details>
+
+      <!-- Terrance Johnson -->
+      <details class="card shadow-soft overflow-hidden">
+        <summary class="flex items-center gap-4 p-4 cursor-pointer">
+          <div class="avatar avatar--grad">TJ</div>
+          <div class="flex-1">
+            <div class="font-semibold">Terrance Johnson</div>
+            <div class="text-sm text-gray-600">City Council Member, Place 1</div>
+          </div>
+          <svg class="chev w-5 h-5 text-gray-500 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.062l3.71-3.83a.75.75 0 111.08 1.04l-4.24 4.38a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+        </summary>
+        <div class="px-4 pb-5 pt-1 text-[15px] leading-7 bg-white">
+          <p>Provides insight on public safety, infrastructure, and constituent service concerns heard at the dais.</p>
+        </div>
+      </details>
+
+      <!-- Cristina Todd -->
+      <details class="card shadow-soft overflow-hidden">
+        <summary class="flex items-center gap-4 p-4 cursor-pointer">
+          <div class="avatar avatar--grad">CT</div>
+          <div class="flex-1">
+            <div class="font-semibold">Cristina Todd</div>
+            <div class="text-sm text-gray-600">City Council Member, Place 2</div>
+          </div>
+          <svg class="chev w-5 h-5 text-gray-500 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.062l3.71-3.83a.75.75 0 111.08 1.04l-4.24 4.38a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+        </summary>
+        <div class="px-4 pb-5 pt-1 text-[15px] leading-7 bg-white">
+          <p>Consulted on drainage, budgeting transparency, and development standards. Individual capacity; no preview of coverage.</p>
+        </div>
+      </details>
+
+      <!-- Johnoie Wright - Chair -->
+      <details class="card shadow-soft overflow-hidden">
+        <summary class="flex items-center gap-4 p-4 cursor-pointer">
+          <div class="avatar avatar--grad">JW</div>
+          <div class="flex-1">
+            <div class="font-semibold">Johnoie Wright</div>
+            <div class="text-sm text-gray-600">Princeton TX Ad Hoc Bylaw Committee — Chair</div>
+          </div>
+          <svg class="chev w-5 h-5 text-gray-500 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.062l3.71-3.83a.75.75 0 111.08 1.04l-4.24 4.38a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+        </summary>
+        <div class="px-4 pb-5 pt-1 text-[15px] leading-7 bg-white">
+          <p>Offers perspective on bylaws, complaint procedures, and meeting mechanics to help decode city process for readers.</p>
+        </div>
+      </details>
+
+      <!-- Sherry Campbell - Vice Chair -->
+      <details class="card shadow-soft overflow-hidden">
+        <summary class="flex items-center gap-4 p-4 cursor-pointer">
+          <div class="avatar avatar--grad">SC</div>
+          <div class="flex-1">
+            <div class="font-semibold">Sherry Campbell</div>
+            <div class="text-sm text-gray-600">Princeton TX Ad Hoc Bylaw Committee — Vice Chair</div>
+          </div>
+          <svg class="chev w-5 h-5 text-gray-500 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.062l3.71-3.83a.75.75 0 111.08 1.04l-4.24 4.38a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+        </summary>
+        <div class="px-4 pb-5 pt-1 text-[15px] leading-7 bg-white">
+          <p>Advises on practical implications of bylaw changes and public participation.</p>
+        </div>
+      </details>
+
+      <!-- Yan Heijligers -->
+      <details class="card shadow-soft overflow-hidden">
+        <summary class="flex items-center gap-4 p-4 cursor-pointer">
+          <div class="avatar avatar--grad">YH</div>
+          <div class="flex-1">
+            <div class="font-semibold">Yan Heijligers</div>
+            <div class="text-sm text-gray-600">Mattei Middle School — Principal</div>
+          </div>
+          <svg class="chev w-5 h-5 text-gray-500 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.062l3.71-3.83a.75.75 0 111.08 1.04l-4.24 4.38a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+        </summary>
+        <div class="px-4 pb-5 pt-1 text-[15px] leading-7 bg-white">
+          <p>Shares context on campus operations, student safety, and how city policies intersect with school life.</p>
+        </div>
+      </details>
+
+      <!-- Neal Tull -->
+      <details class="card shadow-soft overflow-hidden">
+        <summary class="flex items-center gap-4 p-4 cursor-pointer">
+          <div class="avatar avatar--grad">NT</div>
+          <div class="flex-1">
+            <div class="font-semibold">Neal Tull</div>
+            <div class="text-sm text-gray-600">Princeton High School — Assistant Principal</div>
+          </div>
+          <svg class="chev w-5 h-5 text-gray-500 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.062l3.71-3.83a.75.75 0 111.08 1.04l-4.24 4.38a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+        </summary>
+        <div class="px-4 pb-5 pt-1 text-[15px] leading-7 bg-white">
+          <p>Provides student-facing perspective on transportation, facilities, and youth programs.</p>
+        </div>
+      </details>
+
+      <!-- Ahmed Al Sharief -->
+      <details class="card shadow-soft overflow-hidden">
+        <summary class="flex items-center gap-4 p-4 cursor-pointer">
+          <div class="avatar avatar--grad">AA</div>
+          <div class="flex-1">
+            <div class="font-semibold">Ahmed Al Sharief</div>
+            <div class="text-sm text-gray-600">President, Princeton Islamic Center</div>
+          </div>
+          <svg class="chev w-5 h-5 text-gray-500 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.062l3.71-3.83a.75.75 0 111.08 1.04l-4.24 4.38a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+        </summary>
+        <div class="px-4 pb-5 pt-1 text-[15px] leading-7 bg-white">
+          <p>Advises on community needs, outreach, and public-space access for faith and cultural events.</p>
+        </div>
+      </details>
+
+      <!-- Dr. Stan Fike -->
+      <details class="card shadow-soft overflow-hidden">
+        <summary class="flex items-center gap-4 p-4 cursor-pointer">
+          <div class="avatar avatar--grad">SF</div>
+          <div class="flex-1">
+            <div class="font-semibold">Dr. Stan Fike</div>
+            <div class="text-sm text-gray-600">Senior Pastor, Faith Baptist Church</div>
+          </div>
+          <svg class="chev w-5 h-5 text-gray-500 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.062l3.71-3.83a.75.75 0 111.08 1.04l-4.24 4.38a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+        </summary>
+        <div class="px-4 pb-5 pt-1 text-[15px] leading-7 bg-white">
+          <p>Brings perspective on service initiatives, volunteer networks, and social support for families.</p>
+        </div>
+      </details>
+
+      <!-- Terressa Guiness -->
+      <details class="card shadow-soft overflow-hidden">
+        <summary class="flex items-center gap-4 p-4 cursor-pointer">
+          <div class="avatar avatar--grad">TG</div>
+          <div class="flex-1">
+            <div class="font-semibold">Terressa Guiness</div>
+            <div class="text-sm text-gray-600">Citizen Volunteer</div>
+          </div>
+          <svg class="chev w-5 h-5 text-gray-500 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.062l3.71-3.83a.75.75 0 111.08 1.04l-4.24 4.38a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+        </summary>
+        <div class="px-4 pb-5 pt-1 text-[15px] leading-7 bg-white">
+          <p>Community liaison on neighborhood concerns and day-to-day city service issues.</p>
+        </div>
+      </details>
+
+      <!-- Citizen Volunteer Placeholder -->
+      <details class="card shadow-soft overflow-hidden">
+        <summary class="flex items-center gap-4 p-4 cursor-pointer">
+          <div class="avatar avatar--grad">CV</div>
+          <div class="flex-1">
+            <div class="font-semibold">Citizen Volunteer</div>
+            <div class="text-sm text-gray-600">Community Member — Placeholder</div>
+          </div>
+          <svg class="chev w-5 h-5 text-gray-500 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.062l3.71-3.83a.75.75 0 111.08 1.04l-4.24 4.38a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+        </summary>
+        <div class="px-4 pb-5 pt-1 text-[15px] leading-7 bg-white">
+          <p>Seat reserved for an additional resident voice. If you’d like to participate, reach out via our contact page.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Footnote -->
+    <div class="mt-6 text-sm text-gray-600">
+      <p><strong>Note:</strong> Council and committee members listed above participate as private individuals for context only; references here should not be construed as official statements of their bodies or employers.</p>
+    </div>
+  </section>
+
+  <hr class="my-10">
+  <div class="text-xs text-gray-500">Page updated <span id="upd"></span>. For corrections, email <em>bakralqq [at] gmail [dot] com</em>.</div>
+</main>
+
+<footer class="border-t mt-12">
+  <div class="mx-auto container-narrow px-4 py-8 grid md:grid-cols-2 gap-6 text-sm text-gray-700">
+    <div>
+      <div>&copy; <span id="y"></span> The Princeton Journal. All rights reserved.</div>
+      <div class="mt-3">
+        <form name="subscribe" method="POST" data-netlify="true" netlify-honeypot="b" action="/thank-you.html"
+              class="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center" onsubmit="return tpjValidateCaptcha(this)">
+          <input type="hidden" name="form-name" value="subscribe"><input class="hidden" name="b">
+          <input class="border rounded px-3 py-2 min-w-0 w-full sm:flex-1" type="email" name="email" placeholder="Your email" required disabled>
+          <div data-netlify-recaptcha="true"></div>
+          <button class="px-3 py-2 border rounded" disabled>Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="flex gap-4 md:justify-end">
+      <a class="hover:underline" href="/about.html">About</a><a class="hover:underline" href="/privacy.html">Privacy</a>
+      <a class="hover:underline" href="/contact.html">Contact</a><a class="hover:underline" href="/subscribe.html">Subscribe</a>
+    </div>
+  </div>
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+    document.getElementById('upd').textContent = new Date().toLocaleDateString();
+  </script>
+</footer>
+
+<!-- Mobile Drawer -->
+<div id="siteDrawer" class="fixed inset-0 z-50 md:hidden pointer-events-auto transition">
+  <div id="siteDrawerBackdrop" class="absolute inset-0 bg-black/40 transition-opacity duration-200"></div>
+  <aside class="absolute right-0 top-0 h-full w-80 max-w-[85%] bg-white transition-transform duration-200 shadow-xl">
+    <div class="p-4 border-b-2 border-gray-900 flex items-center justify-between">
+      <div class="font-semibold">Menu</div>
+      <label for="siteMenuToggle" class="p-2 border rounded" aria-label="Close menu">Close</label>
+    </div>
+    <div class="p-4 border-b">
+      <form action="/search.html" method="get" class="flex">
+        <input type="search" name="q" placeholder="Search articles…" class="flex-1 border rounded-l px-3 py-2" aria-label="Search">
+        <button class="px-4 py-2 border rounded-r">Search</button>
+      </form>
+    </div>
+    <nav class="p-4 grid gap-3 text-base">
+      <a class="hover:underline font-semibold" href="/index.html">Home</a>
+      <a class="hover:underline" href="/us-news.html">U.S. News</a>
+      <a class="hover:underline" href="/princeton-governance.html">Princeton Governance</a>
+      <a class="hover:underline" href="/council-tracker.html">City Council Tracker</a>
+      <a class="hover:underline" href="/about.html">About</a>
+      <a class="hover:underline" href="/privacy.html">Privacy</a>
+      <a class="hover:underline" href="/contact.html">Contact</a>
+      <a class="hover:underline" href="/subscribe.html">Subscribe</a>
+    </nav>
+  </aside>
+</div>
+
+<!-- Single-open Accordion + reCAPTCHA gate -->
+<script>
+  // Single-open behavior per group
+  document.querySelectorAll('[data-accordion-group]').forEach(function(group){
+    group.addEventListener('toggle', function(e){
+      if(e.target.tagName.toLowerCase() !== 'details' || !e.target.open) return;
+      group.querySelectorAll('details[open]').forEach(function(d){
+        if(d!==e.target) d.open = false;
+      });
+    }, true);
+  });
+
+  // reCAPTCHA-first subscribe gate
+  (function(){
+    function enableIfSolved(form){
+      var tokenEl=form.querySelector('[name="g-recaptcha-response"]');
+      var solved=tokenEl&&tokenEl.value.trim().length>0;
+      var email=form.querySelector('input[type="email"][name="email"]');
+      var btn=form.querySelector('button, input[type="submit"]');
+      if(email) email.disabled=!solved;
+      if(btn) btn.disabled=!solved;
+    }
+    window.tpjValidateCaptcha=function(form){
+      var tokenEl=form.querySelector('[name="g-recaptcha-response"]');
+      if(!tokenEl||!tokenEl.value.trim()){
+        alert("Please complete the reCAPTCHA before subscribing.");
+        return false;
+      }
+      return true;
+    };
+    window.addEventListener('load',function(){
+      document.querySelectorAll('form[name="subscribe"]').forEach(function(form){
+        var email=form.querySelector('input[type="email"][name="email"]');
+        var btn=form.querySelector('button, input[type="submit"]');
+        if(email) email.disabled=true;
+        if(btn) btn.disabled=true;
+        form.addEventListener('submit',function(e){
+          if(!window.tpjValidateCaptcha(form)) e.preventDefault();
+        });
+        var obs=new MutationObserver(function(){ enableIfSolved(form); });
+        obs.observe(form,{childList:true,subtree:true});
+        var iv=setInterval(function(){
+          enableIfSolved(form);
+          var t=form.querySelector('[name="g-recaptcha-response"]');
+          if(t&&t.value.trim()) clearInterval(iv);
+        },500);
+      });
+    });
+  })();
+</script>
+</body>
+</html>
